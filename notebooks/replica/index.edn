@@ -1,0 +1,24 @@
+[{:type :markdown :value
+  "## Welcome to REPLiCA v0.1-alpha:
+
+  The **R**EPL-based **E**xtendable **P**latform
+  for **L**ive-**i**nteractive
+  **C**omposition **A**ssistance.
+
+  Special credits to:
+  [INScore](inscore.grame.fr)
+  [ToneJS](https://tonejs.github.io)
+  [cljs-browser-repl](https://github.com/joakin/cljs-browser-repl)/
+  [replumb](https://github.com/arichiardi/replumb)
+  and [CodeMirror](https://codemirror.net)
+
+  - Start a **[new project](#/file/new)** with default options
+
+  - Follow the **[guided tour](#/file/tour)**
+
+  - or go to the **[REPL!CA tutorials](#/notebook/replica-tutorials)**
+
+  If you want to dive first into ClojureScript, then you must visit
+  **[Joakin's Introduction](http://chimeces.com/cljs-browser-repl/)**,
+  which, by the way was the seed for me diving into THIS project.
+  "}]
