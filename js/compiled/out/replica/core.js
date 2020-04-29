@@ -10,14 +10,14 @@ goog.require('replica.tone');
  */
 replica.core.r = (function replica$core$r(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___25240 = arguments.length;
-var i__4532__auto___25241 = (0);
+var len__4531__auto___22789 = arguments.length;
+var i__4532__auto___22790 = (0);
 while(true){
-if((i__4532__auto___25241 < len__4531__auto___25240)){
-args__4534__auto__.push((arguments[i__4532__auto___25241]));
+if((i__4532__auto___22790 < len__4531__auto___22789)){
+args__4534__auto__.push((arguments[i__4532__auto___22790]));
 
-var G__25242 = (i__4532__auto___25241 + (1));
-i__4532__auto___25241 = G__25242;
+var G__22791 = (i__4532__auto___22790 + (1));
+i__4532__auto___22790 = G__22791;
 continue;
 } else {
 }
@@ -29,8 +29,10 @@ return replica.core.r.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),args
 });
 
 replica.core.r.cljs$core$IFn$_invoke$arity$variadic = (function (route,args){
-var G__25239 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(route)].join('');
-switch (G__25239) {
+cljs.core.reset_BANG_.call(null,replica.utils.resp,null);
+
+var G__22788 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(route)].join('');
+switch (G__22788) {
 case "doc":
 return replica.utils.doc_commands.call(null,"replica.core/r",cljs.core.deref.call(null,replica.utils.routes),null);
 
@@ -97,11 +99,11 @@ return replica.utils.get_value.call(null);
 replica.core.r.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-replica.core.r.cljs$lang$applyTo = (function (seq25237){
-var G__25238 = cljs.core.first.call(null,seq25237);
-var seq25237__$1 = cljs.core.next.call(null,seq25237);
+replica.core.r.cljs$lang$applyTo = (function (seq22786){
+var G__22787 = cljs.core.first.call(null,seq22786);
+var seq22786__$1 = cljs.core.next.call(null,seq22786);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__25238,seq25237__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__22787,seq22786__$1);
 });
 
 replica.core.routes = new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Symbol(null,"r","r",1169147337,null),new cljs.core.Symbol(null,"rr","rr",-977734222,null)], null);
@@ -110,14 +112,14 @@ replica.core.routes = new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.S
  */
 replica.core.rr = (function replica$core$rr(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___25246 = arguments.length;
-var i__4532__auto___25247 = (0);
+var len__4531__auto___22795 = arguments.length;
+var i__4532__auto___22796 = (0);
 while(true){
-if((i__4532__auto___25247 < len__4531__auto___25246)){
-args__4534__auto__.push((arguments[i__4532__auto___25247]));
+if((i__4532__auto___22796 < len__4531__auto___22795)){
+args__4534__auto__.push((arguments[i__4532__auto___22796]));
 
-var G__25248 = (i__4532__auto___25247 + (1));
-i__4532__auto___25247 = G__25248;
+var G__22797 = (i__4532__auto___22796 + (1));
+i__4532__auto___22796 = G__22797;
 continue;
 } else {
 }
@@ -129,17 +131,17 @@ return replica.core.rr.cljs$core$IFn$_invoke$arity$variadic(argseq__4535__auto__
 });
 
 replica.core.rr.cljs$core$IFn$_invoke$arity$variadic = (function (cmds){
-return cljs.core.map.call(null,(function (p1__25244_SHARP_){
-return cljs.core.apply.call(null,replica.core.r,p1__25244_SHARP_);
+return cljs.core.map.call(null,(function (p1__22793_SHARP_){
+return cljs.core.apply.call(null,replica.core.r,p1__22793_SHARP_);
 }),cmds);
 });
 
 replica.core.rr.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-replica.core.rr.cljs$lang$applyTo = (function (seq25245){
+replica.core.rr.cljs$lang$applyTo = (function (seq22794){
 var self__4519__auto__ = this;
-return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq25245));
+return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq22794));
 });
 
 replica.utils.add_routes_BANG_.call(null,"",new cljs.core.Symbol(null,"replica.core","replica.core",-153609092,null),replica.core.routes);

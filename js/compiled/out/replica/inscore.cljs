@@ -11,12 +11,12 @@
   [& codes]
   (js/dropTextTo inscore-viewer (apply str codes)))
 
-(defn- make-line
+(defn make-line
   [& codes]
-  (str (apply str codes) ";"))
+  (str (. (apply array codes) join " ") ";"))
 
 (defn dropl!
-  "Drops (sends) a line, combining its arguments as a string and adding a semicolon to the end, to the active INScore window. If several arguments are provided then they are combined as one string without any formatting."
+  "Drops (sends) a line, combining its arguments and adding a semicolon to the end, to the active INScore window."
   [& codes]
   (dropc! (apply make-line codes)))
 
@@ -67,6 +67,7 @@
 (def routes {'dropc 'dropc!
              'dropl 'dropl!
              'dropls 'dropls!
+             'make-line 'make-line
              'addr 'addr
              'clear 'clear!
              'cmd 'cmd!
@@ -78,9 +79,11 @@
 (defn i
   "The 'i' function is a route to almost all of the INScore built-in functionality inside replica. Available commands are 'clear 'drop[c][l[s]] 'cmds 'gmn 'a#"
   [route & args]
-  (case (str route)
-    "doc" (doc-commands 'replica.inscore/i routes 'i)
-    (apply proc! (str 'i route) args)))
+  (if (re-find #"/ITL" route)
+    (apply dropl! route args)
+    (case (str route)
+      "doc" (doc-commands 'replica.inscore/i routes 'i)
+      (apply proc! (str 'i route) args))))
 
 (add-routes! 'i 'replica.inscore routes)
 

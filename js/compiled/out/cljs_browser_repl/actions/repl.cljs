@@ -27,5 +27,5 @@
          (swap! state/history state/add-entry
                 (if error
                   (state/to-repl-error (error->str error))
-                  (when-not (some? (re-find #"nil" value))
-                    (state/to-repl-result value)))))))))
+                  ;(when-not (some? (re-find #"nil" value))
+                  (state/to-repl-result value))))))))

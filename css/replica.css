@@ -53,6 +53,7 @@ html, body {
 
 .scene {
   grid-area: scene;
+  overflow: auto;
 }
 
 .code {

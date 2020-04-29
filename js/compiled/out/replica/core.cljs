@@ -13,6 +13,7 @@
 (defn r
   "The 'r' function is a parser for replica commands, a door to almost every built-in functionality in the replica system. As a first route-argument you can provide: 'i for inscore 't for tone and 'e for editor. You can always use 'doc after any route-argument or function name for showing up the documentation: Happy REPLiCAtions!!"
   [route & args]
+  (reset! utils/resp nil)
   (case (str route)
     "doc" (doc-commands "replica.core/r" @utils/routes nil)
     "i" (apply i args)

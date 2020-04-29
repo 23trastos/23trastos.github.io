@@ -11,8 +11,8 @@ cljs_browser_repl.actions.repl.new_input_BANG_ = (function cljs_browser_repl$act
 return cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.input,s);
 });
 cljs_browser_repl.actions.repl.repl_entry_BANG_ = (function cljs_browser_repl$actions$repl$repl_entry_BANG_(var_args){
-var G__21435 = arguments.length;
-switch (G__21435) {
+var G__11866 = arguments.length;
+switch (G__11866) {
 case 1:
 return cljs_browser_repl.actions.repl.repl_entry_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -48,12 +48,12 @@ cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl
 } else {
 }
 
-return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,code,(function (p__21436){
-var map__21437 = p__21436;
-var map__21437__$1 = ((((!((map__21437 == null)))?(((((map__21437.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__21437.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__21437):map__21437);
-var ret = map__21437__$1;
-var value = cljs.core.get.call(null,map__21437__$1,new cljs.core.Keyword(null,"value","value",305978217));
-var error = cljs.core.get.call(null,map__21437__$1,new cljs.core.Keyword(null,"error","error",-978969032));
+return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,code,(function (p__11867){
+var map__11868 = p__11867;
+var map__11868__$1 = ((((!((map__11868 == null)))?(((((map__11868.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__11868.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__11868):map__11868);
+var ret = map__11868__$1;
+var value = cljs.core.get.call(null,map__11868__$1,new cljs.core.Keyword(null,"value","value",305978217));
+var error = cljs.core.get.call(null,map__11868__$1,new cljs.core.Keyword(null,"error","error",-978969032));
 cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.current_ns,replumb.repl.current_ns.call(null));
 
 if(cljs.core.truth_(resp_QMARK_)){
@@ -61,7 +61,7 @@ cljs.core.reset_BANG_.call(null,replica.utils.resp,ret);
 } else {
 }
 
-return cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl.state.add_entry,(cljs.core.truth_(error)?cljs_browser_repl.state.to_repl_error.call(null,replumb.core.error__GT_str.call(null,error)):((!((cljs.core.re_find.call(null,/nil/,value) == null)))?null:cljs_browser_repl.state.to_repl_result.call(null,value))));
+return cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl.state.add_entry,(cljs.core.truth_(error)?cljs_browser_repl.state.to_repl_error.call(null,replumb.core.error__GT_str.call(null,error)):cljs_browser_repl.state.to_repl_result.call(null,value)));
 }));
 }
 });
