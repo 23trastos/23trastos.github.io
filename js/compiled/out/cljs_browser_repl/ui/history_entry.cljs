@@ -62,12 +62,12 @@
 
 (defn history-separator [] [:hr])
 
-(defn history-stop [{:keys [emit]} {:keys [disabled] :as entry}]
+(defn history-stop [{:keys [emit]} {:keys [disabled label] :as entry}]
   (if disabled
     [history-separator]
     [:div.history-stop
      {:on-click #(emit :continue)}
-     [:button "Next"]]))
+     [:button (or label "Next")]]))
 
 (defn history-entry [{:keys [emit] :as attrs} {:keys [type] :as entry}]
   [:div.history-entry

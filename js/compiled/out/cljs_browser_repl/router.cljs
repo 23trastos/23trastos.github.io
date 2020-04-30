@@ -92,6 +92,12 @@
         (str @state/history)
         (str file-name ".edn")))))
 
-(defroute "/filter" []
-  (reset! state/history
-          (vec (sort-by :date (state/get-filtered-history)))))
+(defroute "/hist2CM" [query-params]
+  (if (:filter query-params)
+    (js/appendToCM (str "\n" (state/get-filtered-history)))
+    (js/appendToCM js/CM (str "\n" @state/history))))
+
+(defroute "/rscs/:file" [file]
+  (js/fromUrlToCM file))
+
+

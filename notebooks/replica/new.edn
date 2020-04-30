@@ -1,11 +1,4 @@
 [{:type :markdown :value
   "Config: Setting default namespace / Requiring essentials"}
  {:type :input :deaf? true :value
-  "(ns replica.user)
-  (require '[replica.core :refer [r rr]])"}
- {:type :markdown :value
-  "You can start by evaluating something like:"}
- {:type :input :sample? true :value
-  "(r 'doc)"}
- {:type :input :sample? true :value
-  "(rr ['iclear] ['igmn 'bach (r 'er 1)])"}]
+  "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}]

@@ -4,12 +4,16 @@
                                    add-routes!
                                    doc-commands]]))
 
-(defonce inscore-viewer (. js/document getElementById "scene"))
+;(defonce inscore-viewer (. js/document getElementById "scene"))
 
 (defn dropc!
   "Drops (sends) the desired code string to the active INScore window. If several arguments are provided then they are combined as one string without any formatting."
   [& codes]
-  (js/dropTextTo inscore-viewer (apply str codes)))
+  (let [code (apply str codes)]
+    ;(js/alert code)
+    (if (re-find #"--keep" code)
+      (. code replace (js/RegExp. #"--keep|;" 'g) "")
+      (js/dropTextTo js/INS code))))
 
 (defn make-line
   [& codes]
@@ -35,34 +39,41 @@
        object))
 
 (defn clear!
-  "Clears the INScore viewer by deleting every element from the desired scene (if no scene argument is provided then 'scene' is assumed)."
-  [& scene]
-  (dropl! (str (addr (str (first scene))) "* del")))
+  "sends a '* del' message to the desired object or scene (if no argument is provided then '/ITL/scene/' is assumed)."
+  [& obj]
+  (apply dropl! (str (addr (str (first obj))) "* del") (rest obj)))
 
-(defn cmd!
+(defn msg!
   "Address an object [or create it] and send to it a command. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
-  [object & cmd-codes]
-  (apply dropl! (addr object) (map #(str " " %) cmd-codes)))
+  [object & msg-codes]
+  (apply dropl! (addr object) msg-codes))
 
-(defn cmds!
+(defn msgs!
   "Address an object [or create it] and send to it some commands. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
-  [object & cmds]
-  (map (partial dropl! (addr object) " ") cmds))
+  [object & msgs]
+  (map (partial msg! object) msgs))
 
 (defn setx!
-  "Dispatches a 'set [prop] [args]' command to an object."
-  [object prop & args]
-  (cmds! object (apply str "set " prop " " args)))
+  "Dispatches a 'set [obj-type] [args]' command to an object."
+  [object obj-type & args]
+  (apply msg! object "set" obj-type args))
 
 (defn gmn!
-  "Macro command for creating a new GUIDO score object from GMN code. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
-  [object code-string]
-  (setx! object 'gmn "'" code-string "'"))
+  "Macro command for creating a new score from GMN code. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  [object gmn-string & opt]
+  (apply setx! object 'gmn "'" gmn-string "'" opt))
+
+(defn watch!
+  "Macro command for creating a watch to an element. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  [object watch-for & body]
+  (apply msg! object 'watch watch-for "("
+         (. (apply array body) join ", ")
+         ")"))
 
 (defn als!
   "Macro command for creating an alias for the desired object"
-  [object your-alias]
-  (cmds! object (str "alias '" your-alias "'")))
+  [object your-alias & opt]
+  (apply msg! object 'alias "'" your-alias "'" opt))
 
 (def routes {'dropc 'dropc!
              'dropl 'dropl!
@@ -70,14 +81,15 @@
              'make-line 'make-line
              'addr 'addr
              'clear 'clear!
-             'cmd 'cmd!
-             'cmds 'cmds!
+             'msg 'msg!
+             'msgs 'msgs!
              'setx 'setx!
              'gmn 'gmn!
+             'watch 'watch!
              'als 'als!})
 
 (defn i
-  "The 'i' function is a route to almost all of the INScore built-in functionality inside replica. Available commands are 'clear 'drop[c][l[s]] 'cmds 'gmn 'a#"
+  "The 'i' function is a route to almost all of the INScore built-in functionality inside replica."
   [route & args]
   (if (re-find #"/ITL" route)
     (apply dropl! route args)

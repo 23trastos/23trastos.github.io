@@ -41,20 +41,23 @@ return null;
 cljs_browser_repl.ui.repl_input.repl_input_raw = (function cljs_browser_repl$ui$repl_input$repl_input_raw(){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.repl-input","div.repl-input",-1804001456),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span.repl-input-pre","span.repl-input-pre",-619018267),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.current_ns))," =>"].join('')], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.repl-input-post","div.repl-input-post",-811847672),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"textarea.repl-input-input","textarea.repl-input-input",117805625),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"on-key-down","on-key-down",-1374733765),(function (e){
 if(cljs.core.truth_(e.ctrlKey)){
-var G__18552_18554 = e.key;
-switch (G__18552_18554) {
+var G__24073 = e.key;
+switch (G__24073) {
 case "Enter":
-replica.utils.create_command_BANG_.call(null,clojure.string.trim.call(null,cljs_browser_repl.ui.repl_input.get_val.call(null,e)));
+if(cljs.core.truth_(cljs_browser_repl.compiler.is_readable_QMARK_.call(null,cljs_browser_repl.ui.repl_input.get_val.call(null,e)))){
+return replica.utils.create_command_BANG_.call(null,clojure.string.trim.call(null,cljs_browser_repl.ui.repl_input.get_val.call(null,e)));
+} else {
+return null;
+}
 
 break;
 default:
+return null;
 
 }
 } else {
-}
-
-var G__18553 = e.key;
-switch (G__18553) {
+var G__24074 = e.key;
+switch (G__24074) {
 case "Enter":
 return cljs_browser_repl.ui.repl_input.enter_pressed_BANG_.call(null,e,cljs_browser_repl.compiler.is_readable_QMARK_.call(null,cljs_browser_repl.ui.repl_input.get_val.call(null,e)),cljs_browser_repl.actions.repl.repl_entry_BANG_);
 
@@ -67,8 +70,9 @@ default:
 return null;
 
 }
-}),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__18551_SHARP_){
-return cljs_browser_repl.actions.repl.new_input_BANG_.call(null,cljs_browser_repl.ui.repl_input.get_val.call(null,p1__18551_SHARP_));
+}
+}),new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__24072_SHARP_){
+return cljs_browser_repl.actions.repl.new_input_BANG_.call(null,cljs_browser_repl.ui.repl_input.get_val.call(null,p1__24072_SHARP_));
 }),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"REPL here. Type any cljs valid code and press ENTER to evaluate",new cljs.core.Keyword(null,"rows","rows",850049680),(1),new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref.call(null,cljs_browser_repl.state.input)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"span","span",1394872991),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),["repl-input-msg ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"type","type",1174270348).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.repl_info)))].join('')], null),new cljs.core.Keyword(null,"msg","msg",-1386103444).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.repl_info))], null)], null)], null);
 });
 cljs_browser_repl.ui.repl_input.repl_input = cljs.core.with_meta.call(null,cljs_browser_repl.ui.repl_input.repl_input_raw,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"component-did-update","component-did-update",-1468549173),(function (this$,old_argv){

@@ -9,32 +9,14 @@
     <link href="css/codemirror.min.css" rel="stylesheet">
     <link href="css/cljs_browser_repl.css" rel="stylesheet" type="text/css">
     <link href="css/replica.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="lib/libINScore.js"></script>
     <script src="lib/libGUIDOEngine.js"></script>
     <script src="lib/libmusicxml.js"></script>
-    <script src="inscoreview.js"></script>
+    <script src="lib/inscoreview.js"></script>
+    <script src="js/commonmark.min.js"></script>
     <script type="text/javascript">
       var gFS = false;
-      dropTextTo = function (element, text) {
-        const dataTransfer = new DataTransfer;
-        dataTransfer.setData('text', text);
-        element.dispatchEvent(new DragEvent('drop', { dataTransfer: dataTransfer }));
-      };
-      assignUrl = function (url) {
-        location.assign(url);
-      };
-      replaceUrl = function (url) {
-        location.replace(url);
-      };
-      toRepl = function (code, history, resp) {
-        cljs_browser_repl.actions.repl.repl_entry_BANG_.call(null, code, history, resp);
-      };
-      appendToMenu = function (name, hrefString) {
-        let a = document.createElement('a');
-        a.textContent = name;
-        a.href = hrefString;
-        document.getElementById('menu').appendChild(a);
-      };
       goFullScore = function () {
         if (gFS) {
           let style = document.createElement('style');
@@ -57,7 +39,6 @@
         window.setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 500);
       };
     </script>
-
     <title>REPL!CA v0.1-alpha</title>
   </head>
 
@@ -117,13 +98,12 @@
     <div id="right-info" class="info">
     </div>
     <div id="editor" class="code">
-      <textarea id="code">[b& a c2 h1]</textarea>
+      <textarea id="code"></textarea>
     </div>
     <div id="repl-input" class="footer">
     </div>
-    <script src="js/commonmark.min.js"></script>
-    <script src="js/compiled/cljs_browser_repl.js"></script>
-    <script src="lib/searchcursor.js"></script>
     </div>
+  <script src="js/utils.js"></script>
+  <script src="js/compiled/cljs_browser_repl.js"></script>
   </body>
 </html>

@@ -32,12 +32,13 @@
      {:on-key-down (fn [e]
                      (if (.-ctrlKey e)
                        (case (.-key e)
-                         "Enter" (create-command! (string/trim (get-val e)))
-                         nil))
-                     (case (.-key e)
-                       "Enter" (enter-pressed! e (is-readable? (get-val e)) repl-entry!)
-                       "Escape" (.. e -target blur)
-                       nil))
+                         "Enter" (when (is-readable? (get-val e))
+                                   (create-command! (string/trim (get-val e))))
+                         nil)
+                       (case (.-key e)
+                         "Enter" (enter-pressed! e (is-readable? (get-val e)) repl-entry!)
+                         "Escape" (.. e -target blur)
+                         nil)))
       :on-change #(new-input! (get-val %))
       :placeholder "REPL here. Type any cljs valid code and press ENTER to evaluate"
       :rows 1

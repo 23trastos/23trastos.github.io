@@ -10,12 +10,16 @@
                (. js/document getElementById "code")
                (clj->js {:lineNumbers true})))
 
+(set! js/CM cm)
+
+(js/loadScript "lib/searchcursor.js")
+
+(set-info! "CodeMirror loaded")
+
 (defonce search (atom {:query nil :cursor nil}))
 
-(when cm (set-info! "CodeMirror ready!"))
-
 (defn untab [s]
-  (clojure.string/replace s #"\t" " "))
+    (. (. s replace (js/RegExp. #"\s\s+" 'g) " ") trim))
 
 (defn rd
   "Retrieves all the content from the CodeMirror editor as a string."
@@ -46,17 +50,17 @@
   ([start-line end-line]
    (rplc! "" start-line 0 end-line 0)))
 
-(defn rl
+(defn r
   "Reads lines from code editor."
   ([] (rd))
   ([line]
    (. cm getLine (dec line)))
   ([start-line end-line]
-   (rl start-line end-line " "))
+   (r start-line end-line " "))
   ([start-line end-line split-line-with-str]
-   (rl start-line 0 end-line 0 split-line-with-str))
+   (r start-line 0 end-line 0 split-line-with-str))
   ([start-line start-char end-line end-char]
-   (rl start-line start-char end-line end-char " "))
+   (r start-line start-char end-line end-char " "))
   ([start-line start-char end-line end-char split-line-with-str]
    (untab (. cm getRange
              (clj->js {:line (dec start-line) :ch start-char})
@@ -98,7 +102,7 @@
   "Processes lines of the CodeMirror editor as arguments to the r function. If no argument is provided every line is processed as a separate command. Be aware and happy that you can insert also (cljs code), even call (r ... with args) inside a route. This can generate dangerous and beautiful loops!"
   ([] (p! 1 (. cm lineCount)))
   ([n]
-   (let [line (rl n)]
+   (let [line (r n)]
      (case (subs line 0 1)
        "(" (command! line)
        "'" (command! (str "(apply replica.core/r [" line "])"))
@@ -114,6 +118,10 @@
         end (dec (whl regexp))]
       (list start end)))
 
+(defn rl
+  "Reads the lines IN BETWEEN two regexp matches. It will ignore any line containing a regexp definition in the form #\"..."
+  [regexp]
+  (apply r (bl regexp)))
 
 (defn pl!
   "Processes the lines IN BETWEEN two regexp matches. It will ignore any line containing a regexp definition in the form #\"..."
@@ -126,18 +134,25 @@
   []
   (command! (str "(do " (rd) ")")))
 
+(defn lf!
+  [url]
+  "Loads code from file."
+  (js/fromUrlToCM url))
+
 (def routes {'rd 'rd
              's 's!
              'rplc 'rplc!
              'kl 'kl!
-             'rl 'rl
+             'r 'r
              'itl 'itl
              'p 'p!
              'l 'l!
              'where 'where
              'whl 'whl
              'bl 'bl
-             'pl 'pl!})
+             'pl 'pl!
+             'rl 'rl
+             'lf 'lf!})
 
 (defn e
   "'e' is a route to the code editor built-in functions inside replica."

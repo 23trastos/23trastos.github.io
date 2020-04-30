@@ -7,10 +7,9 @@ PROGRAM--------------
 (def pats (range 1 54))
 (def bounds (r 'ebl #"SCORE"))
 (def lines (range (first bounds) (inc (last bounds))))
-(def positions (range -1.5 1.5 (/ 3 53)))
-(map #(r 'igmn (str "pat" %1) (str "[\\repeatBegin " (r 'erl %2) " \\repeatEnd]")) pats lines)
-(map #(r 'icmd (str "pat" %1) 'x %2) pats positions)
-(map #(r 'icmd (str "pat" %1) 'y %2) pats positions)
+(def positions (range 0 70 (/ 70 53)))
+(map #(r 'igmn (str "pat" %1) (str "[\\repeatBegin " (r 'er %2) " \\repeatEnd]")) pats lines)
+(map #(r 'imsg (str "pat" %1) 'x %2) pats positions)
 PROGRAM--------------
 
 SCORE----------------

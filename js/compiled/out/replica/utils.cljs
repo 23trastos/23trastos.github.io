@@ -10,7 +10,7 @@
     (when-not (or (nil? value)
                   (= (list nil) value)
                   (some? (re-find #"nil" value)))
-      (clojure.string/replace value #"\"" ""))))
+      (. value replace (js/RegExp. #"\"" 'g) ""))))
 
 (defn error!
   [origin & msgs]
@@ -24,11 +24,13 @@
 
 (defn url!
   [url]
-  (js/replaceUrl (url)))
+  (js/replaceUrl url))
 
 (defn cmd-url
   [c]
-  (str "#/cmd?c=\"" c "\""))
+  (str "#/cmd?c=\""
+       (. c replace (js/RegExp. #"\"" 'g) "\\\"")
+       "\""))
 
 (defn url-command!
   "Sends a command to REPL by URL query"
@@ -68,4 +70,4 @@
 
 (defn create-command!
   [command-string]
-  (js/appendToMenu command-string (cmd-url command-string)))
+  (js/appendLinkTo "menu" command-string (cmd-url command-string)))

@@ -24,8 +24,8 @@ return cljs.core.tree_seq.call(null,replumb.common.error_branch_QMARK_,replumb.c
  *   ** Be sure to pass a js/Error object here **
  */
 replumb.common.extract_message = (function replumb$common$extract_message(var_args){
-var G__18023 = arguments.length;
-switch (G__18023) {
+var G__24215 = arguments.length;
+switch (G__24215) {
 case 1:
 return replumb.common.extract_message.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -53,19 +53,19 @@ return replumb.common.extract_message.call(null,print_stack_QMARK_,false,err);
 });
 
 replumb.common.extract_message.cljs$core$IFn$_invoke$arity$3 = (function (print_stack_QMARK_,exclude_error_msg_QMARK_,err){
-return [cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var strings = (function (){var G__18024 = cljs.core.keep.call(null,cljs.core.identity,replumb.common.error_seq.call(null,err));
-var G__18024__$1 = (cljs.core.truth_(exclude_error_msg_QMARK_)?cljs.core.filter.call(null,((function (G__18024){
-return (function (p1__18020_SHARP_){
-return cljs.core.not_EQ_.call(null,"ERROR",p1__18020_SHARP_.message);
-});})(G__18024))
-,G__18024):G__18024);
-var G__18024__$2 = cljs.core.map.call(null,((function (G__18024,G__18024__$1){
-return (function (p1__18021_SHARP_){
-return p1__18021_SHARP_.message;
-});})(G__18024,G__18024__$1))
-,G__18024__$1)
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var strings = (function (){var G__24216 = cljs.core.keep.call(null,cljs.core.identity,replumb.common.error_seq.call(null,err));
+var G__24216__$1 = (cljs.core.truth_(exclude_error_msg_QMARK_)?cljs.core.filter.call(null,((function (G__24216){
+return (function (p1__24212_SHARP_){
+return cljs.core.not_EQ_.call(null,"ERROR",p1__24212_SHARP_.message);
+});})(G__24216))
+,G__24216):G__24216);
+var G__24216__$2 = cljs.core.map.call(null,((function (G__24216,G__24216__$1){
+return (function (p1__24213_SHARP_){
+return p1__24213_SHARP_.message;
+});})(G__24216,G__24216__$1))
+,G__24216__$1)
 ;
-return cljs.core.filter.call(null,cljs.core.complement.call(null,cljs.core.empty_QMARK_),G__18024__$2);
+return cljs.core.filter.call(null,cljs.core.complement.call(null,cljs.core.empty_QMARK_),G__24216__$2);
 
 })();
 if(cljs.core.seq.call(null,strings)){
@@ -109,8 +109,8 @@ return cljs.core.re_matches.call(null,/\\{2,}n|\\{2,}r/,s);
  * Is the string returned from an evaluation valid?
  */
 replumb.common.valid_eval_result_QMARK_ = (function replumb$common$valid_eval_result_QMARK_(var_args){
-var G__18027 = arguments.length;
-switch (G__18027) {
+var G__24219 = arguments.length;
+switch (G__24219) {
 case 1:
 return replumb.common.valid_eval_result_QMARK_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -158,11 +158,11 @@ replumb.common.valid_eval_warning_QMARK_ = (function replumb$common$valid_eval_w
 return typeof warning === 'string';
 });
 replumb.common.has_valid_warning_QMARK_ = (function replumb$common$has_valid_warning_QMARK_(result){
-var G__18029 = new cljs.core.Keyword(null,"warning","warning",-1685650671).cljs$core$IFn$_invoke$arity$1(result);
-if((G__18029 == null)){
+var G__24221 = new cljs.core.Keyword(null,"warning","warning",-1685650671).cljs$core$IFn$_invoke$arity$1(result);
+if((G__24221 == null)){
 return null;
 } else {
-return replumb.common.valid_eval_warning_QMARK_.call(null,G__18029);
+return replumb.common.valid_eval_warning_QMARK_.call(null,G__24221);
 }
 });
 /**
@@ -188,10 +188,10 @@ if(cljs.core.map_QMARK_.call(null,opts)){
 throw (new Error("Assert failed: (map? opts)"));
 }
 
-var new_fn_entries = cljs.core.map.call(null,(function (p1__18030_SHARP_){
-return cljs.core.assoc.call(null,p1__18030_SHARP_,(1),"<hidden function>");
-}),cljs.core.filter.call(null,(function (p1__18031_SHARP_){
-return cljs.core.re_find.call(null,/-fn/,cljs.core.name.call(null,cljs.core.first.call(null,p1__18031_SHARP_)));
+var new_fn_entries = cljs.core.map.call(null,(function (p1__24222_SHARP_){
+return cljs.core.assoc.call(null,p1__24222_SHARP_,(1),"<hidden function>");
+}),cljs.core.filter.call(null,(function (p1__24223_SHARP_){
+return cljs.core.re_find.call(null,/-fn/,cljs.core.name.call(null,cljs.core.first.call(null,p1__24223_SHARP_)));
 }),cljs.core.into.call(null,cljs.core.PersistentVector.EMPTY,opts)));
 return cljs.core.into.call(null,opts,new_fn_entries);
 });
@@ -206,14 +206,14 @@ return cljs.core.into.call(null,opts,new_fn_entries);
  */
 replumb.common.debug_prn = (function replumb$common$debug_prn(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___18033 = arguments.length;
-var i__4532__auto___18034 = (0);
+var len__4531__auto___24225 = arguments.length;
+var i__4532__auto___24226 = (0);
 while(true){
-if((i__4532__auto___18034 < len__4531__auto___18033)){
-args__4534__auto__.push((arguments[i__4532__auto___18034]));
+if((i__4532__auto___24226 < len__4531__auto___24225)){
+args__4534__auto__.push((arguments[i__4532__auto___24226]));
 
-var G__18035 = (i__4532__auto___18034 + (1));
-i__4532__auto___18034 = G__18035;
+var G__24227 = (i__4532__auto___24226 + (1));
+i__4532__auto___24226 = G__24227;
 continue;
 } else {
 }
@@ -231,9 +231,9 @@ return cljs.core.apply.call(null,cljs.core.println,args);
 replumb.common.debug_prn.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-replumb.common.debug_prn.cljs$lang$applyTo = (function (seq18032){
+replumb.common.debug_prn.cljs$lang$applyTo = (function (seq24224){
 var self__4519__auto__ = this;
-return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq18032));
+return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq24224));
 });
 
 /**

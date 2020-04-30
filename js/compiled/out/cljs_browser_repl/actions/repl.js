@@ -11,8 +11,8 @@ cljs_browser_repl.actions.repl.new_input_BANG_ = (function cljs_browser_repl$act
 return cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.input,s);
 });
 cljs_browser_repl.actions.repl.repl_entry_BANG_ = (function cljs_browser_repl$actions$repl$repl_entry_BANG_(var_args){
-var G__11866 = arguments.length;
-switch (G__11866) {
+var G__154474 = arguments.length;
+switch (G__154474) {
 case 1:
 return cljs_browser_repl.actions.repl.repl_entry_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -48,12 +48,12 @@ cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl
 } else {
 }
 
-return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,code,(function (p__11867){
-var map__11868 = p__11867;
-var map__11868__$1 = ((((!((map__11868 == null)))?(((((map__11868.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__11868.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__11868):map__11868);
-var ret = map__11868__$1;
-var value = cljs.core.get.call(null,map__11868__$1,new cljs.core.Keyword(null,"value","value",305978217));
-var error = cljs.core.get.call(null,map__11868__$1,new cljs.core.Keyword(null,"error","error",-978969032));
+return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,code,(function (p__154475){
+var map__154476 = p__154475;
+var map__154476__$1 = ((((!((map__154476 == null)))?(((((map__154476.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__154476.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__154476):map__154476);
+var ret = map__154476__$1;
+var value = cljs.core.get.call(null,map__154476__$1,new cljs.core.Keyword(null,"value","value",305978217));
+var error = cljs.core.get.call(null,map__154476__$1,new cljs.core.Keyword(null,"error","error",-978969032));
 cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.current_ns,replumb.repl.current_ns.call(null));
 
 if(cljs.core.truth_(resp_QMARK_)){

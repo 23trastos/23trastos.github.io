@@ -62,7 +62,8 @@ html, body {
 }
 
 .code textarea {
-  display: collapse;
+  height: 100%;
+  width: 100%;
 }
 
 .info {

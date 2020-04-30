@@ -50,8 +50,10 @@
     (nth cmds position)))
 
 (defn get-filtered-history []
-  (filter (and
-            #(:input %)
-            (or #(:essential %)
-                #(re-find #"\b(ns|require|def|defn)\b" (:value %))))
-            @history))
+  (. (apply array
+            (map #(:value %)
+                 (filter #(and
+                            (= (:type %) :input)
+                            (or (:essential %)
+                                (re-find #"\b(ns|require|def|defn)\b" (:value %))))
+                         @history))) join "\n"))
