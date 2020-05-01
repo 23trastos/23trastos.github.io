@@ -30,12 +30,10 @@
   (map (partial apply dropl!) lines))
 
 (defn addr
-  "Address an object from a scene, returns OSC path. If no scene is prepended in the form 'scenex/objx' then 'scene/[object]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  "Address an object from a scene, returns OSC path. If no scene is prepended in the form '/ITL/scenex/objx' then '/ITL/scene/[object]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object]
-  (str (when-not (contains? (set (name object)) "#")
-         "/ITL/")
-       (when-not (contains? (set (name object)) "/")
-         "scene/")
+  (str (when-not (re-find #"#|/ITL/" (str object)) ;TODO ALIASES
+         "/ITL/scene/")
        object))
 
 (defn clear!
@@ -91,7 +89,7 @@
 (defn i
   "The 'i' function is a route to almost all of the INScore built-in functionality inside replica."
   [route & args]
-  (if (re-find #"/ITL" route)
+  (if (re-find #"/ITL" (str route))
     (apply dropl! route args)
     (case (str route)
       "doc" (doc-commands 'replica.inscore/i routes 'i)

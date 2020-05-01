@@ -106,6 +106,7 @@
      (case (subs line 0 1)
        "(" (command! line)
        "'" (command! (str "(apply replica.core/r [" line "])"))
+       "/" (proc! 'idropc line) ;TODO FULL DROP
        "skip")))
   ([start-line end-line]
    (map p! (range start-line (inc end-line)))))

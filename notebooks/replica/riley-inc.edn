@@ -1,0 +1,13 @@
+[{:type :markdown :value
+  "Config: Setting default namespace / Requiring essentials"}
+ {:type :input :value
+  "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
+{:type :input :value
+  "(r 'elf \"rsrc/inc.replica\")"}
+ {:type :stop :label
+  "Click to Start!"}
+ {:type :input :value
+  "(r #\"INIT\")"}
+ {:type :input :value
+  "(map #(r 'cmd (str %) (str \"(r 'epl \" (str \"\\\"\" % \"\\\"\") \")\"))
+  ['START 'STOP 'RESET])"}]

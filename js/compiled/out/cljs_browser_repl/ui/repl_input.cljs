@@ -3,8 +3,8 @@
             [clojure.string :as string]
             [cljs-browser-repl.state :as state]
             [cljs-browser-repl.compiler :refer [is-readable?]]
-            [cljs-browser-repl.actions.repl :refer [repl-entry! new-input!]]
-            [replica.utils :refer [create-command!]]))
+            [cljs-browser-repl.actions.repl :refer [new-input!]]
+            [replica.utils :refer [create-command! entry!]]))
 
 (defn resize [node]
   (set! (.. node -style -height) "auto")
@@ -16,10 +16,14 @@
   "When shift+enter adds a new line. When only enter if the input is valid it
   runs the callback function and clears value and triggers the resize. If the
   input is not valid i'll do as if it was a shift+enter"
-  [e valid? send-input]
-  (let [shift? (.-shiftKey e)]
-    (when (and (not shift?) valid?)
-      (send-input (string/trim (get-val e)))
+  [e]
+  (let [shift? (.-shiftKey e)
+        ctrl? (.-ctrlKey e)
+        string (string/trim (get-val e))]
+    (when (and (not shift?) (is-readable? (get-val e)))
+      (if ctrl?
+        (create-command! string)
+        (entry! string))
       (.preventDefault e)
       (new-input! "")
       )))
@@ -30,15 +34,10 @@
    [:div.repl-input-post
     [:textarea.repl-input-input
      {:on-key-down (fn [e]
-                     (if (.-ctrlKey e)
-                       (case (.-key e)
-                         "Enter" (when (is-readable? (get-val e))
-                                   (create-command! (string/trim (get-val e))))
-                         nil)
-                       (case (.-key e)
-                         "Enter" (enter-pressed! e (is-readable? (get-val e)) repl-entry!)
-                         "Escape" (.. e -target blur)
-                         nil)))
+                     (case (.-key e)
+                       "Enter" (enter-pressed! e)
+                       "Escape" (.. e -target blur)
+                       nil))
       :on-change #(new-input! (get-val %))
       :placeholder "REPL here. Type any cljs valid code and press ENTER to evaluate"
       :rows 1

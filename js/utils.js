@@ -1,4 +1,3 @@
-var gFS = false;
 var head = document.getElementsByTagName('head')[0];
 var INS = document.getElementById('scene');
 var CM = document.getElementById('code'); //now just textarea, later the proper CodeMirror instance.
@@ -35,4 +34,27 @@ fromUrlToCM = function (url) {
   $.get( url , function (data) {
     CM.setValue(data)
   }, 'text');
+};
+
+var FS = false;
+goFullScore = function (full) {
+  if (FS && !full) {
+    let style = document.createElement('style');
+    style.innerHTML =
+      '.grid-container { grid-template-columns: 1fr 1fr;' +
+      'grid-template-rows: 51px 1fr 30px 1fr 80px; }' +
+      '#app { display: flex; }';
+    document.head.appendChild(style);
+    FS = false;
+  } else {
+    let style = document.createElement('style');
+    style.innerHTML =
+      '.grid-container { grid-template-columns: 0fr 1fr;' +
+      'grid-template-rows: 51px 1fr 30px 0fr 80px; }' +
+      '#app { display: none; }';
+    document.head.appendChild(style);
+    FS = true;
+  }
+  window.dispatchEvent(new Event('resize'));
+  window.setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 500);
 };

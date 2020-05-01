@@ -14,31 +14,8 @@
     <script src="lib/libGUIDOEngine.js"></script>
     <script src="lib/libmusicxml.js"></script>
     <script src="lib/inscoreview.js"></script>
+    <!--script src="lib/inscoretests.js"></script-->
     <script src="js/commonmark.min.js"></script>
-    <script type="text/javascript">
-      var gFS = false;
-      goFullScore = function () {
-        if (gFS) {
-          let style = document.createElement('style');
-          style.innerHTML =
-            '.grid-container { grid-template-columns: 1fr 1fr;' +
-            'grid-template-rows: 51px 1fr 30px 1fr 80px; }' +
-            '#app { display: flex; }';
-          document.head.appendChild(style);
-          gFS = false;
-        } else {
-          let style = document.createElement('style');
-          style.innerHTML =
-            '.grid-container { grid-template-columns: 0fr 1fr;' +
-            'grid-template-rows: 51px 1fr 30px 0fr 80px; }' +
-            '#app { display: none; }';
-          document.head.appendChild(style);
-          gFS = true;
-        }
-        window.dispatchEvent(new Event('resize'));
-        window.setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 500);
-      };
-    </script>
     <title>REPL!CA v0.1-alpha</title>
   </head>
 

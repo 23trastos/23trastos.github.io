@@ -54,6 +54,7 @@ html, body {
 .scene {
   grid-area: scene;
   overflow: auto;
+  user-select: none;
 }
 
 .code {

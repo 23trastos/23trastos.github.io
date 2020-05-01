@@ -38,9 +38,11 @@
       )))
 
 (defn is-readable? [line]
-  (try
-    (r/read-string line)
-    true
-    (catch :default _
-      false)))
+  (or (and (= (subs line 0 1) "/")
+           (re-find #";" line))
+      (try
+        (r/read-string line)
+        true
+        (catch :default _
+          false))))
 

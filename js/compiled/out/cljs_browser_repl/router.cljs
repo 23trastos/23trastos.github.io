@@ -64,6 +64,9 @@
   (notebook/from-gist! id file))
 
 ; filesystem
+(defroute "/notebook/:id" [id]
+  (replace! (str (get-token) "/file/index")))
+
 (defroute "/notebook/:id/file/:file" [id file]
   (notebook/from-filesystem! id file))
 

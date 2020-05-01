@@ -90,6 +90,10 @@
   (swap! rscs assoc :run false)
   "stopped!")
 
+(defn go!
+  [seconds]
+  (set! js/Tone.Transport.seconds seconds))
+
 (defn run? [] (:run @rscs))
 
 (defn cancel!
@@ -131,6 +135,7 @@
              'getrsc 'getrsc
              'start 'start!
              'stop 'stop!
+             'go 'go!
              'st 'st!
              'run? 'run?
              'cancel 'cancel!})

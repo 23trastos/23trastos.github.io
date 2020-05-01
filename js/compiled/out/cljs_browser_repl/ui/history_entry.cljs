@@ -62,7 +62,7 @@
 
 (defn history-separator [] [:hr])
 
-(defn history-stop [{:keys [emit]} {:keys [disabled label] :as entry}]
+(defn history-stop [{:keys [emit]} {:keys [disabled label timeout] :as entry}]
   (if disabled
     [history-separator]
     [:div.history-stop

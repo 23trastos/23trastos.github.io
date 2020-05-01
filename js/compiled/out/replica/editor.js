@@ -21,8 +21,8 @@ return s.replace((new RegExp(/\s\s+/,new cljs.core.Symbol(null,"g","g",-91634586
  * Retrieves all the content from the CodeMirror editor as a string.
  */
 replica.editor.rd = (function replica$editor$rd(var_args){
-var G__26539 = arguments.length;
-switch (G__26539) {
+var G__110566 = arguments.length;
+switch (G__110566) {
 case 0:
 return replica.editor.rd.cljs$core$IFn$_invoke$arity$0();
 
@@ -52,14 +52,14 @@ replica.editor.rd.cljs$lang$maxFixedArity = 1;
  */
 replica.editor.s_BANG_ = (function replica$editor$s_BANG_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___26542 = arguments.length;
-var i__4532__auto___26543 = (0);
+var len__4531__auto___110569 = arguments.length;
+var i__4532__auto___110570 = (0);
 while(true){
-if((i__4532__auto___26543 < len__4531__auto___26542)){
-args__4534__auto__.push((arguments[i__4532__auto___26543]));
+if((i__4532__auto___110570 < len__4531__auto___110569)){
+args__4534__auto__.push((arguments[i__4532__auto___110570]));
 
-var G__26544 = (i__4532__auto___26543 + (1));
-i__4532__auto___26543 = G__26544;
+var G__110571 = (i__4532__auto___110570 + (1));
+i__4532__auto___110570 = G__110571;
 continue;
 } else {
 }
@@ -77,17 +77,17 @@ return replica.editor.cm.setValue(cljs.core.apply.call(null,cljs.core.str,values
 replica.editor.s_BANG_.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-replica.editor.s_BANG_.cljs$lang$applyTo = (function (seq26541){
+replica.editor.s_BANG_.cljs$lang$applyTo = (function (seq110568){
 var self__4519__auto__ = this;
-return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq26541));
+return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq110568));
 });
 
 /**
  * Replaces part of the content of the editor.
  */
 replica.editor.rplc_BANG_ = (function replica$editor$rplc_BANG_(var_args){
-var G__26546 = arguments.length;
-switch (G__26546) {
+var G__110573 = arguments.length;
+switch (G__110573) {
 case 2:
 return replica.editor.rplc_BANG_.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -124,8 +124,8 @@ replica.editor.rplc_BANG_.cljs$lang$maxFixedArity = 5;
  * Kills lines.
  */
 replica.editor.kl_BANG_ = (function replica$editor$kl_BANG_(var_args){
-var G__26549 = arguments.length;
-switch (G__26549) {
+var G__110576 = arguments.length;
+switch (G__110576) {
 case 1:
 return replica.editor.kl_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -154,8 +154,8 @@ replica.editor.kl_BANG_.cljs$lang$maxFixedArity = 2;
  * Reads lines from code editor.
  */
 replica.editor.r = (function replica$editor$r(var_args){
-var G__26552 = arguments.length;
-switch (G__26552) {
+var G__110579 = arguments.length;
+switch (G__110579) {
 case 0:
 return replica.editor.r.cljs$core$IFn$_invoke$arity$0();
 
@@ -216,8 +216,8 @@ replica.editor.r.cljs$lang$maxFixedArity = 5;
  * Iterates over eachLine with a function [line-number text].
  */
 replica.editor.itl = (function replica$editor$itl(var_args){
-var G__26555 = arguments.length;
-switch (G__26555) {
+var G__110582 = arguments.length;
+switch (G__110582) {
 case 1:
 return replica.editor.itl.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -271,8 +271,8 @@ return cljs.core.swap_BANG_.call(null,replica.editor.search,cljs.core.assoc,new 
  * Returns nil or the next line (number) matching the regexp. It will ignore any line containing a regexp definition in the form #"...
  */
 replica.editor.whl = (function replica$editor$whl(var_args){
-var G__26558 = arguments.length;
-switch (G__26558) {
+var G__110585 = arguments.length;
+switch (G__110585) {
 case 1:
 return replica.editor.whl.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -306,8 +306,8 @@ replica.editor.whl.cljs$lang$maxFixedArity = 2;
  * Processes lines of the CodeMirror editor as arguments to the r function. If no argument is provided every line is processed as a separate command. Be aware and happy that you can insert also (cljs code), even call (r ... with args) inside a route. This can generate dangerous and beautiful loops!
  */
 replica.editor.p_BANG_ = (function replica$editor$p_BANG_(var_args){
-var G__26561 = arguments.length;
-switch (G__26561) {
+var G__110588 = arguments.length;
+switch (G__110588) {
 case 0:
 return replica.editor.p_BANG_.cljs$core$IFn$_invoke$arity$0();
 
@@ -332,14 +332,18 @@ return replica.editor.p_BANG_.call(null,(1),replica.editor.cm.lineCount());
 
 replica.editor.p_BANG_.cljs$core$IFn$_invoke$arity$1 = (function (n){
 var line = replica.editor.r.call(null,n);
-var G__26562 = cljs.core.subs.call(null,line,(0),(1));
-switch (G__26562) {
+var G__110589 = cljs.core.subs.call(null,line,(0),(1));
+switch (G__110589) {
 case "(":
 return replica.utils.command_BANG_.call(null,line);
 
 break;
 case "'":
 return replica.utils.command_BANG_.call(null,["(apply replica.core/r [",cljs.core.str.cljs$core$IFn$_invoke$arity$1(line),"])"].join(''));
+
+break;
+case "/":
+return replica.utils.proc_BANG_.call(null,new cljs.core.Symbol(null,"idropc","idropc",-672493791,null),line);
 
 break;
 default:
@@ -392,14 +396,14 @@ replica.editor.routes = cljs.core.PersistentHashMap.fromArrays([new cljs.core.Sy
  */
 replica.editor.e = (function replica$editor$e(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___26568 = arguments.length;
-var i__4532__auto___26569 = (0);
+var len__4531__auto___110595 = arguments.length;
+var i__4532__auto___110596 = (0);
 while(true){
-if((i__4532__auto___26569 < len__4531__auto___26568)){
-args__4534__auto__.push((arguments[i__4532__auto___26569]));
+if((i__4532__auto___110596 < len__4531__auto___110595)){
+args__4534__auto__.push((arguments[i__4532__auto___110596]));
 
-var G__26570 = (i__4532__auto___26569 + (1));
-i__4532__auto___26569 = G__26570;
+var G__110597 = (i__4532__auto___110596 + (1));
+i__4532__auto___110596 = G__110597;
 continue;
 } else {
 }
@@ -411,8 +415,8 @@ return replica.editor.e.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),ar
 });
 
 replica.editor.e.cljs$core$IFn$_invoke$arity$variadic = (function (route,args){
-var G__26567 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(route)].join('');
-switch (G__26567) {
+var G__110594 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(route)].join('');
+switch (G__110594) {
 case "doc":
 return replica.utils.doc_commands.call(null,new cljs.core.Symbol("replica.editor","e","replica.editor/e",-1089389128,null),replica.editor.routes,new cljs.core.Symbol(null,"e","e",-1273166571,null));
 
@@ -426,11 +430,11 @@ return cljs.core.apply.call(null,replica.utils.proc_BANG_,[cljs.core.str.cljs$co
 replica.editor.e.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-replica.editor.e.cljs$lang$applyTo = (function (seq26565){
-var G__26566 = cljs.core.first.call(null,seq26565);
-var seq26565__$1 = cljs.core.next.call(null,seq26565);
+replica.editor.e.cljs$lang$applyTo = (function (seq110592){
+var G__110593 = cljs.core.first.call(null,seq110592);
+var seq110592__$1 = cljs.core.next.call(null,seq110592);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__26566,seq26565__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__110593,seq110592__$1);
 });
 
 replica.utils.add_routes_BANG_.call(null,new cljs.core.Symbol(null,"e","e",-1273166571,null),new cljs.core.Symbol(null,"replica.editor","replica.editor",2137293831,null),replica.editor.routes);

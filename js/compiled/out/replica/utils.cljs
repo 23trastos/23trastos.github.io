@@ -26,6 +26,10 @@
   [url]
   (js/replaceUrl url))
 
+(defn full-score!
+  [full?]
+  (js/goFullScore full?))
+
 (defn cmd-url
   [c]
   (str "#/cmd?c=\""
@@ -47,7 +51,15 @@
   [route & args]
   (if (= (str (first args)) "doc")
     (command! (str "(doc " (first (get @routes route)) ")") true false)
-    (apply (second (get @routes route)) args)))
+    (apply (second (get @routes (str route))) args)))
+
+(defn entry!
+  ([string] (entry! string true))
+  ([string clean?]
+   (case (subs string 0 1)
+     "'" (command! (str "(apply replica.core/r [" string "])"))
+     "/" (proc! 'idropc string)
+     (command! string))))
 
 (defn add-routes!
   ([route-cmd-map]
@@ -57,7 +69,7 @@
      (zipmap
        (map #(str pre-route %)
             (keys route-cmd-map))
-       (map #(list (str origin "/" %) (eval (symbol %)))
+       (map #(list (str origin (when origin "/") %) (eval (symbol %)))
             (vals route-cmd-map))))))
 
 (defn doc-commands
@@ -69,5 +81,7 @@
                         join " ") ")\")") false true))
 
 (defn create-command!
-  [command-string]
-  (js/appendLinkTo "menu" command-string (cmd-url command-string)))
+  ([command]
+   (create-command! command command))
+  ([label command]
+   (js/appendLinkTo "menu" label (cmd-url command))))

@@ -1,4 +1,8 @@
 [{:type :markdown :value
+  "Config: Setting default namespace / Requiring essentials"}
+ {:type :input :deaf? true :value
+  "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
+ {:type :markdown :value
   "## Welcome to REPL!CA v0.1-alpha:
 
   The **R**EPL-based **E**xtendable **P**latform
@@ -16,7 +20,7 @@
 
   - Follow the **[guided tour](#/file/tour)**
 
-  - or go to the **[REPL!CA tutorials](#/notebook/replica-tutorials)**
+  - or go and try **[Terry Riley's 'In C' Interactive score](#/file/riley-inc)**
 
   If you want to dive first into ClojureScript, then you must visit
   **[Joakin's Introduction](http://chimeces.com/cljs-browser-repl/)**,
