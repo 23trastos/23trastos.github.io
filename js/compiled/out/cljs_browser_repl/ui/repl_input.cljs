@@ -39,7 +39,7 @@
                        "Escape" (.. e -target blur)
                        nil))
       :on-change #(new-input! (get-val %))
-      :placeholder "REPL here. Type any cljs valid code and press ENTER to evaluate"
+      :placeholder "Type any cljs/INScore/replica valid code and press ENTER to evaluate"
       :rows 1
       :value @state/input
       }]

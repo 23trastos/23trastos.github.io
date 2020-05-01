@@ -5,6 +5,7 @@
                                    doc-commands]]))
 
 ;(defonce inscore-viewer (. js/document getElementById "scene"))
+;TODO here valid
 
 (defn dropc!
   "Drops (sends) the desired code string to the active INScore window. If several arguments are provided then they are combined as one string without any formatting."
