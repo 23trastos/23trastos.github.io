@@ -2,36 +2,45 @@
 %%% IN C
 %%% for REPL!CA v.0.1a
 
-INIT
+SETUP
+'full true
+(def tempo (js/prompt "Set the desired tempo in BPM / Introduce el tempo deseado en BPM"))
+(when (= tempo "") (def tempo 98))
+'tst tempo
 'iclear
 (def pats (range 1 54))
 (def bounds (r 'ebl #"SCORE"))
 (def lines (range (first bounds) (inc (last bounds))))
 (def length 30)
 (def step (/ length 53))
-(def start 0.7)
+(def start 0.4)
 (def positions (range start (+ length start) step))
 'isetx 'inc 'layer
 (map #(r 'igmn (str 'inc/pat %1) (str "[\\repeatBegin " (r 'er %2) " \\repeatEnd]")) pats lines)
-'isetx 'titleL 'txt "In C"
-'isetx 'titleR 'txt "Terry Riley"
-'imsg 'titleL 'x -2.4
-'imsg 'titleL 'y -0.9
+'isetx 'inc/title1 'txt "TERRY RILEY IN C"
+'isetx 'inc/title2 'txt "start stop reset to control"
+'imsg 'inc/title1 'scale 2
+'imsg 'inc/title1 'y -0.5
+'imsg 'inc/title2 'y -0.4
+'isetx 'titleR 'txt "In C_Terry Riley"
 'imsg 'titleR 'x 2.3
 'imsg 'titleR 'y -0.9
 (map #(r 'isetx (str 'inc/lab %1) 'txt (str %1)) pats)
-(map #(r 'imsg (str 'inc/* %1) 'y %2) pats positions)
-'imsg 'inc/lab* 'x -2
-'imsg 'inc/pat* 'scale 2
-'imsg 'inc/pat35 'scale 2.7
+(map #(r 'imsg (str 'inc/pat %1) 'y %2) pats positions)
+(map #(r 'imsg (str 'inc/lab %1) 'y %2) pats positions)
+'imsg 'inc/pat* 'scale 0.6
+'imsg 'inc/lab* 'x -1.8
+'imsg 'inc/lab* 'scale 2
 'isetx 'inc/time 'rect 1 1
 'imsg 'inc/time 'show 0
-'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy -0.001 '--keep)
+'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 60000)) '--keep)
 'iwatch 'inc/time 'STEP (r 'imsg 'inc 'dy (- step) '--keep)
-'tmonos 'b1
-'tmonos 'b2
-'tschr "8n" (fn[t] (r 'tp 'b1 "C5" "16n" t (rand)) (r 'tp 'b2 "C6" "16n" t (rand)))
-INIT
+'tconv 'conv "rsrc/x00y00.wav"
+'tsp 'conv 'wet 'value 0.2
+'tsynth 'b1 :-- 'conv
+'tsynth 'b2 :-- 'conv
+'tschr "8n" (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand)))))
+SETUP
 
 START
 'tstart
@@ -84,7 +93,7 @@ c2 * 3 / 2
 \bm( f1 * 1 / 16 g1 * 1 / 16 f1 * 1 / 16 ) \bm( g1 * 1 / 16 b1 * 1 / 16 \tieBegin:0 f1 * 1 / 16 ) f1 * 3 / 4 \tieEnd:0 g1 * 3 / 8
 g1 * 1 / 16 f1 * 1 / 16 _ * 1 /8
 \bm( g1 * 1 / 16 f1 * 1 / 16 )
-f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4 b&1 * 1 / 4 g2 * 3 / 4 a2 * 1 / 8 \tieBegin:0 g2 * 1 / 8 g2 * 1 / 8 \tieEnd:0 b2 * 1 / 8 a2 * 3 / 8 g2 * 1 / 8 e2 * 3 / 4 g2 * 1 / 8 \tieBegin:0 f#2 * 1 / 8 f#2 * 3 / 4 \tieEnd:0 _ * 1 /4 _ * 1 /4 _ * 1 /8 \tieBegin:0 e2 * 1 / 8 e2 * 1 / 2 \tieEnd:0 f2 * 3 / 2
+f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4 b&1 * 1 / 4 g2 * 3 / 4 \bm( a2 * 1 / 8 \tieBegin:0 g2 * 1 / 8 ) \bm( g2 * 1 / 8 \tieEnd:0 b2 * 1 / 8 ) a2 * 3 / 8 g2 * 1 / 8 e2 * 3 / 4 g2 * 1 / 8 \tieBegin:0 f#2 * 1 / 8 f#2 * 3 / 4 \tieEnd:0 _ * 1 /4 _ * 1 /4 _ * 1 /8 \tieBegin:0 e2 * 1 / 8 e2 * 1 / 2 \tieEnd:0 f2 * 3 / 2
 \bm( f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 )
 \bm( f1 * 1 / 16 g1 * 1 / 16 )
 \bm( f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 )

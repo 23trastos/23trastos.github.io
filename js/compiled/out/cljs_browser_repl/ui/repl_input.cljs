@@ -3,8 +3,9 @@
             [clojure.string :as string]
             [cljs-browser-repl.state :as state]
             [cljs-browser-repl.compiler :refer [is-readable?]]
-            [cljs-browser-repl.actions.repl :refer [new-input!]]
-            [replica.utils :refer [create-command! entry!]]))
+            [cljs-browser-repl.actions.repl :refer [new-input!
+                                                    repl-entry!]]
+            [replica.utils :refer [create-command!]]))
 
 (defn resize [node]
   (set! (.. node -style -height) "auto")
@@ -23,7 +24,7 @@
     (when (and (not shift?) (is-readable? (get-val e)))
       (if ctrl?
         (create-command! string)
-        (entry! string))
+        (repl-entry! string))
       (.preventDefault e)
       (new-input! "")
       )))

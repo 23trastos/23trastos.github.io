@@ -4,7 +4,8 @@
                                    proc!
                                    add-routes!
                                    doc-commands
-                                   set-info!]]))
+                                   set-info!
+                                   command!]]))
 
 (defonce cm (. js/CodeMirror fromTextArea
                (. js/document getElementById "code")
@@ -85,7 +86,7 @@
   (if (. (:cursor @search) findNext)
     (let [from (. (:cursor @search) from)
           to (. (:cursor @search) to)]
-      (if (re-find #"#\"" (. cm getLine (.-line from)))
+      (if (re-find #"'cmd|#\"" (. cm getLine (.-line from)))
         (where regexp)
         {:from {:line (inc (.-line from)) :ch (.-ch from)}
          :to {:line (inc (.-line to)) :ch (.-ch to)}}))
@@ -99,15 +100,10 @@
    (:line (:from (where regexp)))))
 
 (defn p!
-  "Processes lines of the CodeMirror editor as arguments to the r function. If no argument is provided every line is processed as a separate command. Be aware and happy that you can insert also (cljs code), even call (r ... with args) inside a route. This can generate dangerous and beautiful loops!"
+  "Processes lines of the CodeMirror editor as REPL commands. If no argument is provided every line is processed as a separate command. Be aware and happy that you can insert also (cljs code), even call (r ... with args) inside a route. This can generate dangerous and beautiful loops!"
   ([] (p! 1 (. cm lineCount)))
   ([n]
-   (let [line (r n)]
-     (case (subs line 0 1)
-       "(" (command! line)
-       "'" (command! (str "(apply replica.core/r [" line "])"))
-       "/" (proc! 'idropc line) ;TODO FULL DROP
-       "skip")))
+   (command! (r n)))
   ([start-line end-line]
    (map p! (range start-line (inc end-line)))))
 

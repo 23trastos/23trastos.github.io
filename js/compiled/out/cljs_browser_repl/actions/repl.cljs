@@ -11,6 +11,14 @@
 (defn new-input! [s]
   (reset! state/input s))
 
+(defn real-code
+  [string]
+  (case (subs (str string) 0 1)
+    ("'" "[") (str "(apply replica.core/r [" string "])")
+    "/" (str "(apply replica.core/r 'idropc \"" string "\")")
+    "{" (str "(apply replica.core/r ['iclear]['igmn 'new \"" string "\"])")
+    string))
+
 (defn repl-entry!
   ([code] (repl-entry! code true true))
   ([code history?] (repl-entry! code history? true))
@@ -20,7 +28,7 @@
      (when history?
        (swap! state/history state/add-entry (state/to-repl-input code)))
      (cljs-read-eval-print!
-       code
+       (real-code code)
        (fn [{:keys [value error] :as ret}]
          (reset! state/current-ns (current-ns))
          ; Add result to history

@@ -1,4 +1,5 @@
-(ns replica.utils)
+(ns replica.utils
+  (:require [goog.object :as g]))
 
 (def global (this-as this this))
 (defonce resp (atom nil))
@@ -8,8 +9,7 @@
 (defn get-value []
   (let [value (:value @resp)]
     (when-not (or (nil? value)
-                  (= (list nil) value)
-                  (some? (re-find #"nil" value)))
+                  (re-find #"nil|-------" value))
       (. value replace (js/RegExp. #"\"" 'g) ""))))
 
 (defn error!
@@ -33,7 +33,7 @@
 (defn cmd-url
   [c]
   (str "#/cmd?c=\""
-       (. c replace (js/RegExp. #"\"" 'g) "\\\"")
+       (. (str c) replace (js/RegExp. #"\"" 'g) "\\\"")
        "\""))
 
 (defn url-command!
@@ -42,24 +42,34 @@
   (url! (cmd-url c)))
 
 (defn command!
-  ([c] (command! c false true))
+  ([c] (command! c true true))
   ([c hist? resp?]
    (reset! resp nil)
    (js/toRepl c hist? resp?)))
 
+(defn get-js-value
+  [obj & path-to-key]
+  (apply g/getValueByKeys obj path-to-key))
+
+(defn set-js-prop!
+  [obj & path-to-prop-value]
+  (let [target (butlast path-to-prop-value)]
+    (g/set (apply get-js-value obj (butlast target))
+           (last target)
+           (last path-to-prop-value))))
+
+(defn get-js-paths
+  [obj & pre-paths]
+    (let [ret (g/getKeys (apply g/getValueByKeys obj pre-paths))]
+      (if (= (count ret) 0)
+        (apply get-js-value obj pre-paths)
+        ret)))
+
 (defn proc!
   [route & args]
   (if (= (str (first args)) "doc")
-    (command! (str "(doc " (first (get @routes route)) ")") true false)
+    (command! (str "(doc " (first (get @routes (str route))) ")"))
     (apply (second (get @routes (str route))) args)))
-
-(defn entry!
-  ([string] (entry! string true))
-  ([string clean?]
-   (case (subs string 0 1)
-     "'" (command! (str "(apply replica.core/r [" string "])"))
-     "/" (proc! 'idropc string)
-     (command! string))))
 
 (defn add-routes!
   ([route-cmd-map]
@@ -74,14 +84,20 @@
 
 (defn doc-commands
   [fn-path route-cmd-map pre-router]
-  (command! (str "(doc " fn-path ")") true true)
+  (command! (str "(doc " fn-path ")"))
   (command! (str "(str \"Available commands are: "
                  (when pre-router (str "[" pre-router "]+"))
                  "(" (. (apply array (keys route-cmd-map))
                         join " ") ")\")") false true))
+(defn regex2#string
+  [regex]
+  (str "'#\"" (. regex -source) "\""))
 
 (defn create-command!
   ([command]
-   (create-command! command command))
+   (create-command! (str command)
+                    (if (= (type command) (type #""))
+                      (regex2#string command)
+                      (command))))
   ([label command]
-   (js/appendLinkTo "menu" label (cmd-url command))))
+   (js/appendLinkTo "menu" (str label) (cmd-url command))))

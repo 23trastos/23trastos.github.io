@@ -2,10 +2,10 @@
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs-browser-repl.net.gist :as gist]
             [cljs-browser-repl.net.file :as file]
-            [cljs-browser-repl.actions.repl :refer [repl-entry!]]
             [cljs.core.async :refer [<!]]
             [cljs.pprint :refer [pprint]]
-            [cljs-browser-repl.state :as state]))
+            [cljs-browser-repl.state :as state]
+            [cljs-browser-repl.actions.repl :refer [repl-entry!]]))
 
 (defn cmd-to-history! [cmd]
   (swap! state/history state/add-entry (state/to-repl cmd)))

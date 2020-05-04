@@ -5,9 +5,9 @@
             [goog.events]
             [goog.history.EventType :as EventType]
             [cljs-browser-repl.state :as state]
-            [cljs-browser-repl.actions.repl :as repl]
             [cljs-browser-repl.actions.notebook :as notebook]
-            [cljs-browser-repl.net.file :as file])
+            [cljs-browser-repl.net.file :as file]
+            [cljs-browser-repl.actions.repl :refer [repl-entry!]])
   (:import goog.History))
 
 (secretary/set-config! :prefix "#")
@@ -79,7 +79,7 @@
   (notebook/goto! (read-string pos)))
 
 (defn- cmd! [cmd]
-  (repl/repl-entry! (read-string cmd))
+  (repl-entry! (read-string cmd))
   (replace! "/idle"))
 
 ;process command

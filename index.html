@@ -10,11 +10,6 @@
     <link href="css/cljs_browser_repl.css" rel="stylesheet" type="text/css">
     <link href="css/replica.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="lib/libINScore.js"></script>
-    <script src="lib/libGUIDOEngine.js"></script>
-    <script src="lib/libmusicxml.js"></script>
-    <script src="lib/inscoreview.js"></script>
-    <!--script src="lib/inscoretests.js"></script-->
     <script src="js/commonmark.min.js"></script>
     <title>REPL!CA v0.1-alpha</title>
   </head>
@@ -36,7 +31,10 @@
       </div>
       <div id="app" class="history notebook">( Loading REPLiCA . . . )</div>
       <div id="scene" class="inscore scene">
+
+
         /ITL/scene/* del;
+
         grey = 180 180 180;
         shadow = shadow 5 5 $grey 75 3;
         color = 20 0 150;
@@ -63,24 +61,31 @@
         /ITL/scene/score y -0.05;
 
         /ITL/scene/comment set html '<div style="text-align: center">
-        INScore is an open source project developed by GRAME.<br />
+        INScore is an open source project developed by GRAME-CNCM.<br />
         More information on <br />
-        <a href=https://inscore.grame.fr style="font-size: 110%" target=_blank>inscore.grame.fr</a></span>';
+        <a href=https://inscore.grame.fr style="font-size: 110%" target=_blank>inscore.grame.fr</a></div>';
         /ITL/scene/comment y 0.28;
 
-        /ITL/scene/logo set img "imgs/grame.png";
-        /ITL/scene/logo scale 0.15;
-        /ITL/scene/logo y 0.6;</div>
+        /ITL/scene/logo set img "https://inscoreweb.grame.fr/imgs/grame.png";
+        /ITL/scene/logo scale 0.55;
+        /ITL/scene/logo y 0.6;
+
+
+      </div>
+      <div id="right-info" class="info">
+      </div>
+      <div id="editor" class="code">
+        <textarea id="code"></textarea>
+      </div>
+      <div id="repl-input" class="footer">
+      </div>
     </div>
-    <div id="right-info" class="info">
-    </div>
-    <div id="editor" class="code">
-      <textarea id="code"></textarea>
-    </div>
-    <div id="repl-input" class="footer">
-    </div>
-    </div>
-  <script src="js/utils.js"></script>
-  <script src="js/compiled/cljs_browser_repl.js"></script>
+    <script src="lib/libINScore.js"></script>
+    <script src="lib/libGUIDOEngine.js"></script>
+    <script src="lib/libmusicxml.js"></script>
+    <script src="lib/inscoreview.js"></script>
+    <script src="inscoreEditor.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/compiled/cljs_browser_repl.js"></script>
   </body>
 </html>

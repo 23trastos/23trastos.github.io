@@ -11,7 +11,6 @@
   "Drops (sends) the desired code string to the active INScore window. If several arguments are provided then they are combined as one string without any formatting."
   [& codes]
   (let [code (apply str codes)]
-    ;(js/alert code)
     (if (re-find #"--keep" code)
       (. code replace (js/RegExp. #"--keep|;" 'g) "")
       (js/dropTextTo js/INS code))))
@@ -45,12 +44,9 @@
 (defn msg!
   "Address an object [or create it] and send to it a command. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object & msg-codes]
-  (apply dropl! (addr object) msg-codes))
-
-(defn msgs!
-  "Address an object [or create it] and send to it some commands. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
-  [object & msgs]
-  (map (partial msg! object) msgs))
+  (if (coll? (first msg-codes))
+    (map (partial apply msg! object) msg-codes)
+    (apply dropl! (addr object) msg-codes)))
 
 (defn setx!
   "Dispatches a 'set [obj-type] [args]' command to an object."
@@ -81,7 +77,6 @@
              'addr 'addr
              'clear 'clear!
              'msg 'msg!
-             'msgs 'msgs!
              'setx 'setx!
              'gmn 'gmn!
              'watch 'watch!

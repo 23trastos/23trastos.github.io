@@ -1,77 +1,175 @@
 (ns replica.tone
   (:require [tonejs]
+            [goog.object :as g]
             [replica.utils :refer [command!
                                    proc!
                                    add-routes!
-                                   doc-commands]]))
+                                   doc-commands
+                                   get-js-paths
+                                   set-js-prop!]]))
 
-(defonce rscs (atom {:run false}))
+(defonce rsrcs (atom {:run false :master js/Tone.Master :ins {} :fx {}}))
 
-(defn getrsc
-  [k id]
-  (get-in @rscs [k id]))
+(defn getrsrc
+  ([id]
+   (if (coll? id)
+     (apply getrsrc id)
+     (if (= (str id) "master")
+       (:master @rsrcs)
+       (or (getrsrc :ins id) (getrsrc :fx id)))))
+  ([k id]
+   (get-in @rsrcs [k id])))
+
+(defn fan
+  "connects source to several elements by ID, a.k.a. fan"
+  [source-id & elms]
+  (let [src (getrsrc source-id)]
+    (apply (. (. src -fan) bind src)
+           (map getrsrc elms))))
+
+(defn chain
+  "chains from source through elements by ID."
+  [source-id & elms]
+  (let [src (getrsrc source-id)]
+    (apply (. (. src -chain) bind src)
+           (map getrsrc elms))))
+
+(defn connect
+  [id -- -<]
+  (when -- (chain id --))
+  (when -< (fan id -<))
+  id)
+
+(defn setrsrc
+  [k id rsrc & {:keys [-- -<]}]
+  (swap! rsrcs assoc-in [k id] rsrc)
+  (when (or -- -<)
+    (connect [k id] -- -<)))
+
+(defn setprops!
+  [id & val-path-to-props]
+  (apply set-js-prop! (getrsrc id) val-path-to-props))
+
+(defn getpaths
+  [id & pre-path]
+  (apply get-js-paths (getrsrc id) pre-path))
+
+(defn synth
+  "Creates a new Tone.Synth"
+  [id & {:keys [osc a d s r -- -<]
+         :or {osc {:type 'triangle}
+              a 0.005 d 0.1 s 0.3 r 1 -- 'master}}]
+  (setrsrc :ins id
+           (js/Tone.Synth.
+             (clj->js {:oscillator osc
+                       :envelope {:attack a :decay d
+                                  :sustain s :release r}}))
+           :-- -- :-< -<))
 
 (defn monos
-  "Creates a new Tone.Synth"
-  ([id & {:keys [osc a d s r]
-          :or {osc {:type 'triangle}
-               a 0.005 d 0.1 s 0.3 r 1}}]
-   (monos id {:oscillator osc :envelope {:attack a
-                                         :decay d
-                                         :sustain s
-                                         :release r}}))
-  ([id settings]
-   (swap! rscs assoc-in [:ins id]
-          (. (js/Tone.Synth. (clj->js settings)) toMaster))))
+  "Creates a new Tone.MonoSynth"
+  [id & {:keys [osc a d s r filt q roff
+                fa fd fs fr ffreq f8s fexp -- -<]
+         :or {osc {:type 'square} a 0.005 d 0.1 s 0.9 r 1
+              filt 'lowpass q 6 roff -24
+              fa 0.06 fd 0.2 fs 0.3 fr 2
+              ffreq 200 f8s 7 fexp 2 -- 'master}}]
+  (setrsrc :ins id
+           (js/Tone.MonoSynth.
+             (clj->js {:oscillator osc
+                       :envelope {:attack a :decay d
+                                  :sustain s :release r}
+                       :filter {:type filt :Q q :rolloff roff}
+                       :filterEnvelope {:attack fa :decay fd
+                                        :sustain fs :release fr
+                                        :baseFrequency ffreq
+                                        :octaves f8s :exponent fexp}}))
+           :-- -- :-< -<))
 
 (defn metal
   "Creates a new Tone.MetalSynth"
-  ([id & {:keys [freq a d r harm modidx res octs]
-          :or {freq 200 a 0.001 d 1.4 r 0.2
-               harm 5.1 modidx 32 res 4000 otcs 1.5}}]
-   (metal id {:frequency freq
-              :envelope {:attack a :decay d :release r}
-              :harmonicity harm :modulationIndex modidx
-              :resonance res :octaves 1.5}))
-  ([id settings]
-   (swap! rscs assoc-in [:ins id]
-          (. (js/Tone.MetalSynth. (clj->js settings)) toMaster))))
-
-(defn pluck
-  "Creates a new Tone.PluckSynth"
-  ([id & {:keys [noise damp res] :or {noise 1 damp 4000 res 0.99}}]
-   (pluck id {:attackNoise noise :dampening damp :resonance res}))
-  ([id settings]
-   (swap! rscs assoc-in [:ins id]
-          (. (js/Tone.PluckSynth. (clj->js settings)) toMaster))))
+  [id & {:keys [freq a d r harm modidx res octs -- -<]
+         :or {freq 200 a 0.001 d 1.4 r 0.2 harm 5.1
+              modidx 32 res 4000 otcs 1.5 -- 'master}}]
+  (setrsrc :ins id
+           (js/Tone.MetalSynth.
+             (clj->js {:frequency freq
+                       :envelope {:attack a :decay d :release r}
+                       :harmonicity harm :modulationIndex modidx
+                       :resonance res :octaves 1.5})) :-- -- :-< -<))
 
 (defn p!
   "Plays a Synth"
   [id freq dur t vel]
-  (let [s (getrsc :ins id)]
+  (let [s (getrsrc :ins id)]
     (case (str s)
-      "Synth" (. s triggerAttackRelease freq dur t vel)
+      ("Synth" "MonoSynth") (. s triggerAttackRelease freq dur t vel)
       "MetalSynth" (do
-                     (set! (.. s -frequency -value) freq)
+                     (when freq
+                       (set! (.. s -frequency -value) freq))
                      (. s triggerAttackRelease dur t vel))
       (str s " can't be played so!"))))
 
 (defn on!
   "Triggers attack on a Synth"
   [id freq t vel]
-  (let [s (getrsc :ins id)]
+  (let [s (getrsrc :ins id)]
     (case (str s)
-      "Synth" (. s triggerAttack freq t vel)
+      ("Synth" "MonoSynth") (. s triggerAttack freq t vel)
       "PluckSynth" (. s triggerAttack freq t)
       "MetalSynth" (do
-                     (set! (.. s -frequency -value) freq)
+                     (when freq
+                       (set! (.. s -frequency -value) freq))
                      (. s triggerAttack t vel))
       (str s " can't be triggered so!"))))
 
 (defn off!
   "Releases a Synth"
   [id t]
-  (. (getrsc :ins id) triggerRelease t))
+  (. (getrsrc :ins id) triggerRelease t))
+
+(defn buf
+  "creates a Tonejs Buffer from url"
+  [id url & {:keys [onload onerror]}]
+  (setrsrc :buf id (js/Tone.Buffer. url onload onerror))
+  (getrsrc :buf id))
+
+(defn- buf-from-any
+  [buf]
+  (let [buffer (if (= (type buf) Symbol)
+                 (getrsrc buf)
+                 buf)]
+    buffer))
+
+(defn grn
+  "creates a Tonejs GrainPlayer from the specified source buffer or url"
+  [id src & {:keys [onload -- -<]
+             :or {-- 'master}}]
+  (setrsrc :ins id (js/Tone.GrainPlayer.
+                     (buf-from-any src) (fn[]
+                                          (chain [:ins id] --)
+                                          (fan [:ins id] -<)))))
+
+(defn grnst
+  [id t offset dur]
+  "starts a GrainPlayer."
+  (. (getrsrc id) start t offset dur))
+
+
+(defn conv
+  "creates a Tonejs Convolver from the speficied IR source buffer or url"
+  [id src & {:keys [onload -- -<]
+             :or {-- 'master}}]
+  (setrsrc :fx id (js/Tone.Convolver.
+                    (buf-from-any src) (fn[]
+                                         (chain [:fx id] --)
+                                         (fan [:fx id] -<)))))
+
+(defn discn
+  "disconnects source from element(s) by Object or index."
+  [src & disconnect-from]
+  (let [elm (getrsrc src)]
+    (map #(. elm disconnect %) disconnect-from)))
 
 (defn schr!
   "Schedules an event repeated on a time interval."
@@ -81,39 +179,39 @@
 (defn start!
   []
   (js/Tone.Transport.start)
-  (swap! rscs assoc :run true)
+  (swap! rsrcs assoc :run true)
   "started!")
 
 (defn stop!
   []
   (js/Tone.Transport.stop)
-  (swap! rscs assoc :run false)
+  (swap! rsrcs assoc :run false)
   "stopped!")
 
 (defn go!
   [seconds]
   (set! js/Tone.Transport.seconds seconds))
 
-(defn run? [] (:run @rscs))
+(defn run? [] (:run @rsrcs))
 
 (defn cancel!
   ([]
    (js/Tone.Transport.cancel)
-   (swap! rscs :loops {})
+   (swap! rsrcs :loops {})
    "All schedules cancelled.")
   ([id]
    (if (number? id)
      (js/Tone.Transport.clear id)
      (do
-       (. (getrsc :loops id) dispose)
-       (swap! rscs assoc-in [:loops id] nil)))))
+       (. (getrsrc :loops id) dispose)
+       (swap! rsrcs assoc-in [:loops id] nil)))))
 
-(defn l
+(defn lp
   "Creates a new loop with defined start and end."
   [id interval start-time end-time function]
-  (when-let [lp (getrsc :loops id)]
+  (when-let [lp (getrsrc :loops id)]
     (. lp dispose))
-  (swap! rscs assoc-in [:loops id]
+  (swap! rsrcs assoc-in [:loops id]
          (. (. (js/Tone.Loop. function interval)
                start start-time) stop end-time)))
 
@@ -122,17 +220,26 @@
   [target-bpm ramp-time]
   (js/Tone.Transport.bpm.rampTo target-bpm
                                 (if ((every-pred number? (partial < 0)) ramp-time)
-                                             ramp-time 0.001)))
+                                  ramp-time 0.001)))
 
-(def routes {'monos 'monos
+(def routes {'synth 'synth
+             'monos 'monos
              'metal 'metal
-             'pluck 'pluck
              'p 'p!
              'on 'on!
              'off 'off!
+             'conv 'conv
+             'grn 'grn
+             'grnst 'grnst
+             'buf 'buf
+             '-- 'chain
+             '-< 'fan
              'schr 'schr!
-             'l 'l
-             'getrsc 'getrsc
+             'lp 'lp
+             'g 'getrsrc
+             's 'setrsrc
+             'sp 'setprops!
+             'gp 'getpaths
              'start 'start!
              'stop 'stop!
              'go 'go!

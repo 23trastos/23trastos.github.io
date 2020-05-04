@@ -38,12 +38,13 @@
       )))
 
 (defn is-readable? [line]
-  (if (and (= (subs line 0 1) "/")
-           (re-find #";" line))
-    true
-    (try
-      (r/read-string line)
-      true
-      (catch :default _
-        false))))
+  (let [mark (subs line 0 1)]
+    (case mark
+      ("'" "{") true
+      "/" (when (re-find #";" line) true)
+      (try
+        (r/read-string line)
+        true
+        (catch :default _
+          false)))))
 

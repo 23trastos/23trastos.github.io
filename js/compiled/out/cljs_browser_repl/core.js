@@ -16,7 +16,9 @@ return reagent.dom.render.call(null,new cljs.core.PersistentVector(null, 1, 5, c
 if((typeof cljs_browser_repl !== 'undefined') && (typeof cljs_browser_repl.core !== 'undefined') && (typeof cljs_browser_repl.core.initialize_repl_ns !== 'undefined')){
 } else {
 cljs_browser_repl.core.initialize_repl_ns = (function (){
-cljs_browser_repl.actions.repl.repl_entry_BANG_.call(null,"(ns cljs.user)",false);
+cljs_browser_repl.actions.repl.repl_entry_BANG_.call(null,"(ns replica.user)",false);
+
+cljs_browser_repl.actions.repl.repl_entry_BANG_.call(null,"(require '[replica.core :refer [r rr]])",false);
 
 cljs_browser_repl.core.render_BANG_.call(null);
 

@@ -36,11 +36,11 @@ goog.addDependency("../devtools/core.js", ['devtools.core'], ['devtools.toolbox'
 goog.addDependency("../figwheel/repl/preload.js", ['figwheel.repl.preload'], ['cljs.core', 'figwheel.repl']);
 goog.addDependency("../devtools/preload.js", ['devtools.preload'], ['cljs.core', 'devtools.core', 'devtools.prefs']);
 goog.addDependency("../cljsjs/codemirror/development/codemirror.inc.js", ['cljsjs.codemirror', 'codemirror'], [], {'foreign-lib': true});
-goog.addDependency("../replica/utils.js", ['replica.utils'], ['cljs.core']);
+goog.addDependency("../replica/utils.js", ['replica.utils'], ['cljs.core', 'goog.object']);
 goog.addDependency("../replica/editor.js", ['replica.editor'], ['cljs.core', 'cljsjs.codemirror', 'replica.utils']);
 goog.addDependency("../replica/inscore.js", ['replica.inscore'], ['cljs.core', 'replica.utils']);
 goog.addDependency("../cljsjs/tonejs/development/Tone.inc.js", ['tonejs'], [], {'foreign-lib': true});
-goog.addDependency("../replica/tone.js", ['replica.tone'], ['tonejs', 'cljs.core', 'replica.utils']);
+goog.addDependency("../replica/tone.js", ['replica.tone'], ['tonejs', 'cljs.core', 'goog.object', 'replica.utils']);
 goog.addDependency("../replica/core.js", ['replica.core'], ['replica.editor', 'cljs.core', 'replica.inscore', 'replica.utils', 'replica.tone']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/ioc_helpers.js", ['cljs.core.async.impl.ioc_helpers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
