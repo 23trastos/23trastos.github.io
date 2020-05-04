@@ -58,6 +58,11 @@
   [object gmn-string & opt]
   (apply setx! object 'gmn "'" gmn-string "'" opt))
 
+(defn txt!
+  "Macro command for creating a new text entry. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  [object txt-string & opt]
+  (apply setx! object 'txt "'" txt-string "'" opt))
+
 (defn watch!
   "Macro command for creating a watch to an element. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object watch-for & body]
@@ -79,6 +84,7 @@
              'msg 'msg!
              'setx 'setx!
              'gmn 'gmn!
+             'txt 'txt!
              'watch 'watch!
              'als 'als!})
 

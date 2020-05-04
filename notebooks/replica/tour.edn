@@ -16,12 +16,8 @@
   "
   ['iclear]
   ['igmn 'bach1 (r 'erl #\"BACH\")]
-  ['imsg 'bach1 'x -0.5]
-  ['igmn 'bach2 (r 'erl #\"BACH\")]
-  ['imsg 'bach2 'x 0.5]
   ['isetx 'time 'rect 1 1]
   ['imsg 'time 'show 0]
   ['iwatch 'time 'ddate
-    (r 'imsg 'bach1 'dangle 0.4 '--keep)
-    (r 'imsg 'bach2 'dangle -0.6 '--keep)]
+    (r 'imsg 'bach1 'dangle 0.4 '--keep)]
   ['imsg 'time 'tempo 1]"}]

@@ -101,113 +101,6 @@ function downloadMedia(filename, data, type) {
     element.click();
     document.body.removeChild(element);
 }
-///<reference path="lib/inscore.d.ts"/>
-///<reference path="download.ts"/>
-//----------------------------------------------------------------------------
-// this is the editor part, currently using CodeMirror
-//----------------------------------------------------------------------------
-var InscoreEditor = /** @class */ (function () {
-    function InscoreEditor(divID) {
-        this.fFileName = "Untitled";
-        this.fEditor = CodeMirror.fromTextArea(document.getElementById(divID), {
-            lineNumbers: true,
-            // mode: 'inscore',
-            theme: 'default',
-            smartIndent: true,
-            tabSize: 4,
-            lineWrapping: true,
-            indentWithTabs: true
-        });
-        $("code").show();
-    }
-    InscoreEditor.prototype.dragEnter = function (event) {
-        event.stopImmediatePropagation();
-        event.preventDefault();
-        $("#editor").css("opacity", 0.3);
-    };
-    InscoreEditor.prototype.dragLeave = function (event) {
-        event.stopImmediatePropagation();
-        event.preventDefault();
-        $("#editor").css("opacity", 1);
-    };
-    InscoreEditor.prototype.initialize = function () {
-        var _this = this;
-        // this.fEditor.on("dragstart",	(editor: any, e: DragEvent) => {});
-        this.fEditor.on("dragenter", function (editor, e) { _this.dragEnter(e); });
-        this.fEditor.on("dragleave", function (editor, e) { _this.dragLeave(e); });
-        this.fEditor.on("drop", function (editor, e) {
-            _this.dragLeave(e);
-            var data = e.dataTransfer.getData("text");
-            if (!data) {
-                var filelist = e.dataTransfer.files;
-                if (!filelist)
-                    return;
-                var filecount = filelist.length;
-                for (var i = 0; i < filecount; i++)
-                    _this.drop(filelist[i]);
-            }
-        });
-        $("#font-family").change(function (event) { _this.fEditor.getWrapperElement().style.fontFamily = $("#font-family").val(); });
-        $("#font-size").change(function (event) { _this.fEditor.getWrapperElement().style.fontSize = $("#font-size").val() + "px"; });
-        $("#etheme").change(function (event) { _this.fEditor.setOption("theme", $("#etheme").val()); });
-        $("#wraplines").change(function (event) { _this.fEditor.setOption("lineWrapping", $("#wraplines").is(":checked")); });
-        $("#run").click(function (event) { _this.setInscore(_this.fEditor.getValue()); });
-        $("#reset").click(function (event) { inscore.postMessageStr("/ITL/scene", "reset"); });
-        $("#clear-log").click(function (event) { $("#logs").text(""); });
-        $("#saveinscore").click(function (event) { _this.saveInscore(); });
-        $("#savehtml").click(function (event) { _this.saveHtml(); });
-        this.fEditor.getWrapperElement().style.fontFamily = $("#font-family").val();
-        this.fEditor.getWrapperElement().style.fontSize = $("#font-size").val() + "px";
-        this.fEditor.setOption("theme", $("#etheme").val());
-        this.fEditor.setOption("lineWrapping", $("#wraplines").is(":checked"));
-        this.setInscore(this.fEditor.getValue(), this.fFileName);
-        var logs = document.getElementById("logs");
-        $("#log-font").click(function () { logs.style.fontFamily = $("#log-font").val(); });
-        $("#log-size").click(function () { logs.style.fontSize = $("#log-size").val() + "px"; });
-        logs.style.fontFamily = $("#log-font").val();
-        logs.style.fontSize = $("#log-size").val() + "px";
-    };
-    InscoreEditor.prototype.saveInscore = function () { download(this.fFileName + ".inscore", this.fEditor.getValue()); };
-    InscoreEditor.prototype.saveHtml = function () { download(this.fFileName + ".html", document.getElementById("scene").innerHTML); };
-    InscoreEditor.prototype.setInscore = function (script, path) {
-        if (path === void 0) { path = null; }
-        var ext = "inscore";
-        if (path) {
-            $("#inscore-name").text(path);
-            var n = path.lastIndexOf('.');
-            if (n > 0) {
-                ext = path.substring(path.lastIndexOf('.') + 1, path.length).toLocaleLowerCase();
-                var fullname = path.substring(path.lastIndexOf('/') + 1, path.length);
-                this.fFileName = fullname.substring(0, fullname.lastIndexOf('.'));
-            }
-            else
-                this.fFileName = path;
-        }
-        // $("#logs").text (script);
-        if (ext == "inscore2")
-            inscore.loadInscore2("/ITL parse v2;\n" + script);
-        else
-            inscore.loadInscore("/ITL parse v1;\n" + script, true);
-        this.fEditor.setValue(script);
-        this.fEditor.refresh();
-    };
-    InscoreEditor.prototype.drop = function (file) {
-        var _this = this;
-        var reader = new FileReader();
-        reader.onload = function (event) { _this.setInscore(reader.result.toString(), file.name); };
-        reader.readAsText(file, file.name);
-    };
-    InscoreEditor.prototype.select = function (line, col) { this.fEditor.setSelection({ line: line, ch: col - 1 }, { line: line, ch: col }); };
-    ;
-    InscoreEditor.prototype.resize = function (h) { $("div.CodeMirror").css("height", h); };
-    ;
-    Object.defineProperty(InscoreEditor.prototype, "value", {
-        get: function () { return this.fEditor.getValue(); },
-        enumerable: true,
-        configurable: true
-    });
-    return InscoreEditor;
-}());
 ///<reference path="../src/lib/inscore.d.ts"/>
 ///<reference path="constants.ts"/>
 var INScoreDiv = /** @class */ (function () {
@@ -547,11 +440,7 @@ var console = (function (oldCons) {
 ///<reference path="editorGlue.ts"/>
 ///<reference path="editor.ts"/>
 //------------------------------------------------------------------------
-var editor;
 var glue = new EditorGlue();
 glue.start().then(function () {
-    editor = new InscoreEditor("code");
-    editor.initialize();
     $("#version").text(inscore.versionStr());
-    setTimeout(function () { return $("#loading").remove(); }, 1000);
 });

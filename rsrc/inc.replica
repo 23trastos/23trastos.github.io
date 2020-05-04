@@ -17,12 +17,12 @@ SETUP
 (def positions (range start (+ length start) step))
 'isetx 'inc 'layer
 (map #(r 'igmn (str 'inc/pat %1) (str "[\\repeatBegin " (r 'er %2) " \\repeatEnd]")) pats lines)
-'isetx 'inc/title1 'txt "TERRY RILEY IN C"
-'isetx 'inc/title2 'txt "start stop reset to control"
+'itxt 'inc/title1 "TERRY RILEY IN C"
+'itxt 'inc/title2 "control with start/stop/reset buttons above"
 'imsg 'inc/title1 'scale 2
 'imsg 'inc/title1 'y -0.5
 'imsg 'inc/title2 'y -0.4
-'isetx 'titleR 'txt "In C_Terry Riley"
+'itxt 'titleR "In C_Terry Riley"
 'imsg 'titleR 'x 2.3
 'imsg 'titleR 'y -0.9
 (map #(r 'isetx (str 'inc/lab %1) 'txt (str %1)) pats)
@@ -33,7 +33,7 @@ SETUP
 'imsg 'inc/lab* 'scale 2
 'isetx 'inc/time 'rect 1 1
 'imsg 'inc/time 'show 0
-'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 60000)) '--keep)
+'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 100000)) '--keep)
 'iwatch 'inc/time 'STEP (r 'imsg 'inc 'dy (- step) '--keep)
 'tconv 'conv "rsrc/x00y00.wav"
 'tsp 'conv 'wet 'value 0.2
