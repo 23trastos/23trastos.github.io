@@ -29,7 +29,7 @@ SETUP
 (map #(r 'imsg (str 'inc/pat %1) 'y %2) pats positions)
 (map #(r 'imsg (str 'inc/lab %1) 'y %2) pats positions)
 'imsg 'inc/pat* 'scale 0.6
-'imsg 'inc/lab* 'x -1.8
+'imsg 'inc/lab* 'x -1.6
 'imsg 'inc/lab* 'scale 2
 'isetx 'inc/time 'rect 1 1
 'imsg 'inc/time 'show 0
