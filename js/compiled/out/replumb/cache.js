@@ -10,8 +10,8 @@ replumb.cache.cljs__GT_transit_json = (function replumb$cache$cljs__GT_transit_j
 return cognitect.transit.write.call(null,cognitect.transit.writer.call(null,new cljs.core.Keyword(null,"json","json",1279968570)),source);
 });
 replumb.cache.compiled_by_string = (function replumb$cache$compiled_by_string(var_args){
-var G__24187 = arguments.length;
-switch (G__24187) {
+var G__18013 = arguments.length;
+switch (G__18013) {
 case 0:
 return replumb.cache.compiled_by_string.cljs$core$IFn$_invoke$arity$0();
 
@@ -37,8 +37,8 @@ return ["// Compiled by ClojureScript ",cljs.core.str.cljs$core$IFn$_invoke$arit
 replumb.cache.compiled_by_string.cljs$lang$maxFixedArity = 1;
 
 replumb.cache.cache_prefix_for_path = (function replumb$cache$cache_prefix_for_path(var_args){
-var G__24190 = arguments.length;
-switch (G__24190) {
+var G__18016 = arguments.length;
+switch (G__18016) {
 case 2:
 return replumb.cache.cache_prefix_for_path.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 

@@ -403,16 +403,7 @@ var EditorGlue = /** @class */ (function (_super) {
     };
     return EditorGlue;
 }(INScoreBase));
-function load(name, path) {
-    if (path) {
-        fetch("./" + path)
-            .then(function (response) { return response.text(); })
-            .then(function (code) {
-            editor.setInscore(code, path);
-        });
-    }
-}
-function mylog(text, level) {
+/*function mylog(text, level) {
     var dest = document.getElementById("right-info");
     if (level == 1)
         text = '<span class="warning">' + text + '</span>';
@@ -436,7 +427,7 @@ var console = (function (oldCons) {
             mylog(text, 2);
         }
     };
-}(window.console));
+}(window.console));*/
 ///<reference path="editorGlue.ts"/>
 ///<reference path="editor.ts"/>
 //------------------------------------------------------------------------
