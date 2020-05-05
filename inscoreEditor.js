@@ -403,7 +403,8 @@ var EditorGlue = /** @class */ (function (_super) {
     };
     return EditorGlue;
 }(INScoreBase));
-/*function mylog(text, level) {
+/*LEAVING FOR NOW AS GENERATES CONFLICT WITH CLJS DEV TOOLS
+function mylog(text, level) {
     var dest = document.getElementById("right-info");
     if (level == 1)
         text = '<span class="warning">' + text + '</span>';
