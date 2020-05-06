@@ -1,4 +1,8 @@
-[{:type :input :value
+[{:type :markdown :value
+  "Welcome to an interactive score for Terry Riley's In C
+  Bienvenido a la partitura virtual de In C de Terry Riley"}
+ {:type :stop :label "START/EMPEZAR"}
+ {:type :input :value
   "'elf \"rsrc/inc.replica\""}
  {:type :input :value
   "'full true"}
