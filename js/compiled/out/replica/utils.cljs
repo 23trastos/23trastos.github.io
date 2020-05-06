@@ -24,7 +24,7 @@
 
 (defn url!
   [url]
-  (js/replaceUrl url))
+  (js/assignUrl url))
 
 (defn full-score!
   [full?]

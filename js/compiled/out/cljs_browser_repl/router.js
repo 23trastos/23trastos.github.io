@@ -44,8 +44,8 @@ cljs_browser_repl.router.handle_url_change_BANG_ = (function cljs_browser_repl$r
 return secretary.core.dispatch_BANG_.call(null,e.token);
 });
 cljs_browser_repl.router.init = (function cljs_browser_repl$router$init(){
-goog.events.listen(cljs_browser_repl.router.history,goog.history.EventType.NAVIGATE,(function (p1__20654_SHARP_){
-return cljs_browser_repl.router.handle_url_change_BANG_.call(null,p1__20654_SHARP_);
+goog.events.listen(cljs_browser_repl.router.history,goog.history.EventType.NAVIGATE,(function (p1__24130_SHARP_){
+return cljs_browser_repl.router.handle_url_change_BANG_.call(null,p1__24130_SHARP_);
 }));
 
 cljs_browser_repl.router.history.setEnabled(true);
@@ -62,173 +62,173 @@ return cljs_browser_repl.router.history.replaceToken(url);
 cljs_browser_repl.router.get_token = (function cljs_browser_repl$router$get_token(){
 return cljs_browser_repl.router.history.getToken();
 });
-var action__13462__auto___20660 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20655 = params__13463__auto__;
-var map__20655__$1 = ((((!((map__20655 == null)))?(((((map__20655.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20655.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20655):map__20655);
-return cljs_browser_repl.router.navigate_BANG_.call(null,"/notebook/replica/file/index");
+var action__9402__auto___24136 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24131 = params__9403__auto__;
+var map__24131__$1 = ((((!((map__24131 == null)))?(((((map__24131.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24131.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24131):map__24131);
+return cljs_browser_repl.router.navigate_BANG_.call(null,"/replica/index");
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20657 = params__13463__auto__;
-return cljs_browser_repl.router.navigate_BANG_.call(null,"/notebook/replica/file/index");
-} else {
-return null;
-}
-}
-});
-secretary.core.add_route_BANG_.call(null,"/",action__13462__auto___20660);
-
-var action__13462__auto___20666 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20661 = params__13463__auto__;
-var map__20661__$1 = ((((!((map__20661 == null)))?(((((map__20661.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20661.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20661):map__20661);
-return cljs_browser_repl.router.navigate_BANG_.call(null,"/notebook/replica/file/new");
-} else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20663 = params__13463__auto__;
-return cljs_browser_repl.router.navigate_BANG_.call(null,"/notebook/replica/file/new");
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24133 = params__9403__auto__;
+return cljs_browser_repl.router.navigate_BANG_.call(null,"/replica/index");
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/new",action__13462__auto___20666);
+secretary.core.add_route_BANG_.call(null,"/",action__9402__auto___24136);
 
-var action__13462__auto___20672 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20667 = params__13463__auto__;
-var map__20667__$1 = ((((!((map__20667 == null)))?(((((map__20667.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20667.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20667):map__20667);
-var id = cljs.core.get.call(null,map__20667__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-return cljs_browser_repl.router.replace_BANG_.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs_browser_repl.router.get_token.call(null)),"/file/index"].join(''));
+var action__9402__auto___24142 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24137 = params__9403__auto__;
+var map__24137__$1 = ((((!((map__24137 == null)))?(((((map__24137.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24137.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24137):map__24137);
+return cljs_browser_repl.router.navigate_BANG_.call(null,"/replica/new");
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20669 = params__13463__auto__;
-var id = cljs.core.nth.call(null,vec__20669,(0),null);
-return cljs_browser_repl.router.replace_BANG_.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs_browser_repl.router.get_token.call(null)),"/file/index"].join(''));
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24139 = params__9403__auto__;
+return cljs_browser_repl.router.navigate_BANG_.call(null,"/replica/new");
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/gist/:id",action__13462__auto___20672);
+secretary.core.add_route_BANG_.call(null,"/new",action__9402__auto___24142);
 
-var action__13462__auto___20678 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20673 = params__13463__auto__;
-var map__20673__$1 = ((((!((map__20673 == null)))?(((((map__20673.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20673.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20673):map__20673);
-var id = cljs.core.get.call(null,map__20673__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var file = cljs.core.get.call(null,map__20673__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
+var action__9402__auto___24148 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24143 = params__9403__auto__;
+var map__24143__$1 = ((((!((map__24143 == null)))?(((((map__24143.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24143.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24143):map__24143);
+var id = cljs.core.get.call(null,map__24143__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var file = cljs.core.get.call(null,map__24143__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
 return cljs_browser_repl.actions.notebook.from_gist_BANG_.call(null,id,file);
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20675 = params__13463__auto__;
-var id = cljs.core.nth.call(null,vec__20675,(0),null);
-var file = cljs.core.nth.call(null,vec__20675,(1),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24145 = params__9403__auto__;
+var id = cljs.core.nth.call(null,vec__24145,(0),null);
+var file = cljs.core.nth.call(null,vec__24145,(1),null);
 return cljs_browser_repl.actions.notebook.from_gist_BANG_.call(null,id,file);
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/gist/:id/file/:file",action__13462__auto___20678);
+secretary.core.add_route_BANG_.call(null,"/gist/:id/file/:file",action__9402__auto___24148);
 
-var action__13462__auto___20684 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20679 = params__13463__auto__;
-var map__20679__$1 = ((((!((map__20679 == null)))?(((((map__20679.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20679.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20679):map__20679);
-var id = cljs.core.get.call(null,map__20679__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var action__9402__auto___24154 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24149 = params__9403__auto__;
+var map__24149__$1 = ((((!((map__24149 == null)))?(((((map__24149.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24149.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24149):map__24149);
+var id = cljs.core.get.call(null,map__24149__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
 return cljs_browser_repl.router.replace_BANG_.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs_browser_repl.router.get_token.call(null)),"/file/index"].join(''));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20681 = params__13463__auto__;
-var id = cljs.core.nth.call(null,vec__20681,(0),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24151 = params__9403__auto__;
+var id = cljs.core.nth.call(null,vec__24151,(0),null);
 return cljs_browser_repl.router.replace_BANG_.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs_browser_repl.router.get_token.call(null)),"/file/index"].join(''));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/notebook/:id",action__13462__auto___20684);
+secretary.core.add_route_BANG_.call(null,"/notebook/:id",action__9402__auto___24154);
 
-var action__13462__auto___20690 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20685 = params__13463__auto__;
-var map__20685__$1 = ((((!((map__20685 == null)))?(((((map__20685.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20685.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20685):map__20685);
-var id = cljs.core.get.call(null,map__20685__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var file = cljs.core.get.call(null,map__20685__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
+var action__9402__auto___24160 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24155 = params__9403__auto__;
+var map__24155__$1 = ((((!((map__24155 == null)))?(((((map__24155.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24155.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24155):map__24155);
+var id = cljs.core.get.call(null,map__24155__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var file = cljs.core.get.call(null,map__24155__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
 return cljs_browser_repl.actions.notebook.from_filesystem_BANG_.call(null,id,file);
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20687 = params__13463__auto__;
-var id = cljs.core.nth.call(null,vec__20687,(0),null);
-var file = cljs.core.nth.call(null,vec__20687,(1),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24157 = params__9403__auto__;
+var id = cljs.core.nth.call(null,vec__24157,(0),null);
+var file = cljs.core.nth.call(null,vec__24157,(1),null);
 return cljs_browser_repl.actions.notebook.from_filesystem_BANG_.call(null,id,file);
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/notebook/:id/file/:file",action__13462__auto___20690);
+secretary.core.add_route_BANG_.call(null,"/notebook/:id/file/:file",action__9402__auto___24160);
 
-var action__13462__auto___20696 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20691 = params__13463__auto__;
-var map__20691__$1 = ((((!((map__20691 == null)))?(((((map__20691.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20691.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20691):map__20691);
-var id = cljs.core.get.call(null,map__20691__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
-var file = cljs.core.get.call(null,map__20691__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
-var pos = cljs.core.get.call(null,map__20691__$1,new cljs.core.Keyword(null,"pos","pos",-864607220));
+var action__9402__auto___24166 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24161 = params__9403__auto__;
+var map__24161__$1 = ((((!((map__24161 == null)))?(((((map__24161.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24161.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24161):map__24161);
+var file = cljs.core.get.call(null,map__24161__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
+return cljs_browser_repl.actions.notebook.from_filesystem_BANG_.call(null,"replica",file);
+} else {
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24163 = params__9403__auto__;
+var file = cljs.core.nth.call(null,vec__24163,(0),null);
+return cljs_browser_repl.actions.notebook.from_filesystem_BANG_.call(null,"replica",file);
+} else {
+return null;
+}
+}
+});
+secretary.core.add_route_BANG_.call(null,"/replica/:file",action__9402__auto___24166);
+
+var action__9402__auto___24172 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24167 = params__9403__auto__;
+var map__24167__$1 = ((((!((map__24167 == null)))?(((((map__24167.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24167.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24167):map__24167);
+var id = cljs.core.get.call(null,map__24167__$1,new cljs.core.Keyword(null,"id","id",-1388402092));
+var file = cljs.core.get.call(null,map__24167__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
+var pos = cljs.core.get.call(null,map__24167__$1,new cljs.core.Keyword(null,"pos","pos",-864607220));
 return cljs_browser_repl.actions.notebook.from_filesystem_BANG_.call(null,id,file,pos,false);
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20693 = params__13463__auto__;
-var id = cljs.core.nth.call(null,vec__20693,(0),null);
-var file = cljs.core.nth.call(null,vec__20693,(1),null);
-var pos = cljs.core.nth.call(null,vec__20693,(2),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24169 = params__9403__auto__;
+var id = cljs.core.nth.call(null,vec__24169,(0),null);
+var file = cljs.core.nth.call(null,vec__24169,(1),null);
+var pos = cljs.core.nth.call(null,vec__24169,(2),null);
 return cljs_browser_repl.actions.notebook.from_filesystem_BANG_.call(null,id,file,pos,false);
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/follow/:id/:file/:pos",action__13462__auto___20696);
+secretary.core.add_route_BANG_.call(null,"/follow/:id/:file/:pos",action__9402__auto___24172);
 
-var action__13462__auto___20702 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20697 = params__13463__auto__;
-var map__20697__$1 = ((((!((map__20697 == null)))?(((((map__20697.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20697.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20697):map__20697);
-var pos = cljs.core.get.call(null,map__20697__$1,new cljs.core.Keyword(null,"pos","pos",-864607220));
+var action__9402__auto___24178 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24173 = params__9403__auto__;
+var map__24173__$1 = ((((!((map__24173 == null)))?(((((map__24173.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24173.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24173):map__24173);
+var pos = cljs.core.get.call(null,map__24173__$1,new cljs.core.Keyword(null,"pos","pos",-864607220));
 return cljs_browser_repl.actions.notebook.goto_BANG_.call(null,cljs.reader.read_string.call(null,pos));
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20699 = params__13463__auto__;
-var pos = cljs.core.nth.call(null,vec__20699,(0),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24175 = params__9403__auto__;
+var pos = cljs.core.nth.call(null,vec__24175,(0),null);
 return cljs_browser_repl.actions.notebook.goto_BANG_.call(null,cljs.reader.read_string.call(null,pos));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/goto/:pos",action__13462__auto___20702);
+secretary.core.add_route_BANG_.call(null,"/goto/:pos",action__9402__auto___24178);
 
 cljs_browser_repl.router.cmd_BANG_ = (function cljs_browser_repl$router$cmd_BANG_(cmd){
 cljs_browser_repl.actions.repl.repl_entry_BANG_.call(null,cljs.reader.read_string.call(null,cmd));
 
 return cljs_browser_repl.router.replace_BANG_.call(null,"/idle");
 });
-var action__13462__auto___20708 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20703 = params__13463__auto__;
-var map__20703__$1 = ((((!((map__20703 == null)))?(((((map__20703.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20703.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20703):map__20703);
-var query_params = cljs.core.get.call(null,map__20703__$1,new cljs.core.Keyword(null,"query-params","query-params",900640534));
+var action__9402__auto___24184 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24179 = params__9403__auto__;
+var map__24179__$1 = ((((!((map__24179 == null)))?(((((map__24179.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24179.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24179):map__24179);
+var query_params = cljs.core.get.call(null,map__24179__$1,new cljs.core.Keyword(null,"query-params","query-params",900640534));
 if(cljs.core.truth_(query_params)){
 return cljs_browser_repl.router.cmd_BANG_.call(null,new cljs.core.Keyword(null,"c","c",-1763192079).cljs$core$IFn$_invoke$arity$1(query_params));
 } else {
 return null;
 }
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20705 = params__13463__auto__;
-var query_params = cljs.core.nth.call(null,vec__20705,(0),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24181 = params__9403__auto__;
+var query_params = cljs.core.nth.call(null,vec__24181,(0),null);
 if(cljs.core.truth_(query_params)){
 return cljs_browser_repl.router.cmd_BANG_.call(null,new cljs.core.Keyword(null,"c","c",-1763192079).cljs$core$IFn$_invoke$arity$1(query_params));
 } else {
@@ -239,13 +239,13 @@ return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/cmd",action__13462__auto___20708);
+secretary.core.add_route_BANG_.call(null,"/cmd",action__9402__auto___24184);
 
-var action__13462__auto___20714 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20709 = params__13463__auto__;
-var map__20709__$1 = ((((!((map__20709 == null)))?(((((map__20709.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20709.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20709):map__20709);
-var query_params = cljs.core.get.call(null,map__20709__$1,new cljs.core.Keyword(null,"query-params","query-params",900640534));
+var action__9402__auto___24190 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24185 = params__9403__auto__;
+var map__24185__$1 = ((((!((map__24185 == null)))?(((((map__24185.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24185.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24185):map__24185);
+var query_params = cljs.core.get.call(null,map__24185__$1,new cljs.core.Keyword(null,"query-params","query-params",900640534));
 var file_name = [cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var or__3949__auto__ = new cljs.core.Keyword(null,"file","file",-1269645878).cljs$core$IFn$_invoke$arity$1(query_params);
 if(cljs.core.truth_(or__3949__auto__)){
 return or__3949__auto__;
@@ -259,9 +259,9 @@ return null;
 return cljs_browser_repl.net.file.download_object_BANG_.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.history))].join(''),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(file_name),".edn"].join(''));
 }
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20711 = params__13463__auto__;
-var query_params = cljs.core.nth.call(null,vec__20711,(0),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24187 = params__9403__auto__;
+var query_params = cljs.core.nth.call(null,vec__24187,(0),null);
 var file_name = [cljs.core.str.cljs$core$IFn$_invoke$arity$1((function (){var or__3949__auto__ = new cljs.core.Keyword(null,"file","file",-1269645878).cljs$core$IFn$_invoke$arity$1(query_params);
 if(cljs.core.truth_(or__3949__auto__)){
 return or__3949__auto__;
@@ -279,51 +279,51 @@ return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/save",action__13462__auto___20714);
+secretary.core.add_route_BANG_.call(null,"/save",action__9402__auto___24190);
 
-var action__13462__auto___20720 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20715 = params__13463__auto__;
-var map__20715__$1 = ((((!((map__20715 == null)))?(((((map__20715.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20715.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20715):map__20715);
-var query_params = cljs.core.get.call(null,map__20715__$1,new cljs.core.Keyword(null,"query-params","query-params",900640534));
+var action__9402__auto___24196 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24191 = params__9403__auto__;
+var map__24191__$1 = ((((!((map__24191 == null)))?(((((map__24191.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24191.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24191):map__24191);
+var query_params = cljs.core.get.call(null,map__24191__$1,new cljs.core.Keyword(null,"query-params","query-params",900640534));
 if(cljs.core.truth_(new cljs.core.Keyword(null,"filter","filter",-948537934).cljs$core$IFn$_invoke$arity$1(query_params))){
 return appendToCM(["\n",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs_browser_repl.state.get_filtered_history.call(null))].join(''));
 } else {
-return appendToCM(CM,["\n",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.history))].join(''));
+return appendToCM(["\n",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.history))].join(''));
 }
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20717 = params__13463__auto__;
-var query_params = cljs.core.nth.call(null,vec__20717,(0),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24193 = params__9403__auto__;
+var query_params = cljs.core.nth.call(null,vec__24193,(0),null);
 if(cljs.core.truth_(new cljs.core.Keyword(null,"filter","filter",-948537934).cljs$core$IFn$_invoke$arity$1(query_params))){
 return appendToCM(["\n",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs_browser_repl.state.get_filtered_history.call(null))].join(''));
 } else {
-return appendToCM(CM,["\n",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.history))].join(''));
+return appendToCM(["\n",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,cljs_browser_repl.state.history))].join(''));
 }
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/hist2CM",action__13462__auto___20720);
+secretary.core.add_route_BANG_.call(null,"/hist2CM",action__9402__auto___24196);
 
-var action__13462__auto___20726 = (function (params__13463__auto__){
-if(cljs.core.map_QMARK_.call(null,params__13463__auto__)){
-var map__20721 = params__13463__auto__;
-var map__20721__$1 = ((((!((map__20721 == null)))?(((((map__20721.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20721.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20721):map__20721);
-var file = cljs.core.get.call(null,map__20721__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
+var action__9402__auto___24202 = (function (params__9403__auto__){
+if(cljs.core.map_QMARK_.call(null,params__9403__auto__)){
+var map__24197 = params__9403__auto__;
+var map__24197__$1 = ((((!((map__24197 == null)))?(((((map__24197.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24197.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24197):map__24197);
+var file = cljs.core.get.call(null,map__24197__$1,new cljs.core.Keyword(null,"file","file",-1269645878));
 return fromUrlToCM(file);
 } else {
-if(cljs.core.vector_QMARK_.call(null,params__13463__auto__)){
-var vec__20723 = params__13463__auto__;
-var file = cljs.core.nth.call(null,vec__20723,(0),null);
+if(cljs.core.vector_QMARK_.call(null,params__9403__auto__)){
+var vec__24199 = params__9403__auto__;
+var file = cljs.core.nth.call(null,vec__24199,(0),null);
 return fromUrlToCM(file);
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/rscs/:file",action__13462__auto___20726);
+secretary.core.add_route_BANG_.call(null,"/rscs/:file",action__9402__auto___24202);
 
 
 //# sourceMappingURL=router.js.map

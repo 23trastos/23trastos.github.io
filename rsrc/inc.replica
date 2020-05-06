@@ -15,7 +15,7 @@ b1 * 1 / 16 g1 * 1 / 16 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4
 \bm( b1 * 1 / 16 g1 * 1 / 16 )
 \bm( f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 )
 f1 * 1 / 8 g1 * 1 / 8 b1 * 1 / 1 c2 * 1 / 4
-b1 * 1 / 16 g1 * 3 / 16 g1 * 1 / 16 f1 * 1 / 16 g1 * 1 / 8 _ * 3 /16 \tieBegin:0 g1 * 1 / 16 g1 * 3 / 4 \tieEnd:0 g1 * 1 / 16
+b1 * 1 / 16 g1 * 3 / 16 g1 * 1 / 16 f1 * 1 / 16 g1 * 1 / 8 _ * 3 /16 \tieBegin:0 g1 * 1 / 16 g1 * 3 / 4 \tieEnd:0
 c2 * 1 / 1 b1 * 1 / 1 g1 * 1 / 1 f#1 * 1 / 1
 g1 * 1 / 16 _ * 3 /16 _ * 1 /4 _ * 1 /4 _ * 1 /4
 g1 * 1 / 16 b1 * 1 / 16 c2 * 1 / 16 b1 * 1 / 16
@@ -101,7 +101,7 @@ SETUP
 'imsg 'inc/lab* ['scale 2] ['x -1.6]
 'isetx 'inc/time 'rect 1 1
 'imsg 'inc/time 'show 0
-'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 100000)) '--keep)
+'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 110000)) '--keep)
 'iwatch 'inc/time 'STEP (r 'imsg 'inc 'dy (- step) '--keep)
 'tconv 'conv "rsrc/x00y00.wav"
 'tsp 'conv 'wet 'value 0.2

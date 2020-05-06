@@ -1,6 +1,6 @@
 (ns cljs-browser-repl.ui.cljs-browser-repl
   (:require [cljs-browser-repl.ui.history :refer [history]]
-            [cljs-browser-repl.actions.repl :refer [new-input!]]
+            [cljs-browser-repl.actions.repl :refer [new-input! repl-entry!]]
             [cljs-browser-repl.actions.notebook :refer [play-notebook!]]
             [cljs-browser-repl.state :as state]
             [goog.events :as events]
@@ -16,9 +16,12 @@
    [history {:on-event
              (fn [type payload]
                (case type
-                 :input (do
-                          (new-input! (:value payload) (= js/currKey 91))
-                          (focus-input!))
+                 :input
+                 (if (= js/currKey 91)
+                   (repl-entry! (:value payload))
+                   (do
+                     (new-input! (:value payload) (= js/currKey 18))
+                     (focus-input!)))
                  :continue (play-notebook!)
                  :visit-file
                  (router/navigate!
@@ -29,23 +32,25 @@
     @state/history]])
 
 
-(def cljs-browser-repl cljs-browser-repl-raw
+(def cljs-browser-repl cljs-browser-repl-raw)
+
+
   #_(with-meta
-    cljs-browser-repl-raw
-    {:component-did-mount
-     (fn [this]
-       (set! (.-shortcutListener this)
-             (fn [e]
-               ; Brittle way of managing app key shortcuts :(
-               (when-not (= (.. e -target -nodeName) "TEXTAREA")
-                 (case (.-keyCode e)
-                   ; n
-                   78 (play-notebook!)
-                   ; i
-                   73 (focus-input!)
-                   nil))))
-       (events/listen js/window "keyup" (.-shortcutListener this)))
-     :component-will-unmount
-     (fn [this]
-       (events/unlisten js/window "keyup" (.-shortcutListener this)))}
-    ))
+      cljs-browser-repl-raw
+      {:component-did-mount
+       (fn [this]
+         (set! (.-shortcutListener this)
+               (fn [e]
+                 ; Brittle way of managing app key shortcuts :(
+                 (when-not (= (.. e -target -nodeName) "TEXTAREA")
+                   (case (.-keyCode e)
+                     ; n
+                     78 (play-notebook!)
+                     ; i
+                     73 (focus-input!)
+                     nil))))
+         (events/listen js/window "keyup" (.-shortcutListener this)))
+       :component-will-unmount
+       (fn [this]
+         (events/unlisten js/window "keyup" (.-shortcutListener this)))}
+      )

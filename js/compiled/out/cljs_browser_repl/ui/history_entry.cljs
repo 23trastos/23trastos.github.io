@@ -16,7 +16,18 @@
   (let [sel (.toString (.getSelection js/window))
         value (if (string/blank? sel) (:value entry) sel)
         payload (response-with-meta->entry (assoc entry :value value))]
-      (emit-fn :input payload)))
+    (emit-fn :input payload)))
+
+(defn history-separator [] [:hr])
+
+(defn history-stop [{:keys [emit]} {:keys [disabled label resp-enables auto-continue] :as entry}]
+  (if (or disabled resp-enables)
+    [history-separator]
+    [:div.history-stop
+     (if auto-continue
+       {:component-did-mount (emit :continue)}
+       {:on-click #(emit :continue)})
+     [:button (or label "Next")]]))
 
 (defn history-input [{:keys [emit]} {:keys [value] :as entry}]
   [:div.history-input
@@ -49,25 +60,7 @@
 
 (defn history-md [{:keys [emit]} {:keys [value]}]
   [:div.history-markdown
-   {:on-click
-    #(do
-       (.preventDefault %)
-       (let [target (.-target %)
-             href (.-href target)]
-         (when href
-           (if-let [internal? (re-seq internal-re href)]
-             (emit :visit-file (second (first internal?)))
-             (.open js/window href)))))
-    :dangerouslySetInnerHTML {:__html (md/render value)}}])
-
-(defn history-separator [] [:hr])
-
-(defn history-stop [{:keys [emit]} {:keys [disabled label timeout] :as entry}]
-  (if disabled
-    [history-separator]
-    [:div.history-stop
-     {:on-click #(emit :continue)}
-     [:button (or label "Next")]]))
+   {:dangerouslySetInnerHTML {:__html (md/render value)}}])
 
 (defn history-entry [{:keys [emit] :as attrs} {:keys [type] :as entry}]
   [:div.history-entry

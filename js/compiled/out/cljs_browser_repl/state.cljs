@@ -1,13 +1,27 @@
 (ns cljs-browser-repl.state
   (:require [reagent.core :refer [atom]]
-            [replumb.core :as replumb]
-            [replumb.repl :as repl]
-            ))
+            [replumb.repl :as repl]))
 
 ;; History
 
 (defn now [] (.now js/Date))
-(defn add-entry [h e] (conj h e))
+
+(defn add-entry [h e]
+  (let [last-entry (peek h)]
+    (if (= (:type last-entry) :stop)
+      (if (and
+            (:resp-enables last-entry)
+            (= (:type e) :response))
+        (conj (pop h) e (assoc last-entry :resp-enables false))
+        (conj (pop h) e last-entry))
+      (let [new (if (and
+                      (= (:type e) :stop)
+                      (:resp-enables e)
+                      (= (:type last-entry) :response))
+                  (assoc e :resp-enables false)
+                  e)]
+        (conj h new)))))
+
 (defn add-entries [h es] (apply conj h es))
 
 (defn to-repl [o] (assoc o :date (now)))

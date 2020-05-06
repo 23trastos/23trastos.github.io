@@ -13,9 +13,9 @@
 (defn disable-stops! []
   (swap! state/history
          (fn [h]
-           (mapv #(if (= (:type %) :stop) (assoc % :disabled true) %) h))))
+           (mapv #(if (= (:type %) :stop) (assoc % :type :separator) %) h))))
 
-(defn add-separator! []
+#_(defn add-separator! []
   (when (not= (:type (last @state/history)) :stop)
     (swap! state/history state/add-entry (state/to-repl {:type :separator}))))
 
@@ -26,7 +26,6 @@
     ; If was stopped, disable the history repl stop and move to next command.
     (when (and started? (= type :stop))
       (disable-stops!)
-      (add-separator!)
       (swap! state/current-notebook update :position inc)))
 
   ; When there's a command we'll go looping through the notebook and parsing

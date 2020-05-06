@@ -1,4 +1,8 @@
-[{:type :stop :label "Start"}
+[{:type :markdown :value
+  "Waiting for Replica dependencies..."}
+ {:type :input :value
+  "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
+ {:type :stop :resp-enables true :auto-continue true}
  {:type :markdown :value
   "You can start by evaluating something like:"}
  {:type :input :sample? true :value
@@ -9,11 +13,9 @@
  {:type :input :silent? true :value
   "'es \"BACH:\\n[b& a c2 h1]\\n:BACH\""}
  {:type :input :sample? true :value
-  "
-  ['iclear]
-  ['igmn 'bach1 (r 'erl #\"BACH\")]
-  ['isetx 'time 'rect 1 1]
-  ['imsg 'time 'show 0]
-  ['iwatch 'time 'ddate
-    (r 'imsg 'bach1 'dangle 0.4 '--keep)]
-  ['imsg 'time 'tempo 1]"}]
+  "['iclear]['igmn 'bach1 (r 'erl #\"BACH\")]['isetx 'time 'rect 1 1]['imsg 'time 'show 0]"}
+ {:type :stop}
+ {:type :markdown :value
+  "And then:"}
+ {:type :input :sample? true :value
+ "['iwatch 'time 'ddate (r 'imsg 'bach1 'dangle 0.4 '--keep)]['imsg 'time 'tempo 1]"}]

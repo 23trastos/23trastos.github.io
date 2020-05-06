@@ -11,8 +11,9 @@
 (defn new-input!
   ([s] (new-input! s false))
   ([s add?]
-   (let [new (if add? (str @state/input s) s)]
-     (reset! state/input new))))
+   (if add?
+     (swap! state/input str s)
+     (reset! state/input s))))
 
 (defn real-code
   [string]

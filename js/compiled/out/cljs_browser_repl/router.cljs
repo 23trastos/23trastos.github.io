@@ -51,14 +51,10 @@
 
 ; home
 (defroute "/" []
-  (navigate! "/notebook/replica/file/index"))
+  (navigate! "/replica/index"))
 
 (defroute "/new" []
-  (navigate! "/notebook/replica/file/new"))
-
-; gists
-(defroute "/gist/:id" [id]
-  (replace! (str (get-token) "/file/index")))
+  (navigate! "/replica/new"))
 
 (defroute "/gist/:id/file/:file" [id file]
   (notebook/from-gist! id file))
@@ -69,6 +65,9 @@
 
 (defroute "/notebook/:id/file/:file" [id file]
   (notebook/from-filesystem! id file))
+
+(defroute "/replica/:file" [file]
+  (notebook/from-filesystem! "replica" file))
 
 ;fork
 (defroute "/follow/:id/:file/:pos" [id file pos]
@@ -98,7 +97,7 @@
 (defroute "/hist2CM" [query-params]
   (if (:filter query-params)
     (js/appendToCM (str "\n" (state/get-filtered-history)))
-    (js/appendToCM js/CM (str "\n" @state/history))))
+    (js/appendToCM (str "\n" @state/history))))
 
 (defroute "/rscs/:file" [file]
   (js/fromUrlToCM file))

@@ -15,11 +15,11 @@
   [replumb](https://github.com/arichiardi/replumb)
   and [CodeMirror](https://codemirror.net)
 
-  - Start a **[new project](#/file/new)** with default options
+  - Start a **[new project](#/replica/new)** with default options
 
-  - Follow the **[guided tour](#/file/tour)**
+  - Follow the **[guided tour](#/replica/tour)**
 
-  - or go and try **[Terry Riley's 'In C' Interactive score](#/file/riley-inc)**
+  - or go and try **[Terry Riley's 'In C' Interactive score](#/replica/riley-inc)**
 
   If you want to dive first into ClojureScript, then you must visit
   **[Joakin's Introduction](http://chimeces.com/cljs-browser-repl/)**,

@@ -96,8 +96,7 @@ goog.addDependency("../cljs/repl.js", ['cljs.repl'], ['cljs.core', 'cljs.spec.al
 goog.addDependency("../replumb/ast.js", ['replumb.ast'], ['goog.string', 'cljs.core']);
 goog.addDependency("../replumb/nodejs.js", ['replumb.nodejs'], ['cljs.core', 'replumb.common']);
 goog.addDependency("../replumb/repl.js", ['replumb.repl'], ['cljs.tools.reader.impl.commons', 'cljs.tools.reader', 'replumb.load', 'cljs.js', 'cljs.core', 'cljs.tools.reader.reader_types', 'cljs.env', 'replumb.cache', 'cljs.pprint', 'cljs.tagged_literals', 'replumb.doc_maps', 'replumb.browser', 'cljs.analyzer', 'cljs.repl', 'replumb.ast', 'clojure.string', 'replumb.nodejs', 'replumb.common']);
-goog.addDependency("../replumb/core.js", ['replumb.core'], ['cljs.js', 'cljs.core', 'replumb.repl', 'replumb.common']);
-goog.addDependency("../cljs_browser_repl/state.js", ['cljs_browser_repl.state'], ['reagent.core', 'cljs.core', 'replumb.core', 'replumb.repl']);
+goog.addDependency("../cljs_browser_repl/state.js", ['cljs_browser_repl.state'], ['reagent.core', 'cljs.core', 'replumb.repl']);
 goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.timers'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.ioc_helpers', 'goog.array', 'cljs.core.async.impl.timers']);
 goog.addDependency("../no/en/core.js", ['no.en.core'], ['cljs.core', 'goog.crypt.base64', 'clojure.string', 'cljs.reader']);
@@ -106,6 +105,7 @@ goog.addDependency("../cljs_http/core.js", ['cljs_http.core'], ['goog.net.Jsonp'
 goog.addDependency("../cljs_http/client.js", ['cljs_http.client'], ['cljs_http.core', 'no.en.core', 'goog.Uri', 'cljs.core', 'cljs_http.util', 'cljs.core.async', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../cljs_browser_repl/net/gist.js", ['cljs_browser_repl.net.gist'], ['cljs_browser_repl.state', 'cljs.core', 'cljs_http.client', 'cljs.core.async', 'cljs.pprint', 'cljs.reader']);
 goog.addDependency("../cljs_browser_repl/net/file.js", ['cljs_browser_repl.net.file'], ['cljs_browser_repl.state', 'cljs.core', 'cljs_http.client', 'cljs.core.async', 'cljs.pprint', 'cljs.reader', 'goog.events']);
+goog.addDependency("../replumb/core.js", ['replumb.core'], ['cljs.js', 'cljs.core', 'replumb.repl', 'replumb.common']);
 goog.addDependency("../cljs_browser_repl/compiler.js", ['cljs_browser_repl.compiler'], ['goog.net.XhrIo', 'cljs.tools.reader', 'cljs.core', 'replumb.core', 'replumb.repl']);
 goog.addDependency("../cljs_browser_repl/actions/repl.js", ['cljs_browser_repl.actions.repl'], ['cljs_browser_repl.compiler', 'cljs_browser_repl.state', 'cljs.core', 'replumb.core', 'replumb.repl', 'clojure.string', 'replica.utils']);
 goog.addDependency("../cljs_browser_repl/actions/notebook.js", ['cljs_browser_repl.actions.notebook'], ['cljs_browser_repl.state', 'cljs.core', 'cljs.core.async', 'cljs.pprint', 'cljs_browser_repl.net.gist', 'cljs_browser_repl.net.file', 'cljs_browser_repl.actions.repl']);

@@ -1,4 +1,5 @@
 [{:type :markdown :value
-  "Config: Setting default namespace / Requiring essentials"}
+  "Waiting for Replica dependencies..."}
  {:type :input :value
-  "(ns replica.user)\n(require '[replica.core :refer [r]])"}]
+  "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
+ {:type :stop :resp-enables true :auto-continue true}]
