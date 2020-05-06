@@ -20,7 +20,7 @@
 (defonce search (atom {:query nil :cursor nil}))
 
 (defn untab [s]
-    (. (. s replace (js/RegExp. #"\s\s+" 'g) " ") trim))
+  (. (. s replace (js/RegExp. #"\s\s+" 'g) " ") trim))
 
 (defn rd
   "Retrieves all the content from the CodeMirror editor as a string."
@@ -93,11 +93,14 @@
     (swap! search assoc :query nil)))
 
 (defn whl
-  "Returns nil or the next line (number) matching the regexp. It will ignore any line containing a regexp definition in the form #\"..."
-  ([regexp] (whl regexp false))
-  ([regexp only-first?]
-   (when only-first? (swap! search :query nil))
-   (:line (:from (where regexp)))))
+  "Returns nil or the next line (number) matching the provided string or regexp. It will ignore any line containing a regexp definition in the form #\"..."
+  ([match] (whl match false))
+  ([match only-first?]
+   (let [regexp (if (= (type match) (type #""))
+                  match
+                  (re-pattern (str match)))]
+     (when only-first? (swap! search :query nil))
+     (:line (:from (where regexp))))))
 
 (defn p!
   "Processes lines of the CodeMirror editor as REPL commands. If no argument is provided every line is processed as a separate command. Be aware and happy that you can insert also (cljs code), even call (r ... with args) inside a route. This can generate dangerous and beautiful loops!"
@@ -113,7 +116,7 @@
   (swap! search assoc :query nil)
   (let [start (inc (whl regexp))
         end (dec (whl regexp))]
-      (list start end)))
+    (list start end)))
 
 (defn rl
   "Reads the lines IN BETWEEN two regexp matches. It will ignore any line containing a regexp definition in the form #\"..."

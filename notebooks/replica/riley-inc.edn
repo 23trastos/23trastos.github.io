@@ -1,21 +1,7 @@
-[{:type :markdown :value
-  "Config: Setting default namespace / Requiring essentials"}
- {:type :input :value
-  "(ns replica.user)\n(require '[replica.core :refer [r]])"}
- {:type :stop :label
-  "CLICK HERE TO LOAD. CLICK AQUÍ PARA EMPEZAR!"}
- {:type :input :value
+[{:type :input :value
   "'elf \"rsrc/inc.replica\""}
  {:type :input :value
   "'full true"}
- {:type :input :value
-  "'cmd #\"SETUP\""}
- {:type :input :value
-  "'cmd #\"START\""}
- {:type :input :value
-  "'cmd #\"STOP\""}
- {:type :input :value
-  "'cmd #\"RESET\""}
  {:type :input :value
   "'iclear"}
  {:type :input :value
@@ -24,9 +10,5 @@
   "'imsg 'title 'y -0.5"}
  {:type :input :value
   "'imsg 'title 'scale 2"}
- {:type :input :value
-  "'isetx 'intro 'txt \"Click SETUP above to start configuration\""}
- {:type :input :value
-  "'isetx 'intro2 'txt \"Haz click en SETUP arriba para iniciar la configuracion\""}
- {:type :input :value
-  "'imsg 'intro2 'y 0.1"}]
+  {:type :input :value
+  "'ibtn 'SETUP \"(r 'epl 'SETUP)\""}]

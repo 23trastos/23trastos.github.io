@@ -93,11 +93,15 @@
   [regex]
   (str "'#\"" (. regex -source) "\""))
 
+(defn rand-str
+  [len]
+  (apply str (take len (repeatedly #(char (+ (rand 26) 65))))))
+
 (defn create-command!
   ([command]
    (create-command! (str command)
                     (if (= (type command) (type #""))
                       (regex2#string command)
-                      (command))))
+                      command)))
   ([label command]
    (js/appendLinkTo "menu" (str label) (cmd-url command))))

@@ -17,7 +17,7 @@
              (fn [type payload]
                (case type
                  :input (do
-                          (new-input! (:value payload))
+                          (new-input! (:value payload) (= js/currKey 91))
                           (focus-input!))
                  :continue (play-notebook!)
                  :visit-file
@@ -29,8 +29,8 @@
     @state/history]])
 
 
-(def cljs-browser-repl
-  (with-meta
+(def cljs-browser-repl cljs-browser-repl-raw
+  #_(with-meta
     cljs-browser-repl-raw
     {:component-did-mount
      (fn [this]

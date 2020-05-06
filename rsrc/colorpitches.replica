@@ -1,0 +1,16 @@
+>INIT<
+(def number (js/prompt "Set the game's maximum number of pitches:"))
+['iclear]['ibtn 'ACTION (r 'erl #">ACTION<")]['imsg 'ACTION ['x 0] ['y -0.9] ['z 1]]
+>INIT<
+
+>ACTION<
+(let [new (str 'a (rand-int number))]
+	(r
+	['igmn new (str [(symbol
+		(str (rand-nth '(a b c d e f g))
+        (- 2 (rand-int 4))))])]
+	['imsg new
+    	['x (- 1 (rand 2))]
+        ['y (- 0.5 (rand 1))]
+        ['color (rand-int 255) (rand-int 255) (rand-int 255)]]))
+>ACTION<

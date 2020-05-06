@@ -1,8 +1,4 @@
-[{:type :markdown :value
-  "Config: Setting default namespace / Requiring essentials"}
- {:type :input :deaf? true :value
-  "(ns replica.user)\n(require '[replica.core :refer [r]])"}
- {:type :stop :label "Start"}
+[{:type :stop :label "Start"}
  {:type :markdown :value
   "You can start by evaluating something like:"}
  {:type :input :sample? true :value

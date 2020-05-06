@@ -53,12 +53,28 @@
 (defn gmn!
   "Macro command for creating a new score from GMN code. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object gmn-string & opt]
-  (apply setx! object 'gmn "'" gmn-string "'" opt))
+  (apply setx! object 'gmn (str "'" gmn-string "'") opt))
 
 (defn txt!
   "Macro command for creating a new text entry. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object txt-string & opt]
-  (apply setx! object 'txt "'" txt-string "'" opt))
+  (apply setx! object 'txt (str "'" txt-string "'") opt))
+
+(defn html!
+  "Macro command for creating a new html entry. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  [object html-string & opt]
+  (apply setx! object 'html (str "'" html-string "'") opt))
+
+(defn btn!
+  "Macro command for creating a new html <button> entry and the repl entry to be sent onclick. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  ([object to-repl-code]
+   (btn! object object to-repl-code))
+  ([object label to-repl-code & opt]
+   (let [code (. to-repl-code replace (js/RegExp. #"'" 'g) "\\\\'")]
+     (apply setx! object 'html
+            (str "'<button onclick=\"toRepl(\\'" code "\\')\">"
+                 (or label object)
+                 "</button>'") opt))))
 
 (defn watch!
   "Macro command for creating a watch to an element. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
@@ -82,6 +98,8 @@
              'setx 'setx!
              'gmn 'gmn!
              'txt 'txt!
+             'html 'html!
+             'btn 'btn!
              'watch 'watch!
              'als 'als!})
 

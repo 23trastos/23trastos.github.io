@@ -7,7 +7,7 @@
                                                     repl-entry!]]
             [replica.utils :refer [create-command!]]))
 
-(defn resize [node]
+#_(defn resize [node]
   (set! (.. node -style -height) "auto")
   (set! (.. node -style -height) (str (.-scrollHeight node) "px")))
 
@@ -48,8 +48,8 @@
                         (:type @state/repl-info))}
      (:msg @state/repl-info)]]])
 
-(def repl-input
-  (with-meta
+(def repl-input repl-input-raw
+  #_(with-meta
     repl-input-raw
     {:component-did-update
      (fn [this old-argv]

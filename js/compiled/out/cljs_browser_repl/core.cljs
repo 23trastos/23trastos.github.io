@@ -17,8 +17,8 @@
 (defonce initialize-repl-ns
   (do
     ; Init compiler env
-    (repl-entry! "(ns replica.user)" false)
-    (repl-entry! "(require '[replica.core :refer [r rr]])" false)
+    (repl-entry! "(ns replica.user)" false false)
+    (repl-entry! "(require '[replica.core :refer [r rr]])" false false)
     ; First render
     (render!)
     ; Init router

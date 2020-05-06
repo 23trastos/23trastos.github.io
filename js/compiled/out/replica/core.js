@@ -10,14 +10,14 @@ goog.require('replica.tone');
  */
 replica.core.r = (function replica$core$r(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___22335 = arguments.length;
-var i__4532__auto___22336 = (0);
+var len__4531__auto___12738 = arguments.length;
+var i__4532__auto___12739 = (0);
 while(true){
-if((i__4532__auto___22336 < len__4531__auto___22335)){
-args__4534__auto__.push((arguments[i__4532__auto___22336]));
+if((i__4532__auto___12739 < len__4531__auto___12738)){
+args__4534__auto__.push((arguments[i__4532__auto___12739]));
 
-var G__22337 = (i__4532__auto___22336 + (1));
-i__4532__auto___22336 = G__22337;
+var G__12740 = (i__4532__auto___12739 + (1));
+i__4532__auto___12739 = G__12740;
 continue;
 } else {
 }
@@ -31,16 +31,19 @@ return replica.core.r.cljs$core$IFn$_invoke$arity$variadic(argseq__4535__auto__)
 replica.core.r.cljs$core$IFn$_invoke$arity$variadic = (function (args){
 cljs.core.reset_BANG_.call(null,replica.utils.resp,null);
 
-if(cljs.core.truth_(cljs.core.some.call(null,cljs.core.coll_QMARK_,args))){
+if(cljs.core.coll_QMARK_.call(null,cljs.core.first.call(null,args))){
 return cljs.core.map.call(null,cljs.core.partial.call(null,cljs.core.apply,replica.core.r),args);
+} else {
+if(cljs.core.empty_QMARK_.call(null,args)){
+return null;
 } else {
 var route = cljs.core.first.call(null,args);
 if(cljs.core._EQ_.call(null,cljs.core.type.call(null,route),cljs.core.type.call(null,(new RegExp(""))))){
 return replica.core.r.call(null,new cljs.core.Symbol(null,"epl","epl",-2108995518,null),route);
 } else {
 var route__$1 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(route)].join('');
-var G__22334 = route__$1;
-switch (G__22334) {
+var G__12737 = route__$1;
+switch (G__12737) {
 case "doc":
 return replica.utils.doc_commands.call(null,"replica.core/r",cljs.core.deref.call(null,replica.utils.routes),null);
 
@@ -100,14 +103,15 @@ return replica.utils.get_value.call(null);
 }
 }
 }
+}
 });
 
 replica.core.r.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-replica.core.r.cljs$lang$applyTo = (function (seq22333){
+replica.core.r.cljs$lang$applyTo = (function (seq12736){
 var self__4519__auto__ = this;
-return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq22333));
+return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq12736));
 });
 
 replica.core.routes = new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Symbol(null,"r","r",1169147337,null),new cljs.core.Symbol("replica.core","r","replica.core/r",347578068,null),new cljs.core.Symbol(null,"i","i",253690212,null),new cljs.core.Symbol("replica.inscore","i","replica.inscore/i",-1616446785,null),new cljs.core.Symbol(null,"e","e",-1273166571,null),new cljs.core.Symbol("replica.editor","e","replica.editor/e",-1089389128,null),new cljs.core.Symbol(null,"t","t",242699008,null),new cljs.core.Symbol("replica.tone","t","replica.tone/t",-1082667992,null),new cljs.core.Symbol(null,"cmd","cmd",1337600384,null),new cljs.core.Symbol("replica.utils","create-command!","replica.utils/create-command!",-1137978773,null),new cljs.core.Symbol(null,"url","url",1916828573,null),new cljs.core.Symbol("replica.utils","url!","replica.utils/url!",-129249061,null),new cljs.core.Symbol(null,"full","full",2077332747,null),new cljs.core.Symbol("replica.utils","full-score!","replica.utils/full-score!",342237218,null)], null);

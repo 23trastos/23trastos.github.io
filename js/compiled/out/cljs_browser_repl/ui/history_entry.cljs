@@ -16,7 +16,7 @@
   (let [sel (.toString (.getSelection js/window))
         value (if (string/blank? sel) (:value entry) sel)
         payload (response-with-meta->entry (assoc entry :value value))]
-    (emit-fn :input payload)))
+      (emit-fn :input payload)))
 
 (defn history-input [{:keys [emit]} {:keys [value] :as entry}]
   [:div.history-input

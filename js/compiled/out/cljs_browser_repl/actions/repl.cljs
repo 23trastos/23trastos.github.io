@@ -8,8 +8,11 @@
             [replica.utils :as utils]
             ))
 
-(defn new-input! [s]
-  (reset! state/input s))
+(defn new-input!
+  ([s] (new-input! s false))
+  ([s add?]
+   (let [new (if add? (str @state/input s) s)]
+     (reset! state/input new))))
 
 (defn real-code
   [string]
