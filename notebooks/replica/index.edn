@@ -9,7 +9,7 @@
   or... well, just replications of it.
 
   Special credits to:
-  [INScore](inscore.grame.fr)
+  [INScore](https://inscore.grame.fr)
   [ToneJS](https://tonejs.github.io)
   [cljs-browser-repl](https://github.com/joakin/cljs-browser-repl)/
   [replumb](https://github.com/arichiardi/replumb)
@@ -24,4 +24,9 @@
   If you want to dive first into ClojureScript, then you must visit
   **[Joakin's Introduction](http://chimeces.com/cljs-browser-repl/)**,
   whose browser-repl, by the way, is half of the core of REPL!CA's system.
-  "}]
+  "}
+ {:type :input :silent? true :deaf? true :value
+  "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
+ {:type :stop :resp-enables true :auto-continue true}
+ {:type :input :silent? true :deaf? true :value
+  "'elf \"rsrc/welcome.inscore\" (fn[] (r 'idropc (r 'er)))"}]

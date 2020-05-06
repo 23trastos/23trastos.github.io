@@ -1,4 +1,3 @@
-
 var currKey = null;
 var head = document.getElementsByTagName('head')[0];
 var INS = document.getElementById('scene');
@@ -41,9 +40,12 @@ appendLinkTo = function (containerID, name, hrefString) {
 appendToCM = function (text) {
   CM.replaceRange(text, CodeMirror.Pos(CM.lastLine()));
 };
-fromUrlToCM = function (url) {
+fromUrlToCM = function (url, callback) {
   $.get( url , function (data) {
-    CM.setValue(data)
+    CM.setValue(data);
+    if (typeof callback === 'function') {
+        callback();
+    }
   }, 'text');
 };
 
@@ -69,3 +71,27 @@ goFullScore = function (full) {
   window.dispatchEvent(new Event('resize'));
   window.setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 500);
 };
+
+// define a new console
+var console=(function(oldCons){
+    return {
+        log: function(text){
+            oldCons.log(text);
+            $('#right-info').text(text);
+        },
+        info: function (text) {
+            oldCons.info(text);
+            $('#right-info').text(text);
+        },
+        warn: function (text) {
+            oldCons.warn(text);
+            $('#right-info').text(text);
+        },
+        error: function (text) {
+            oldCons.error(text);
+        }
+    };
+}(window.console));
+
+//Then redefine the old console
+window.console = console;

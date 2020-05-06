@@ -135,9 +135,10 @@
   (command! (str "(do " (rd) ")")))
 
 (defn lf!
-  [url]
-  "Loads code from file."
-  (js/fromUrlToCM url))
+  ([url] (lf! url nil))
+  ([url callback]
+   "Loads code from file."
+   (js/fromUrlToCM url callback)))
 
 (def routes {'rd 'rd
              's 's!
