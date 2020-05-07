@@ -36,8 +36,13 @@ goog.addDependency("../devtools/core.js", ['devtools.core'], ['devtools.toolbox'
 goog.addDependency("../figwheel/repl/preload.js", ['figwheel.repl.preload'], ['cljs.core', 'figwheel.repl']);
 goog.addDependency("../devtools/preload.js", ['devtools.preload'], ['cljs.core', 'devtools.core', 'devtools.prefs']);
 goog.addDependency("../cljsjs/codemirror/development/codemirror.inc.js", ['cljsjs.codemirror', 'codemirror'], [], {'foreign-lib': true});
+goog.addDependency("../cljsjs/codemirror/common/addon/dialog/dialog.inc.js", ['codemirror.addon.dialog.dialog', 'cljsjs.codemirror.addon.dialog.dialog'], ['codemirror'], {'foreign-lib': true});
+goog.addDependency("../cljsjs/codemirror/common/mode/clojure.inc.js", ['codemirror.mode.clojure', 'cljsjs.codemirror.mode.clojure'], ['codemirror'], {'foreign-lib': true});
+goog.addDependency("../cljsjs/codemirror/common/addon/edit/matchbrackets.inc.js", ['codemirror.addon.edit.matchbrackets', 'cljsjs.codemirror.addon.edit.matchbrackets'], ['codemirror'], {'foreign-lib': true});
+goog.addDependency("../cljsjs/codemirror/common/addon/edit/closebrackets.inc.js", ['codemirror.addon.edit.closebrackets', 'cljsjs.codemirror.addon.edit.closebrackets'], ['codemirror'], {'foreign-lib': true});
+goog.addDependency("../cljsjs/codemirror/common/addon/search/searchcursor.inc.js", ['codemirror.addon.search.searchcursor', 'cljsjs.codemirror.addon.search.searchcursor'], ['codemirror'], {'foreign-lib': true});
 goog.addDependency("../replica/utils.js", ['replica.utils'], ['cljs.core', 'goog.object']);
-goog.addDependency("../replica/editor.js", ['replica.editor'], ['cljs.core', 'cljsjs.codemirror', 'replica.utils']);
+goog.addDependency("../replica/editor.js", ['replica.editor'], ['cljs.core', 'cljsjs.codemirror', 'cljsjs.codemirror.addon.dialog.dialog', 'cljsjs.codemirror.mode.clojure', 'cljsjs.codemirror.addon.edit.matchbrackets', 'cljsjs.codemirror.addon.edit.closebrackets', 'cljsjs.codemirror.addon.search.searchcursor', 'replica.utils']);
 goog.addDependency("../replica/inscore.js", ['replica.inscore'], ['cljs.core', 'replica.utils']);
 goog.addDependency("../cljsjs/tonejs/development/Tone.inc.js", ['tonejs'], [], {'foreign-lib': true});
 goog.addDependency("../replica/tone.js", ['replica.tone'], ['tonejs', 'cljs.core', 'goog.object', 'replica.utils']);

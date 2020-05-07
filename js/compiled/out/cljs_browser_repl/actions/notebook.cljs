@@ -37,6 +37,8 @@
             new-pos (inc pos)]
         ;; Dispatch commands as necessary
         (case type
+          :lock (reset! state/locked true)
+          :unlock (reset! state/locked false)
           :input (if (:sample? cmd) ; If just sample, put to history
                    (cmd-to-history! cmd) ; without running it.
                    (repl-entry! value (not silent?) (not deaf?)))

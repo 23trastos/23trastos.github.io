@@ -9,7 +9,7 @@ _ * 1 / 8 e1 * 1 / 8 f1 * 1 / 8 e1 * 1 / 8
 _ * 1 / 8 e1 * 1 / 8 f1 * 1 / 8 g1 * 1 / 8
 e1 * 1 / 8 f1 * 1 / 8 g1 * 1 / 8 _ * 1 /8
 \tieBegin:0 c2 * 1 / 1 c2 * 1 / 1 \tieEnd:0
-_ * 1 /4 _ * 1 /4 _ * 1 /8 c1 * 1 / 16 c1 * 1 / 16 c1 * 1 / 8 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4 _ * 1 /4
+_ * 1 /4 _ * 1 /4 _ * 1 /4 _ * 1 /8 c1 * 1 / 16 c1 * 1 / 16 c1 * 1 / 8 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4 _ * 1 /4
 g1 * 3 / 2 \tieBegin:0 f1 * 1 / 1 f1 * 1 / 1 \tieEnd:0
 b1 * 1 / 16 g1 * 1 / 16 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4
 \bm( b1 * 1 / 16 g1 * 1 / 16 )
@@ -93,10 +93,11 @@ SETUP
 'imsg 'inc/title1 ['scale 2] ['y -0.5]
 'imsg 'inc/title2 'y -0.4
 'itxt 'titleR "In C_Terry Riley"
-'imsg 'titleR ['x 2.2] ['y -0.8]
+'imsg 'titleR ['x 2.2] ['y -0.9]
 (map #(r 'isetx (str 'inc/lab %1) 'txt (str %1)) pats)
 (map #(r 'imsg (str 'inc/pat %1) 'y %2) pats positions)
 (map #(r 'imsg (str 'inc/lab %1) 'y %2) pats positions)
+'imsg 'inc/lab35 'dy -0.2
 'imsg 'inc/pat* 'scale 0.6
 'imsg 'inc/lab* ['scale 2] ['x -1.6]
 'isetx 'inc/time 'rect 1 1
@@ -108,10 +109,13 @@ SETUP
 'tsynth 'b1 :-- 'conv
 'tsynth 'b2 :-- 'conv
 'tschr "8n" (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand)))))
-'ibtn 'btnStart 'START "(r 'epl 'START)"
-'ibtn 'btnStop 'STOP "(r 'epl 'STOP)"
-'ibtn 'btnReset 'RESET "(r 'epl 'RESET)"
-'imsg 'btn* ['y -0.9] ['z 1]
-'imsg 'btnStart 'x -1
-'imsg 'btnReset 'x 1
+'isetx 'control 'layer
+'isetx 'control/back 'rect 4 0.18
+'imsg 'control/back 'color 255 255 255 100
+'ibtn 'control/start 'START "(r 'epl 'START)"
+'ibtn 'control/stop 'STOP "(r 'epl 'STOP)"
+'ibtn 'control/reset 'RESET "(r 'epl 'RESET)"
+'imsg 'control ['y -0.9] ['z 1]
+'imsg 'control/start 'x -1
+'imsg 'control/reset 'x 1
 SETUP

@@ -29,4 +29,4 @@
   "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
  {:type :stop :resp-enables true :auto-continue true}
  {:type :input :silent? true :deaf? true :value
-  "'elf \"rsrc/welcome.inscore\" (fn[] (r 'idropc (r 'er)))"}]
+  "'elf \"rsrc/welcome.replica\" (fn[] (r 'del #(print-str (r 'ep)) 500))"}]

@@ -1,0 +1,20 @@
+'iclear
+
+(def grey "180 180 180")
+(def shadow (str 'shadow " 5 5 " grey " 75 3"))
+(def color "20 0 150")
+
+'itxt 'welcome "Welcome to INScore"
+'imsg 'welcome ['color color]['fontSize 32]['fontWeight 'bold]['effect shadow]['y -0.7]
+
+'ihtml 'what "<div style=\"text-align: center\">An environment for the design of<br/>interactive, augmented music scores.</div>"
+'imsg 'what ['y -0.5]['fontSize 18]
+
+'igmn 'score "[ a f# g ]"
+'imsg 'score ['effect shadow]['scale 1.2]['y -0.05]
+
+'ihtml 'comm "<div style=\"text-align: center\">INScore is an open source project developed by GRAME-CNCM.<br />More information on <br /><a href=https://inscore.grame.fr style=\"font-size: 110%\" target=_blank>inscore.grame.fr</a></div>"
+'imsg 'comm 'y 0.4
+
+'isetx 'logo 'img "'https://inscoreweb.grame.fr/imgs/grame.png'"
+'imsg 'logo ['scale 0.4]['y 0.8]

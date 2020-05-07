@@ -1,5 +1,10 @@
 (ns replica.editor
   (:require [cljsjs.codemirror]
+            [cljsjs.codemirror.addon.search.searchcursor]
+            [cljsjs.codemirror.addon.dialog.dialog]
+            [cljsjs.codemirror.mode.clojure]
+            [cljsjs.codemirror.addon.edit.matchbrackets]
+            [cljsjs.codemirror.addon.edit.closebrackets]
             [replica.utils :refer [command!
                                    proc!
                                    add-routes!
@@ -9,11 +14,13 @@
 
 (defonce cm (. js/CodeMirror fromTextArea
                (. js/document getElementById "code")
-               (clj->js {:lineNumbers true})))
+               (clj->js {:lineNumbers true
+                         :mode "clojure"
+                         :matchBrackets true})))
 
 (set! js/CM cm)
 
-(js/loadScript "lib/searchcursor.js")
+;(js/loadScript "lib/searchcursor.js")
 
 (set-info! "CodeMirror loaded")
 
@@ -106,7 +113,7 @@
   "Processes lines of the CodeMirror editor as REPL commands. If no argument is provided every line is processed as a separate command. Be aware and happy that you can insert also (cljs code), even call (r ... with args) inside a route. This can generate dangerous and beautiful loops!"
   ([] (p! 1 (. cm lineCount)))
   ([n]
-   (command! (r n)))
+   (command! (r n) false false))
   ([start-line end-line]
    (map p! (range start-line (inc end-line)))))
 

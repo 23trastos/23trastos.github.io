@@ -6,21 +6,24 @@
 
 (defn now [] (.now js/Date))
 
+(defonce locked (atom false));
+
 (defn add-entry [h e]
-  (let [last-entry (peek h)]
-    (if (= (:type last-entry) :stop)
-      (if (and
-            (:resp-enables last-entry)
-            (some (partial = (:type e)) [:response nil]))
-        (conj (pop h) e (assoc last-entry :resp-enables false))
-        (conj (pop h) e last-entry))
-      (let [new (if (and
-                      (= (:type e) :stop)
-                      (:resp-enables e)
-                      (= (:type last-entry) :response))
-                  (assoc e :resp-enables false)
-                  e)]
-        (conj h new)))))
+  (when-not @locked
+    (let [last-entry (peek h)]
+      (if (= (:type last-entry) :stop)
+        (if (and
+              (:resp-enables last-entry)
+              (some (partial = (:type e)) [:response nil]))
+          (conj (pop h) e (assoc last-entry :resp-enables false))
+          (conj (pop h) e last-entry))
+        (let [new (if (and
+                        (= (:type e) :stop)
+                        (:resp-enables e)
+                        (= (:type last-entry) :response))
+                    (assoc e :resp-enables false)
+                    e)]
+          (conj h new))))))
 
 (defn add-entries [h es] (apply conj h es))
 

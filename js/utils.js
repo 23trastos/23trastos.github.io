@@ -16,11 +16,19 @@ loadScript = function (url) {
   script.src= url;
   head.appendChild(script);
 };
+
+addInfo = function (text, color) {
+  var d = $('#right-info');
+  var p = $('<p></p>').css('color', color).text(text);
+  d.append(p);
+  d.scrollTop(d.prop('scrollHeight'));
+}
+
 dropTextTo = function (element, text) {
+  addInfo(text, 'olive');
   const dataTransfer = new DataTransfer;
   dataTransfer.setData('text', text);
   element.dispatchEvent(new DragEvent('drop', { dataTransfer: dataTransfer }));
-  $('#right-info').text(text);
 };
 assignUrl = function (url) {
   location.assign(url);
@@ -73,19 +81,19 @@ goFullScore = function (full) {
 };
 
 // define a new console
-var console=(function(oldCons){
+var console = (function(oldCons){
     return {
         log: function(text){
             oldCons.log(text);
-            $('#right-info').text(text);
+            addInfo(text, 'midnightblue');
         },
         info: function (text) {
             oldCons.info(text);
-            $('#right-info').text(text);
+            addInfo(text, 'darkslategrey');
         },
         warn: function (text) {
-            oldCons.warn(text);
-            $('#right-info').text(text);
+            oldCons.warn(text, 'firebrick');
+            addInfo(text);
         },
         error: function (text) {
             oldCons.error(text);
