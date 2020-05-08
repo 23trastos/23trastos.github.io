@@ -8,8 +8,8 @@ goog.require('replumb.repl');
 goog.require('clojure.string');
 goog.require('replica.utils');
 cljs_browser_repl.actions.repl.new_input_BANG_ = (function cljs_browser_repl$actions$repl$new_input_BANG_(var_args){
-var G__16159 = arguments.length;
-switch (G__16159) {
+var G__12094 = arguments.length;
+switch (G__12094) {
 case 1:
 return cljs_browser_repl.actions.repl.new_input_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -39,8 +39,8 @@ return cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.input,s);
 cljs_browser_repl.actions.repl.new_input_BANG_.cljs$lang$maxFixedArity = 2;
 
 cljs_browser_repl.actions.repl.real_code = (function cljs_browser_repl$actions$repl$real_code(string){
-var G__16161 = cljs.core.subs.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(string)].join(''),(0),(1));
-switch (G__16161) {
+var G__12096 = cljs.core.subs.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(string)].join(''),(0),(1));
+switch (G__12096) {
 case "'":
 case "[":
 return ["(apply replica.core/r [",cljs.core.str.cljs$core$IFn$_invoke$arity$1(string),"])"].join('');
@@ -60,8 +60,8 @@ return string;
 }
 });
 cljs_browser_repl.actions.repl.repl_entry_BANG_ = (function cljs_browser_repl$actions$repl$repl_entry_BANG_(var_args){
-var G__16164 = arguments.length;
-switch (G__16164) {
+var G__12099 = arguments.length;
+switch (G__12099) {
 case 1:
 return cljs_browser_repl.actions.repl.repl_entry_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -97,12 +97,12 @@ cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl
 } else {
 }
 
-return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,cljs_browser_repl.actions.repl.real_code.call(null,code),(function (p__16165){
-var map__16166 = p__16165;
-var map__16166__$1 = ((((!((map__16166 == null)))?(((((map__16166.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__16166.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__16166):map__16166);
-var ret = map__16166__$1;
-var value = cljs.core.get.call(null,map__16166__$1,new cljs.core.Keyword(null,"value","value",305978217));
-var error = cljs.core.get.call(null,map__16166__$1,new cljs.core.Keyword(null,"error","error",-978969032));
+return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,cljs_browser_repl.actions.repl.real_code.call(null,code),(function (p__12100){
+var map__12101 = p__12100;
+var map__12101__$1 = ((((!((map__12101 == null)))?(((((map__12101.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__12101.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__12101):map__12101);
+var ret = map__12101__$1;
+var value = cljs.core.get.call(null,map__12101__$1,new cljs.core.Keyword(null,"value","value",305978217));
+var error = cljs.core.get.call(null,map__12101__$1,new cljs.core.Keyword(null,"error","error",-978969032));
 cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.current_ns,replumb.repl.current_ns.call(null));
 
 cljs.core.reset_BANG_.call(null,replica.utils.resp,ret);

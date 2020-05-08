@@ -99,6 +99,10 @@
     (js/appendToCM (str "\n" (state/get-filtered-history)))
     (js/appendToCM (str "\n" @state/history))))
 
+(defroute "/initRec" [query-params]
+  (js/initMediaRecorder (or (not (:onlyAudio query-params))
+                            false)))
+
 (defroute "/rscs/:file" [file]
   (js/fromUrlToCM file))
 
