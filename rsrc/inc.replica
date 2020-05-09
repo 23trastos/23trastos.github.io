@@ -76,7 +76,7 @@ RESET
 
 SETUP
 (def tempo (js/prompt "Set the desired tempo in BPM / Introduce el tempo deseado en BPM"))
-(when (= tempo "") (def tempo 98))
+(when (= tempo "") (def tempo 100))
 'tst tempo
 'iclear
 (def pats (range 1 54))
@@ -98,7 +98,7 @@ SETUP
 'imsg 'inc/lab* ['scale 2] ['x -1.6]
 'isetx 'inc/time 'rect 1 1
 'imsg 'inc/time 'show 0
-'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 110000)) '--keep)
+'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 115000)) '--keep)
 'iwatch 'inc/time 'STEP (r 'imsg 'inc 'dy (- step) '--keep)
 'tconv 'conv "rsrc/x00y00.wav"
 'tsp 'conv 'wet 'value 0.2
@@ -107,14 +107,15 @@ SETUP
 'tschr "8n" (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand)))))
 'tgrn 'back "rsrc/inC_backing.mp3"
 (. (.sync (r 'tg 'back)) start 0)
+'tsp 'back 'playbackRate (/ tempo 100)
 'isetx 'control 'layer
 'isetx 'control/back 'rect 4 0.18
 'imsg 'control/back 'color 255 255 255 100
 'ibtn 'control/start 'START "(r 'epl 'START)"
 'ibtn 'control/stop 'STOP "(r 'epl 'STOP)"
 'ibtn 'control/reset 'RESET "(r 'epl 'RESET)"
-'isld 'control/volmetr "Metr.Vol" 0.01 1 0.01 0.5 "#(r 'tsp 'conv 'output 'gain 'value %)"
-'isld 'control/volback "Acmp.Vol" -60 2 0.2 0 "#(r 'tsp 'back 'volume 'value %)"
+'isld 'control/volmetr "Metr.Vol" 0.01 1 0.01 1 "#(r 'tsp 'conv 'output 'gain 'value %)"
+'isld 'control/volback "Acmp.Vol" -60 5 0.2 0 "#(r 'tsp 'back 'volume 'value %)"
 'imsg 'control ['y -0.9] ['z 1]
 'imsg 'control/start 'x -1.5
 'imsg 'control/stop 'x -1.3
