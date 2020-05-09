@@ -98,7 +98,7 @@ SETUP
 'imsg 'inc/lab* ['scale 2] ['x -1.6]
 'isetx 'inc/time 'rect 1 1
 'imsg 'inc/time 'show 0
-'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 115000)) '--keep)
+'iwatch 'inc/time 'ddate (r 'imsg 'inc 'dy (- (/ tempo 120000)) '--keep)
 'iwatch 'inc/time 'STEP (r 'imsg 'inc 'dy (- step) '--keep)
 'tconv 'conv "rsrc/x00y00.wav"
 'tsp 'conv 'wet 'value 0.2
