@@ -71,10 +71,23 @@
    (btn! object object to-repl-code))
   ([object label to-repl-code & opt]
    (let [code (. to-repl-code replace (js/RegExp. #"'" 'g) "\\\\'")]
-     (apply setx! object 'html
-            (str "'<button onclick=\"toRepl(\\'" code "\\')\">"
+     (apply html! object
+            (str "<button onclick=\"toRepl(\\'" code "\\')\">"
                  (or label object)
-                 "</button>'") opt))))
+                 "</button>") opt))))
+
+(defn sld!
+  "Macro command for creating a new html slider (range) <input> with desired attr. and the fn[new-value] to be sent on change. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  ([object-id minv maxv step initv on-change]
+   (sld! object-id object-id minv maxv step initv on-change))
+  ([object-id label minv maxv step initv on-change & opt]
+   (let [function (. on-change replace (js/RegExp. #"'" 'g) "\\\\'")]
+     (apply html! object-id
+            (str "<p>" label ":</p><input type=\"range\"
+                 min=\"" minv "\" max=\"" maxv "\" step=\"" step
+                 "\" value=\"" initv "\" id=\"" object-id
+                 "\" oninput=\"toRepl(\\'("
+                 function " \\' + this.value + \\')\\', false, false)\">") opt))))
 
 (defn watch!
   "Macro command for creating a watch to an element. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
@@ -100,6 +113,7 @@
              'txt 'txt!
              'html 'html!
              'btn 'btn!
+             'sld 'sld!
              'watch 'watch!
              'als 'als!})
 

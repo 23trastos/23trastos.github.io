@@ -7,19 +7,19 @@ SCORE
 \grace(c1 * 1 / 8) e1 * 1 / 8 f1 * 1 / 8 e1 * 1 / 4
 _ * 1 / 8 e1 * 1 / 8 f1 * 1 / 8 e1 * 1 / 8
 _ * 1 / 8 e1 * 1 / 8 f1 * 1 / 8 g1 * 1 / 8
-e1 * 1 / 8 f1 * 1 / 8 g1 * 1 / 8 _ * 1 /8
+e1 * 1 / 8 f1 * 1 / 8 g1 * 1 / 8 _ * 1 / 8
 \tieBegin:0 c2 * 1 / 1 c2 * 1 / 1 \tieEnd:0
-_ * 1 /4 _ * 1 /4 _ * 1 /4 _ * 1 /8 c1 * 1 / 16 c1 * 1 / 16 c1 * 1 / 8 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4 _ * 1 /4
+_ * 1 / 4 _ * 1 / 4 _ * 1 / 4 _ * 1 / 8 c1 * 1 / 16 c1 * 1 / 16 c1 * 1 / 8 _ * 1 / 8 _ * 1 / 4 _ * 1 / 4 _ * 1 / 4 _ * 1 / 4
 g1 * 3 / 2 \tieBegin:0 f1 * 1 / 1 f1 * 1 / 1 \tieEnd:0
-b1 * 1 / 16 g1 * 1 / 16 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4
+b1 * 1 / 16 g1 * 1 / 16 _ * 1 / 8 _ * 1 / 4 _ * 1 / 4 _ * 1 / 4
 \bm( b1 * 1 / 16 g1 * 1 / 16 )
 \bm( f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 )
 f1 * 1 / 8 g1 * 1 / 8 b1 * 1 / 1 c2 * 1 / 4
-b1 * 1 / 16 g1 * 3 / 16 g1 * 1 / 16 f1 * 1 / 16 g1 * 1 / 8 _ * 3 /16 \tieBegin:0 g1 * 1 / 16 g1 * 3 / 4 \tieEnd:0
+b1 * 1 / 16 g1 * 3 / 16 g1 * 1 / 16 f1 * 1 / 16 g1 * 1 / 8 _ * 3 / 16 \tieBegin:0 g1 * 1 / 16 g1 * 3 / 4 \tieEnd:0
 c2 * 1 / 1 b1 * 1 / 1 g1 * 1 / 1 f#1 * 1 / 1
-g1 * 1 / 16 _ * 3 /16 _ * 1 /4 _ * 1 /4 _ * 1 /4
+g1 * 1 / 16 _ * 3 / 16 _ * 1 / 4 _ * 1 / 4 _ * 1 / 4
 g1 * 1 / 16 b1 * 1 / 16 c2 * 1 / 16 b1 * 1 / 16
-\bm( b1 * 1 / 16 c2 * 1 / 16 b1 * 1 / 16 c2 * 1 / 16 b1 * 1 / 16 _ * 1 /16 )
+\bm( b1 * 1 / 16 c2 * 1 / 16 b1 * 1 / 16 c2 * 1 / 16 b1 * 1 / 16 _ * 1 / 16 )
 e1 * 1 / 16 f#1 * 1 / 16 e1 * 1 / 16 f#1 * 1 / 16 e1 * 3 / 16 e1 * 1 / 16
 _ * 3 /8 g2 * 3 / 8
 e1 * 1 / 16 f#1 * 1 / 16 e1 * 1 / 16 f#1 * 1 / 16 g0 * 3 / 16 e1 * 1 / 16 f#1 * 1 / 16 e1 * 1 / 16 f#1 * 1 / 16 e1 * 1 / 16
@@ -35,9 +35,9 @@ e1 * 3 / 4 g1 * 3 / 4 c2 * 3 / 4
 c2 * 3 / 2
 \bm( g1 * 1 / 16 f1 * 1 / 16 g1 * 1 / 16 ) \bm( b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 )
 \bm( f1 * 1 / 16 g1 * 1 / 16 f1 * 1 / 16 ) \bm( g1 * 1 / 16 b1 * 1 / 16 \tieBegin:0 f1 * 1 / 16 ) f1 * 3 / 4 \tieEnd:0 g1 * 3 / 8
-g1 * 1 / 16 f1 * 1 / 16 _ * 1 /8
+g1 * 1 / 16 f1 * 1 / 16 _ * 1 / 8
 \bm( g1 * 1 / 16 f1 * 1 / 16 )
-f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 _ * 1 /8 _ * 1 /4 _ * 1 /4 _ * 1 /4 b&1 * 1 / 4 g2 * 3 / 4 \bm( a2 * 1 / 8 \tieBegin:0 g2 * 1 / 8 ) \bm( g2 * 1 / 8 \tieEnd:0 b2 * 1 / 8 ) a2 * 3 / 8 g2 * 1 / 8 e2 * 3 / 4 g2 * 1 / 8 \tieBegin:0 f#2 * 1 / 8 f#2 * 3 / 4 \tieEnd:0 _ * 1 /4 _ * 1 /4 _ * 1 /8 \tieBegin:0 e2 * 1 / 8 e2 * 1 / 2 \tieEnd:0 f2 * 3 / 2
+f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 _ * 1 / 8 _ * 1 / 4 _ * 1 / 4 _ * 1 / 4 b&1 * 1 / 4 g2 * 3 / 4 \bm( a2 * 1 / 8 \tieBegin:0 g2 * 1 / 8 ) \bm( g2 * 1 / 8 \tieEnd:0 b2 * 1 / 8 ) a2 * 3 / 8 g2 * 1 / 8 e2 * 3 / 4 g2 * 1 / 8 \tieBegin:0 f#2 * 1 / 8 f#2 * 3 / 4 \tieEnd:0 _ * 1 / 4 _ * 1 / 4 _ * 1 / 8 \tieBegin:0 e2 * 1 / 8 e2 * 1 / 2 \tieEnd:0 f2 * 3 / 2
 \bm( f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 g1 * 1 / 16 )
 \bm( f1 * 1 / 16 g1 * 1 / 16 )
 \bm( f1 * 1 / 16 g1 * 1 / 16 b1 * 1 / 16 )
@@ -48,7 +48,7 @@ c2 * 1 / 1 b1 * 1 / 1 a1 * 1 / 1 c2 * 1 / 1
 f2 * 1 / 16 e2 * 1 / 16 f2 * 1 / 16 e2 * 1 / 16 e2 * 1 / 8 e2 * 1 / 8 e2 * 1 / 8 f2 * 1 / 16 e2 * 1 / 16
 f2 * 1 / 8 \tieBegin:0 e2 * 1 / 8 e2 * 1 / 8 \tieEnd:0 e2 * 1 / 8 c2 * 1 / 4
 d2 * 1 / 4 d2 * 1 / 4 g1 * 1 / 4
-g1 * 1 / 16 d2 * 1 / 16 e2 * 1 / 16 d2 * 1 / 16 _ * 1 /8 g1 * 1 / 8 _ * 1 /8 g1 * 1 / 8 _ * 1 /8 g1 * 1 / 8 g1 * 1 / 16 d2 * 1 / 16 e2 * 1 / 16 d2 * 1 / 16
+g1 * 1 / 16 d2 * 1 / 16 e2 * 1 / 16 d2 * 1 / 16 _ * 1 / 8 g1 * 1 / 8 _ * 1 / 8 g1 * 1 / 8 _ * 1 / 8 g1 * 1 / 8 g1 * 1 / 16 d2 * 1 / 16 e2 * 1 / 16 d2 * 1 / 16
 d2 * 1 / 16 e2 * 1 / 16 d2 * 1 / 8
 g1 * 3 / 2 g1 * 1 / 1 \tieBegin:0 f1 * 1 / 1 f1 * 1 / 4 \tieEnd:0
 \bm( f1 * 1 / 16   g1 * 1 / 16 b&1 * 1 / 16 g1 * 1 / 16 b&1 * 1 / 16 g1 * 1 / 16 )
@@ -89,11 +89,7 @@ SETUP
 'isetx 'inc 'layer
 (map #(r 'igmn (str 'inc/pat %1) (str "[\\repeatBegin " (r 'er %2) " \\repeatEnd]")) pats lines)
 'itxt 'inc/title1 "TERRY RILEY IN C"
-'itxt 'inc/title2 "control with start/stop/reset buttons above"
 'imsg 'inc/title1 ['scale 2] ['y -0.5]
-'imsg 'inc/title2 'y -0.4
-'itxt 'titleR "In C_Terry Riley"
-'imsg 'titleR ['x 2.2] ['y -0.9]
 (map #(r 'isetx (str 'inc/lab %1) 'txt (str %1)) pats)
 (map #(r 'imsg (str 'inc/pat %1) 'y %2) pats positions)
 (map #(r 'imsg (str 'inc/lab %1) 'y %2) pats positions)
@@ -109,13 +105,21 @@ SETUP
 'tsynth 'b1 :-- 'conv
 'tsynth 'b2 :-- 'conv
 'tschr "8n" (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand)))))
+'tgrn 'back "rsrc/inC_backing.mp3"
+(. (.sync (r 'tg 'back)) start 0)
 'isetx 'control 'layer
 'isetx 'control/back 'rect 4 0.18
 'imsg 'control/back 'color 255 255 255 100
 'ibtn 'control/start 'START "(r 'epl 'START)"
 'ibtn 'control/stop 'STOP "(r 'epl 'STOP)"
 'ibtn 'control/reset 'RESET "(r 'epl 'RESET)"
+'isld 'control/volmetr "Metr.Vol" 0.01 1 0.01 0.5 "#(r 'tsp 'conv 'output 'gain 'value %)"
+'isld 'control/volback "Acmp.Vol" -60 2 0.2 0 "#(r 'tsp 'back 'volume 'value %)"
 'imsg 'control ['y -0.9] ['z 1]
-'imsg 'control/start 'x -1
-'imsg 'control/reset 'x 1
+'imsg 'control/start 'x -1.5
+'imsg 'control/stop 'x -1.3
+'imsg 'control/reset 'x -1.1
+'imsg 'control/volmetr 'x 1
+'imsg 'control/volback 'x 1.5
+'imsg 'control/vol* 'scale 0.8
 SETUP

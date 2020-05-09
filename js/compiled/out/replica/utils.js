@@ -33,14 +33,14 @@ return value.replace((new RegExp(/\"/,new cljs.core.Symbol(null,"g","g",-9163458
 });
 replica.utils.error_BANG_ = (function replica$utils$error_BANG_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___24802 = arguments.length;
-var i__4532__auto___24803 = (0);
+var len__4531__auto___19451 = arguments.length;
+var i__4532__auto___19452 = (0);
 while(true){
-if((i__4532__auto___24803 < len__4531__auto___24802)){
-args__4534__auto__.push((arguments[i__4532__auto___24803]));
+if((i__4532__auto___19452 < len__4531__auto___19451)){
+args__4534__auto__.push((arguments[i__4532__auto___19452]));
 
-var G__24804 = (i__4532__auto___24803 + (1));
-i__4532__auto___24803 = G__24804;
+var G__19453 = (i__4532__auto___19452 + (1));
+i__4532__auto___19452 = G__19453;
 continue;
 } else {
 }
@@ -58,11 +58,11 @@ throw (new Error(cljs.core.apply.call(null,cljs.core.str,"@replica.",origin,": "
 replica.utils.error_BANG_.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-replica.utils.error_BANG_.cljs$lang$applyTo = (function (seq24800){
-var G__24801 = cljs.core.first.call(null,seq24800);
-var seq24800__$1 = cljs.core.next.call(null,seq24800);
+replica.utils.error_BANG_.cljs$lang$applyTo = (function (seq19449){
+var G__19450 = cljs.core.first.call(null,seq19449);
+var seq19449__$1 = cljs.core.next.call(null,seq19449);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__24801,seq24800__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__19450,seq19449__$1);
 });
 
 replica.utils.set_info_BANG_ = (function replica$utils$set_info_BANG_(string){
@@ -84,8 +84,8 @@ replica.utils.url_command_BANG_ = (function replica$utils$url_command_BANG_(c){
 return replica.utils.url_BANG_.call(null,replica.utils.cmd_url.call(null,c));
 });
 replica.utils.command_BANG_ = (function replica$utils$command_BANG_(var_args){
-var G__24806 = arguments.length;
-switch (G__24806) {
+var G__19455 = arguments.length;
+switch (G__19455) {
 case 1:
 return replica.utils.command_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -114,14 +114,14 @@ replica.utils.command_BANG_.cljs$lang$maxFixedArity = 3;
 
 replica.utils.get_js_value = (function replica$utils$get_js_value(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___24810 = arguments.length;
-var i__4532__auto___24811 = (0);
+var len__4531__auto___19459 = arguments.length;
+var i__4532__auto___19460 = (0);
 while(true){
-if((i__4532__auto___24811 < len__4531__auto___24810)){
-args__4534__auto__.push((arguments[i__4532__auto___24811]));
+if((i__4532__auto___19460 < len__4531__auto___19459)){
+args__4534__auto__.push((arguments[i__4532__auto___19460]));
 
-var G__24812 = (i__4532__auto___24811 + (1));
-i__4532__auto___24811 = G__24812;
+var G__19461 = (i__4532__auto___19460 + (1));
+i__4532__auto___19460 = G__19461;
 continue;
 } else {
 }
@@ -139,23 +139,23 @@ return cljs.core.apply.call(null,goog.object.getValueByKeys,obj,path_to_key);
 replica.utils.get_js_value.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-replica.utils.get_js_value.cljs$lang$applyTo = (function (seq24808){
-var G__24809 = cljs.core.first.call(null,seq24808);
-var seq24808__$1 = cljs.core.next.call(null,seq24808);
+replica.utils.get_js_value.cljs$lang$applyTo = (function (seq19457){
+var G__19458 = cljs.core.first.call(null,seq19457);
+var seq19457__$1 = cljs.core.next.call(null,seq19457);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__24809,seq24808__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__19458,seq19457__$1);
 });
 
 replica.utils.set_js_prop_BANG_ = (function replica$utils$set_js_prop_BANG_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___24815 = arguments.length;
-var i__4532__auto___24816 = (0);
+var len__4531__auto___19464 = arguments.length;
+var i__4532__auto___19465 = (0);
 while(true){
-if((i__4532__auto___24816 < len__4531__auto___24815)){
-args__4534__auto__.push((arguments[i__4532__auto___24816]));
+if((i__4532__auto___19465 < len__4531__auto___19464)){
+args__4534__auto__.push((arguments[i__4532__auto___19465]));
 
-var G__24817 = (i__4532__auto___24816 + (1));
-i__4532__auto___24816 = G__24817;
+var G__19466 = (i__4532__auto___19465 + (1));
+i__4532__auto___19465 = G__19466;
 continue;
 } else {
 }
@@ -174,23 +174,23 @@ return goog.object.set(cljs.core.apply.call(null,replica.utils.get_js_value,obj,
 replica.utils.set_js_prop_BANG_.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-replica.utils.set_js_prop_BANG_.cljs$lang$applyTo = (function (seq24813){
-var G__24814 = cljs.core.first.call(null,seq24813);
-var seq24813__$1 = cljs.core.next.call(null,seq24813);
+replica.utils.set_js_prop_BANG_.cljs$lang$applyTo = (function (seq19462){
+var G__19463 = cljs.core.first.call(null,seq19462);
+var seq19462__$1 = cljs.core.next.call(null,seq19462);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__24814,seq24813__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__19463,seq19462__$1);
 });
 
 replica.utils.get_js_paths = (function replica$utils$get_js_paths(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___24820 = arguments.length;
-var i__4532__auto___24821 = (0);
+var len__4531__auto___19469 = arguments.length;
+var i__4532__auto___19470 = (0);
 while(true){
-if((i__4532__auto___24821 < len__4531__auto___24820)){
-args__4534__auto__.push((arguments[i__4532__auto___24821]));
+if((i__4532__auto___19470 < len__4531__auto___19469)){
+args__4534__auto__.push((arguments[i__4532__auto___19470]));
 
-var G__24822 = (i__4532__auto___24821 + (1));
-i__4532__auto___24821 = G__24822;
+var G__19471 = (i__4532__auto___19470 + (1));
+i__4532__auto___19470 = G__19471;
 continue;
 } else {
 }
@@ -202,34 +202,29 @@ return replica.utils.get_js_paths.cljs$core$IFn$_invoke$arity$variadic((argument
 });
 
 replica.utils.get_js_paths.cljs$core$IFn$_invoke$arity$variadic = (function (obj,pre_paths){
-var ret = goog.object.getKeys(cljs.core.apply.call(null,goog.object.getValueByKeys,obj,pre_paths));
-if(cljs.core._EQ_.call(null,cljs.core.count.call(null,ret),(0))){
-return cljs.core.apply.call(null,replica.utils.get_js_value,obj,pre_paths);
-} else {
-return ret;
-}
+return goog.object.getKeys(cljs.core.apply.call(null,goog.object.getValueByKeys,obj,pre_paths));
 });
 
 replica.utils.get_js_paths.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-replica.utils.get_js_paths.cljs$lang$applyTo = (function (seq24818){
-var G__24819 = cljs.core.first.call(null,seq24818);
-var seq24818__$1 = cljs.core.next.call(null,seq24818);
+replica.utils.get_js_paths.cljs$lang$applyTo = (function (seq19467){
+var G__19468 = cljs.core.first.call(null,seq19467);
+var seq19467__$1 = cljs.core.next.call(null,seq19467);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__24819,seq24818__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__19468,seq19467__$1);
 });
 
 replica.utils.proc_BANG_ = (function replica$utils$proc_BANG_(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___24825 = arguments.length;
-var i__4532__auto___24826 = (0);
+var len__4531__auto___19474 = arguments.length;
+var i__4532__auto___19475 = (0);
 while(true){
-if((i__4532__auto___24826 < len__4531__auto___24825)){
-args__4534__auto__.push((arguments[i__4532__auto___24826]));
+if((i__4532__auto___19475 < len__4531__auto___19474)){
+args__4534__auto__.push((arguments[i__4532__auto___19475]));
 
-var G__24827 = (i__4532__auto___24826 + (1));
-i__4532__auto___24826 = G__24827;
+var G__19476 = (i__4532__auto___19475 + (1));
+i__4532__auto___19475 = G__19476;
 continue;
 } else {
 }
@@ -251,16 +246,16 @@ return cljs.core.apply.call(null,cljs.core.second.call(null,cljs.core.get.call(n
 replica.utils.proc_BANG_.cljs$lang$maxFixedArity = (1);
 
 /** @this {Function} */
-replica.utils.proc_BANG_.cljs$lang$applyTo = (function (seq24823){
-var G__24824 = cljs.core.first.call(null,seq24823);
-var seq24823__$1 = cljs.core.next.call(null,seq24823);
+replica.utils.proc_BANG_.cljs$lang$applyTo = (function (seq19472){
+var G__19473 = cljs.core.first.call(null,seq19472);
+var seq19472__$1 = cljs.core.next.call(null,seq19472);
 var self__4518__auto__ = this;
-return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__24824,seq24823__$1);
+return self__4518__auto__.cljs$core$IFn$_invoke$arity$variadic(G__19473,seq19472__$1);
 });
 
 replica.utils.add_routes_BANG_ = (function replica$utils$add_routes_BANG_(var_args){
-var G__24831 = arguments.length;
-switch (G__24831) {
+var G__19480 = arguments.length;
+switch (G__19480) {
 case 1:
 return replica.utils.add_routes_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -280,10 +275,10 @@ return cljs.core.swap_BANG_.call(null,replica.utils.routes,cljs.core.merge,route
 });
 
 replica.utils.add_routes_BANG_.cljs$core$IFn$_invoke$arity$3 = (function (pre_route,origin,route_cmd_map){
-return replica.utils.add_routes_BANG_.call(null,cljs.core.zipmap.call(null,cljs.core.map.call(null,(function (p1__24828_SHARP_){
-return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(pre_route),cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__24828_SHARP_)].join('');
-}),cljs.core.keys.call(null,route_cmd_map)),cljs.core.map.call(null,(function (p1__24829_SHARP_){
-return (new cljs.core.List(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(origin),cljs.core.str.cljs$core$IFn$_invoke$arity$1((cljs.core.truth_(origin)?"/":null)),cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__24829_SHARP_)].join(''),(new cljs.core.List(null,cljs.core.eval.call(null,cljs.core.symbol.call(null,p1__24829_SHARP_)),null,(1),null)),(2),null));
+return replica.utils.add_routes_BANG_.call(null,cljs.core.zipmap.call(null,cljs.core.map.call(null,(function (p1__19477_SHARP_){
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(pre_route),cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__19477_SHARP_)].join('');
+}),cljs.core.keys.call(null,route_cmd_map)),cljs.core.map.call(null,(function (p1__19478_SHARP_){
+return (new cljs.core.List(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(origin),cljs.core.str.cljs$core$IFn$_invoke$arity$1((cljs.core.truth_(origin)?"/":null)),cljs.core.str.cljs$core$IFn$_invoke$arity$1(p1__19478_SHARP_)].join(''),(new cljs.core.List(null,cljs.core.eval.call(null,cljs.core.symbol.call(null,p1__19478_SHARP_)),null,(1),null)),(2),null));
 }),cljs.core.vals.call(null,route_cmd_map))));
 });
 
@@ -303,8 +298,8 @@ return cljs.core.char$.call(null,(cljs.core.rand.call(null,(26)) + (65)));
 }))));
 });
 replica.utils.create_command_BANG_ = (function replica$utils$create_command_BANG_(var_args){
-var G__24834 = arguments.length;
-switch (G__24834) {
+var G__19483 = arguments.length;
+switch (G__19483) {
 case 1:
 return replica.utils.create_command_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 

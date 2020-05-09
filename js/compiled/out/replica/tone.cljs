@@ -6,7 +6,8 @@
                                    add-routes!
                                    doc-commands
                                    get-js-paths
-                                   set-js-prop!]]))
+                                   set-js-prop!
+                                   get-js-value]]))
 
 (defonce rsrcs (atom {:run false :master js/Tone.Master :ins {} :fx {}}))
 
@@ -47,12 +48,22 @@
     (connect [k id] -- -<)))
 
 (defn setprops!
-  [id & val-path-to-props]
-  (apply set-js-prop! (getrsrc id) val-path-to-props))
+  [id & path-to-prop-val]
+  (apply set-js-prop! (getrsrc id) path-to-prop-val))
 
-(defn getpaths
+(defn getprops
   [id & pre-path]
-  (apply get-js-paths (getrsrc id) pre-path))
+  (let [obj (getrsrc id)]
+    (list
+      (apply get-js-value obj pre-path)
+      (apply get-js-paths obj pre-path))))
+
+(defn do!
+  [id path-to-fn & args]
+  (apply js-invoke
+         (apply get-js-value (getrsrc id) (butlast path-to-fn))
+         (str (last path-to-fn))
+         args))
 
 (defn synth
   "Creates a new Tone.Synth"
@@ -150,10 +161,15 @@
                                           (chain [:ins id] --)
                                           (fan [:ins id] -<)))))
 
-(defn grnst
+(defn grnstart
   [id t offset dur]
   "starts a GrainPlayer."
   (. (getrsrc id) start t offset dur))
+
+(defn grnstop
+  [id t]
+  "stops a GrainPlayer."
+  (. (getrsrc id) stop t))
 
 
 (defn conv
@@ -230,7 +246,8 @@
              'off 'off!
              'conv 'conv
              'grn 'grn
-             'grnst 'grnst
+             'gstart 'grnstart
+             'gstop 'grnstop
              'buf 'buf
              '-- 'chain
              '-< 'fan
@@ -239,7 +256,8 @@
              'g 'getrsrc
              's 'setrsrc
              'sp 'setprops!
-             'gp 'getpaths
+             'gp 'getprops
+             'do 'do!
              'start 'start!
              'stop 'stop!
              'go 'go!

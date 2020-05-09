@@ -60,10 +60,7 @@
 
 (defn get-js-paths
   [obj & pre-paths]
-    (let [ret (g/getKeys (apply g/getValueByKeys obj pre-paths))]
-      (if (= (count ret) 0)
-        (apply get-js-value obj pre-paths)
-        ret)))
+  (g/getKeys (apply g/getValueByKeys obj pre-paths)))
 
 (defn proc!
   [route & args]
