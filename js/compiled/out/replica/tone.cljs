@@ -234,6 +234,7 @@
 (defn st!
   "ramps to a new Tempo in bpm within the desired time."
   [target-bpm ramp-time]
+  (set! js/tempo target-bpm)
   (js/Tone.Transport.bpm.rampTo target-bpm
                                 (if ((every-pred number? (partial < 0)) ramp-time)
                                   ramp-time 0.001)))

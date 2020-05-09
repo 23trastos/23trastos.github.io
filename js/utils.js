@@ -2,6 +2,7 @@ var currKey = null;
 var head = document.getElementsByTagName('head')[0];
 var INS = document.getElementById('scene');
 var CM = document.getElementById('code'); //now just textarea, later the proper CodeMirror instance.
+var tempo = 0;
 
 $(window).keydown(function (event) {
   currKey = event.which;
@@ -207,7 +208,7 @@ if (navigator.mediaDevices) {
       mediaRecorder.onstop = function(e) {
         console.log("data available after MediaRecorder.stop() called.");
 
-        var clipName = prompt('Enter a name for your clip / Introduce un nombre para este clip:');
+        var clipName = prompt('Enter a name for your clip / Introduce un nombre para este clip:') + "_" + tempo;
 
         var clipContainer = document.createElement('article');
         var clipLabel = document.createElement('p');
