@@ -10,6 +10,9 @@ $(window).keydown(function (event) {
 $(window).keyup(function (event) {
   currKey = null;
 });
+$('.close').click(function (event) {
+  $('#myModal').css('display','none');
+});
 
 loadScript = function (url) {
   var script= document.createElement('script');
@@ -104,6 +107,17 @@ var console = (function(oldCons){
 
 //Then redefine the old console
 window.console = console;
+
+var saveData = function(blob, fileName) {
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  document.body.appendChild(a);
+  a.style = 'display: none';
+  a.href = url;
+  a.download = fileName;
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
 
 //MediaStream record
 if (navigator.mediaDevices) {
@@ -219,23 +233,27 @@ if (navigator.mediaDevices) {
           clip = document.createElement('audio');
         }
         var deleteButton = document.createElement('button');
+        var downloadButton = document.createElement('button');
 
         clipContainer.classList.add('clip');
         clip.setAttribute('controls', '');
         deleteButton.innerHTML = "Delete";
+        downloadButton.innerHTML = "Download";
         clipLabel.innerHTML = clipName;
 
         clipContainer.appendChild(clip);
         clipContainer.appendChild(clipLabel);
         clipContainer.appendChild(deleteButton);
-        $('#app').prepend(clipContainer);
+        clipContainer.appendChild(downloadButton);
+        $('#clips').append(clipContainer);
+        $('#myModal').css('display','block');
 
         clip.controls = true;
         var blob = null;
         if (needVideo) {
-          blob = new Blob(chunks, { 'type' : 'video/webm; codecs=vp9,opus'});
+          blob = new Blob(chunks, { 'type' : 'video/webm'});
         } else {
-          blob = new Blob(chunks, { 'type' : 'audio/webm; codecs=opus'});
+          blob = new Blob(chunks, { 'type' : 'audio/webm'});
         }
         chunks = [];
         var clipURL = URL.createObjectURL(blob);
@@ -246,11 +264,15 @@ if (navigator.mediaDevices) {
           evtTgt = e.target;
           evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
         }
-      }
+
+        downloadButton.onclick = function(e) {
+          saveData(blob, clipName + '.webm');
+        }
+      };
 
       mediaRecorder.ondataavailable = function(e) {
         chunks.push(e.data);
-      }
+      };
     }
   };
 }

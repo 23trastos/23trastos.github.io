@@ -75,8 +75,10 @@ RESET
 RESET
 
 SETUP
-(def tempo (js/prompt "Set the desired tempo in BPM / Introduce el tempo deseado en BPM"))
+(def tempo (js/prompt "Set the desired tempo in BPM / Introduce el tempo deseado en BPM" "100"))
 (when (= tempo "") (def tempo 100))
+;(def transp (js/prompt "Set the desired reference note for transposition (c0 = middle c) / Introduce la nota de referencia para instrumentos transpositores (c0 = do central)" "100"))
+;(when (= transp "") (def transp 'c0))
 'tst tempo
 'iclear
 (def pats (range 1 54))
