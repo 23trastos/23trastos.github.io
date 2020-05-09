@@ -155,11 +155,11 @@
 (defn grn
   "creates a Tonejs GrainPlayer from the specified source buffer or url"
   [id src & {:keys [onload -- -<]
-             :or {-- 'master}}]
+             :or {-- 'master onload #(print-str % " grn ready!")}}]
   (setrsrc :ins id (js/Tone.GrainPlayer.
                      (buf-from-any src) (fn[]
-                                          (chain [:ins id] --)
-                                          (fan [:ins id] -<)))))
+                                          (connect [:ins id] -- -<)
+                                          (onload id)))))
 
 (defn grnstart
   [id t offset dur]
@@ -175,11 +175,11 @@
 (defn conv
   "creates a Tonejs Convolver from the speficied IR source buffer or url"
   [id src & {:keys [onload -- -<]
-             :or {-- 'master}}]
+             :or {-- 'master onload #(print-str % " conv ready!")}}]
   (setrsrc :fx id (js/Tone.Convolver.
                     (buf-from-any src) (fn[]
-                                         (chain [:fx id] --)
-                                         (fan [:fx id] -<)))))
+                                         (connect [:fx id] -- -<)
+                                         (onload id)))))
 
 (defn discn
   "disconnects source from element(s) by Object or index."
