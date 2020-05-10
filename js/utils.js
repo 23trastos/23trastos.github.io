@@ -205,7 +205,7 @@ if (navigator.mediaDevices) {
       }
       const audioSource = audioSelect.value;
       const constraints = {
-        audio: {deviceId: audioSource ? {exact: audioSource} : undefined}
+        audio: {echoCancellation: false, noiseSuppression: false, deviceId: audioSource ? {exact: audioSource} : undefined}
       };
       if (needVideo) {
         const videoSource = videoSelect.value;
