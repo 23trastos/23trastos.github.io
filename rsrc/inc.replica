@@ -83,7 +83,7 @@ SETUP
 (def lines (range (first bounds) (inc (last bounds))))
 (def length 20)
 (def step (/ length 53))
-(def delta (/ tempo 90000))
+(def delta (/ tempo 100000))
 (def start 0.4)
 (def positions (range start (+ length start) step))
 'isetx 'inc 'layer
