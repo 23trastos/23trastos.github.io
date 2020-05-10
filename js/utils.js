@@ -218,6 +218,19 @@ if (navigator.mediaDevices) {
     }
 
     function gotStream(stream) {
+      var options = null;
+      if (needVideo) {
+        options = {
+          audioBitsPerSecond : 128000,
+          videoBitsPerSecond : 2500000,
+          mimeType : 'video/webm;codecs=vp9,opus'
+        }
+      } else {
+        options = {
+          audioBitsPerSecond : 128000,
+          mimeType : 'audio/ogg;codecs=opus'
+        }
+      }
       mediaRecorder = new MediaRecorder(stream);
       audioSelect.selectedIndex = [...audioSelect.options].
       findIndex(option => option.text === stream.getAudioTracks()[0].label);
@@ -259,9 +272,9 @@ if (navigator.mediaDevices) {
         clip.controls = true;
         var blob = null;
         if (needVideo) {
-          blob = new Blob(chunks, { 'type' : 'video/webm'});
+          blob = new Blob(chunks, { 'type' : 'video/webm;codecs=vp9,opus'});
         } else {
-          blob = new Blob(chunks, { 'type' : 'audio/webm'});
+          blob = new Blob(chunks, { 'type' : 'audio/ogg;codecs=opus'});
         }
         chunks = [];
         var clipURL = URL.createObjectURL(blob);
