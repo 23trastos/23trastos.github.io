@@ -208,6 +208,16 @@
   [seconds]
   (set! js/Tone.Transport.seconds seconds))
 
+(defn secs
+  "returns the transport position in seconds."
+  []
+  (. js/Tone.Transport -seconds))
+
+(defn pos
+  "returns the transport position in Bars:Beats:Sixteenths"
+  []
+  (. js/Tone.Transport -position))
+
 (defn run? [] (:run @rsrcs))
 
 (defn cancel!
@@ -239,6 +249,7 @@
                                 (if ((every-pred number? (partial < 0)) ramp-time)
                                   ramp-time 0.001)))
 
+
 (def routes {'synth 'synth
              'monos 'monos
              'metal 'metal
@@ -262,6 +273,8 @@
              'start 'start!
              'stop 'stop!
              'go 'go!
+             'secs 'secs
+             'pos 'pos
              'st 'st!
              'run? 'run?
              'cancel 'cancel!})

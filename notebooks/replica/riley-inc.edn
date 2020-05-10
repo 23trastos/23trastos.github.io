@@ -4,25 +4,4 @@
   "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
  {:type :stop :resp-enables true :auto-continue true}
  {:type :input :silent? true :deaf? true :value
-  "['iclear]['es nil]"}
- {:type :markdown :value
-  "
-  ## Welcome to an interactive score for Terry Riley's *In C*
-
-  ## Bienvenido a la partitura virtual de *In C* de Terry Riley
-  "}
- {:type :stop :label "START/EMPEZAR"}
- {:type :input :value
-  "'elf \"rsrc/inc.replica\""}
- {:type :input :value
-  "'full true"}
- {:type :input :value
-  "'iclear"}
- {:type :input :value
-  "'isetx 'title 'txt \"TERRY RILEY -- IN C\""}
- {:type :input :value
-  "'imsg 'title 'y -0.5"}
- {:type :input :value
-  "'imsg 'title 'scale 2"}
- {:type :input :value
-  "'ibtn 'SETUP \"(r 'epl 'SETUP)\""}]
+  "['full true]['iclear]['elf \"rsrc/inc.replica\"]['isetx 'title 'txt \"TERRY RILEY -- IN C\"]['imsg 'title ['y -0.5]['scale 2]]['ibtn 'SETUP \"(r 'epl 'SETUP)\"]"}]

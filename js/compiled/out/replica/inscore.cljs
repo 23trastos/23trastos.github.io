@@ -55,7 +55,7 @@
   [object gmn-string & opt]
   (apply setx! object 'gmn (str "'" gmn-string "'") opt))
 
-(defn gmn-expr!
+#_(defn gmn-expr! ; needs NESTED
     "Macro command for creating a new score from GMN score expression. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object operation gmn1 gmn2 & opt]
   (apply setx! object 'gmn (str "expr(" operation " '" gmn1 "' '" gmn2 "')") opt))
@@ -115,7 +115,7 @@
              'msg 'msg!
              'setx 'setx!
              'gmn 'gmn!
-             'gmn-expr 'gmn-expr!
+             ;'gmn-expr 'gmn-expr!
              'txt 'txt!
              'html 'html!
              'btn 'btn!

@@ -36,6 +36,7 @@
             "filter" (utils/url! "#/hist2CM?filter=true")
             "edit" (utils/url! "#/hist2CM")
             "del" (apply (partial js-invoke js/window "setTimeout") args)
+            "log" (apply utils/set-info! args)
             (or (apply proc! route args)
                 (get-value))))))))
 
