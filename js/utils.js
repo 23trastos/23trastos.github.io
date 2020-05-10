@@ -11,7 +11,7 @@ $(window).keyup(function (event) {
   currKey = null;
 });
 $('.close').click(function (event) {
-  e.target.parentNode.parentNode.style.display = 'none';
+  event.target.parentNode.parentNode.style.display = 'none';
 });
 
 loadScript = function (url) {
