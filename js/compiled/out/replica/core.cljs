@@ -33,10 +33,11 @@
             "st" (if (not= (str (first args)) "doc")
                    (apply t 'st args)
                    (r 'tst 'doc))
-            "filter" (utils/url! "#/hist2CM?filter=true")
-            "edit" (utils/url! "#/hist2CM")
+            "fh2cm" (utils/url! "#/hist2CM?filter=true")
+            "h2cm" (utils/url! "#/hist2CM")
             "del" (apply (partial js-invoke js/window "setTimeout") args)
             "log" (apply utils/set-info! args)
+            "display" (apply utils/display-div! args)
             (or (apply proc! route args)
                 (get-value))))))))
 

@@ -11,6 +11,7 @@ $(window).keyup(function (event) {
   currKey = null;
 });
 $('.close').click(function (event) {
+  e.target.parentNode.style.display = 'none';
   $('#myModal').css('display','none');
 });
 
@@ -27,6 +28,14 @@ addInfo = function (text, color) {
   d.append(p);
   d.scrollTop(d.prop('scrollHeight'));
 }
+
+displayDiv = function (id, show) {
+  if (show) {
+    $('#' + id).css('display','block');
+  } else {
+    $('#' + id).css('display','none');
+  }
+};
 
 dropTextTo = function (element, text) {
   addInfo(text, 'olive');
@@ -246,7 +255,7 @@ if (navigator.mediaDevices) {
         clipContainer.appendChild(deleteButton);
         clipContainer.appendChild(downloadButton);
         $('#clips').append(clipContainer);
-        $('#myModal').css('display','block');
+        displayDiv('modalClips',true);
 
         clip.controls = true;
         var blob = null;

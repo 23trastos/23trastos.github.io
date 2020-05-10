@@ -75,6 +75,7 @@ SETUP
 (when (= tempo "") (def tempo 100))
 (def query-transp (js/prompt "Set the desired transposition note (Bb Eb F...) default: C / Introduce la transposición deseada (Eb Bb F...) por defecto: C" "C"))
 (def query-octave (js/parseInt (js/prompt "Set an optional 8ve shift (1 -2...) default: 0 / Introduce el desplazamiento de 8va opcional (1 -2...) por defecto: 0" "0")))
+'display 'modalLoading true
 (def transp (str (case query-transp "Bb" "b&" "Eb" "e&" "F" "f" "c") (+ query-octave (if (= query-transp "Bb") 0 1))))
 'tst tempo
 'iclear
@@ -120,7 +121,7 @@ SETUP
 'imsg 'control/volback 'x 1.5
 'imsg 'control/vol* 'scale 0.8
 'imsg 'control ['y -0.9] ['z 1]
-'tgrn 'back "rsrc/inC_backing.mp3" :onload #(r 'isld 'control/volback "Acmp.Vol" -40 10 0.2 0 "#(r 'tsp 'back 'volume 'value %)")
+'tgrn 'back "rsrc/inC_backing.mp3" :onload (fn[] (r 'isld 'control/volback "Acmp.Vol" -40 10 0.2 0 "#(r 'tsp 'back 'volume 'value %)") (r 'display 'modalLoading false))
 'tsp 'back 'playbackRate (/ tempo 100)
 (. (.sync (r 'tg 'back)) start 0)
 SETUP

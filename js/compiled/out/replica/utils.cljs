@@ -22,6 +22,10 @@
   [string]
   (set! (. info -innerHTML) string))
 
+(defn display-div!
+  [id display?]
+  (js/displayDiv id display?))
+
 (defn url!
   [url]
   (js/assignUrl url))
