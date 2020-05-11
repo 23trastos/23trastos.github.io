@@ -1,6 +1,6 @@
 [{:type :input :silent? true :deaf? true :value
   "(js/displayDiv \"modalLoading\" true)"}
- {:type :input :silent? true :deaf? true :value
+ {:type :input :silent? true :value
   "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
  {:type :stop :resp-enables true :auto-continue true}
  {:type :input :silent? true :deaf? true :value

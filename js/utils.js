@@ -104,8 +104,8 @@ var console = (function(oldCons){
       addInfo(text, 'darkslategrey');
     },
     warn: function (text) {
-      oldCons.warn(text, 'firebrick');
-      addInfo(text);
+      oldCons.warn(text);
+      addInfo(text, 'firebrick');
     },
     error: function (text) {
       oldCons.error(text);

@@ -11,11 +11,11 @@
  {:type :markdown :value
   "Or go into some more action with:"}
  {:type :input :silent? true :value
-  "'es \"BACH:\\n[b& a c2 h1]\\n:BACH\""}
+  "'es \":BACH\\n[b& a c2 h1]\\n:BACH\""}
  {:type :input :sample? true :value
-  "['iclear]['igmn 'bach1 (r 'erl #\"BACH\")]['isetx 'time 'rect 1 1]['imsg 'time 'show 0]"}
+  "['iclear]['igmn 'bach1 (r 'erl :BACH)]['igmn 'bach2 (r 'erl :BACH)]['imsg 'bach2 ['angle 180]['x 0.22]['y -0.04]]['isetx 'time 'rect 0 0]"}
  {:type :stop}
  {:type :markdown :value
   "And then:"}
  {:type :input :sample? true :value
- "['iwatch 'time 'ddate (r 'imsg 'bach1 'dangle 0.4 '--keep)]['imsg 'time 'tempo 1]"}]
+  "['iwatch 'time 'ddate (r 'imsg 'bach1 'dangle 0.3 '--keep) (r 'imsg 'bach2 'dangle -0.2 '--keep)]['imsg 'time 'tempo 1]"}]
