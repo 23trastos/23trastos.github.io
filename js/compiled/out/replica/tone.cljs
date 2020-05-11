@@ -234,7 +234,7 @@
 
 (defn lp
   "Creates a new loop with defined start and end."
-  [id interval start-time end-time function]
+  [id function interval start-time end-time]
   (when-let [lp (getrsrc :loops id)]
     (. lp dispose))
   (swap! rsrcs assoc-in [:loops id]
