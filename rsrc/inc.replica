@@ -123,5 +123,5 @@ SETUP
 'imsg 'control ['y -0.9] ['z 1]
 'tgrn 'back "rsrc/inC_backing.mp3" :onload (fn[] (r 'isld 'control/volback "Acmp.Vol" -40 10 0.2 0 "#(r 'tsp 'back 'volume 'value %)") (r 'display 'modalLoading false))
 'tsp 'back 'playbackRate (/ tempo 100)
-(. (.sync (r 'tg 'back)) start 0.675)
+(. (.sync (r 'tg 'back)) start (/ 67.5 tempo))
 SETUP
