@@ -107,7 +107,7 @@ SETUP
 'tsynth 'b2 :-- 'conv
 'tsp 'conv 'output 'gain 'value 0.3
 'tlp 'metr (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand))))) "8n" 0.1 1200
-'tlp 'info (fn[t] (r 'imsg 'inc/time 'event 'SMALL) (swap! progress inc) (r 'log (str "pos: " @progress " secs: " (r 'tsecs)))) "64n" (/ 100 tempo) 1200
+'tlp 'info (fn[t] (r 'imsg 'inc/time 'event 'SMALL) (swap! progress inc) (r 'log (str "pos: " @progress " secs: " (r 'tsecs)))) "64n" 0.1 1200
 'isetx 'control 'layer
 'isetx 'control/bgn 'rect 4 0.18
 'imsg 'control/bgn 'color 255 255 255 100
