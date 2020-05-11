@@ -85,7 +85,7 @@ SETUP
 (def length 20)
 (def step (/ length 53))
 (def delta (/ tempo 100000))
-(def start 0.4)
+(def start 0.6)
 (def positions (range start (+ length start) step))
 'isetx 'inc 'layer
 (map #(r 'isetx (str 'inc/pat %1) 'gmn "expr(seq '[\\repeatBegin]' (seq (tail (transpose (seq '[c]' '[" (r 'er %2) "]') '[" transp "]') '[" transp "]')" "'[\\repeatEnd]'))") pats lines)
@@ -105,15 +105,15 @@ SETUP
 'tsp 'conv 'wet 'value 0.2
 'tsynth 'b1 :-- 'conv
 'tsynth 'b2 :-- 'conv
-'tsp 'conv 'output 'gain 'value 0.5
-'tlp 'metr (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand))))) "8n" 0 1200
-'tlp 'info (fn[t] (r 'imsg 'inc/time 'event 'SMALL) (swap! progress inc) (r 'log (str "pos: " @progress " secs: " (r 'tsecs)))) "64n" 0 1200
+'tsp 'conv 'output 'gain 'value 0.3
+'tlp 'metr (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand))))) "8n" 0.1 1200
+'tlp 'info (fn[t] (r 'imsg 'inc/time 'event 'SMALL) (swap! progress inc) (r 'log (str "pos: " @progress " secs: " (r 'tsecs)))) "64n" 3 1200
 'isetx 'control 'layer
 'isetx 'control/bgn 'rect 4 0.18
 'imsg 'control/bgn 'color 255 255 255 100
 'ibtn 'control/start 'START "(r 'epl 'START)"
 'ibtn 'control/stop 'STOP "(r 'epl 'STOP)"
-'isld 'control/volmetr "Metr.Vol" 0 0.6 0.01 0.5 "#(r 'tsp 'conv 'output 'gain 'value %)"
+'isld 'control/volmetr "Metr.Vol" 0 0.4 0.01 0.3 "#(r 'tsp 'conv 'output 'gain 'value %)"
 'isld 'control/volback "Loading.Acmp..." 0 0 0 0 "#(str 'not-yet-loaded)"
 'imsg 'control/start 'x -1.5
 'imsg 'control/stop 'x -1.3
@@ -123,5 +123,5 @@ SETUP
 'imsg 'control ['y -0.9] ['z 1]
 'tgrn 'back "rsrc/inC_backing.mp3" :onload (fn[] (r 'isld 'control/volback "Acmp.Vol" -40 10 0.2 0 "#(r 'tsp 'back 'volume 'value %)") (r 'display 'modalLoading false))
 'tsp 'back 'playbackRate (/ tempo 100)
-(. (.sync (r 'tg 'back)) start 0)
+(. (.sync (r 'tg 'back)) start 0.675)
 SETUP
