@@ -33,8 +33,12 @@
             "fh2cm" (utils/url! "#/hist2CM?filter=true")
             "h2cm" (utils/url! "#/hist2CM")
             "del" (apply (partial js-invoke js/window "setTimeout") args)
-            "log" (apply utils/set-info! args)
+            "log" (apply utils/add-info! args)
             "display" (apply utils/display-div! args)
+            "get" (apply utils/get-js-value args)
+            "set" (apply utils/set-js-prop! args)
+            "paths" (apply utils/get-js-paths args)
+            "query" (apply utils/js-query args)
             (or (apply proc! route args)
                 (get-value))))))))
 

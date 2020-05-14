@@ -4,7 +4,8 @@
             [cljs-browser-repl.actions.repl :refer [repl-entry!]]
             [cljs-browser-repl.ui.cljs-browser-repl :refer [cljs-browser-repl]]
             [cljs-browser-repl.ui.repl-input :refer [repl-input]]
-            [cljs-browser-repl.router :as router]))
+            [cljs-browser-repl.router :as router]
+            [replica.core]))
 
 (enable-console-print!)
 

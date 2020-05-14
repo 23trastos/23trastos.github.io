@@ -7,6 +7,7 @@ goog.require('cljs_browser_repl.actions.repl');
 goog.require('cljs_browser_repl.ui.cljs_browser_repl');
 goog.require('cljs_browser_repl.ui.repl_input');
 goog.require('cljs_browser_repl.router');
+goog.require('replica.core');
 cljs.core.enable_console_print_BANG_.call(null);
 cljs_browser_repl.core.render_BANG_ = (function cljs_browser_repl$core$render_BANG_(){
 reagent.dom.render.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs_browser_repl.ui.cljs_browser_repl.cljs_browser_repl], null),document.getElementById("app"));

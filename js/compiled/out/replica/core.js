@@ -10,14 +10,14 @@ goog.require('replica.tone');
  */
 replica.core.r = (function replica$core$r(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___12070 = arguments.length;
-var i__4532__auto___12071 = (0);
+var len__4531__auto___12681 = arguments.length;
+var i__4532__auto___12682 = (0);
 while(true){
-if((i__4532__auto___12071 < len__4531__auto___12070)){
-args__4534__auto__.push((arguments[i__4532__auto___12071]));
+if((i__4532__auto___12682 < len__4531__auto___12681)){
+args__4534__auto__.push((arguments[i__4532__auto___12682]));
 
-var G__12072 = (i__4532__auto___12071 + (1));
-i__4532__auto___12071 = G__12072;
+var G__12683 = (i__4532__auto___12682 + (1));
+i__4532__auto___12682 = G__12683;
 continue;
 } else {
 }
@@ -42,8 +42,8 @@ var args__$1 = cljs.core.rest.call(null,args);
 if(cljs.core._EQ_.call(null,cljs.core.type.call(null,route),cljs.core.type.call(null,(new RegExp(""))))){
 return replica.core.r.call(null,new cljs.core.Symbol(null,"epl","epl",-2108995518,null),route);
 } else {
-var G__12069 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(route)].join('');
-switch (G__12069) {
+var G__12680 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(route)].join('');
+switch (G__12680) {
 case "doc":
 return replica.utils.doc_commands.call(null,"replica.core/r",cljs.core.deref.call(null,replica.utils.routes),null);
 
@@ -89,11 +89,27 @@ return cljs.core.apply.call(null,cljs.core.partial.call(null,cljs.core.js_invoke
 
 break;
 case "log":
-return cljs.core.apply.call(null,replica.utils.set_info_BANG_,args__$1);
+return cljs.core.apply.call(null,replica.utils.add_info_BANG_,args__$1);
 
 break;
 case "display":
 return cljs.core.apply.call(null,replica.utils.display_div_BANG_,args__$1);
+
+break;
+case "get":
+return cljs.core.apply.call(null,replica.utils.get_js_value,args__$1);
+
+break;
+case "set":
+return cljs.core.apply.call(null,replica.utils.set_js_prop_BANG_,args__$1);
+
+break;
+case "paths":
+return cljs.core.apply.call(null,replica.utils.get_js_paths,args__$1);
+
+break;
+case "query":
+return cljs.core.apply.call(null,replica.utils.js_query,args__$1);
 
 break;
 default:
@@ -113,9 +129,9 @@ return replica.utils.get_value.call(null);
 replica.core.r.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-replica.core.r.cljs$lang$applyTo = (function (seq12068){
+replica.core.r.cljs$lang$applyTo = (function (seq12679){
 var self__4519__auto__ = this;
-return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq12068));
+return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq.call(null,seq12679));
 });
 
 replica.core.routes = new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Symbol(null,"r","r",1169147337,null),new cljs.core.Symbol("replica.core","r","replica.core/r",347578068,null),new cljs.core.Symbol(null,"i","i",253690212,null),new cljs.core.Symbol("replica.inscore","i","replica.inscore/i",-1616446785,null),new cljs.core.Symbol(null,"e","e",-1273166571,null),new cljs.core.Symbol("replica.editor","e","replica.editor/e",-1089389128,null),new cljs.core.Symbol(null,"t","t",242699008,null),new cljs.core.Symbol("replica.tone","t","replica.tone/t",-1082667992,null),new cljs.core.Symbol(null,"cmd","cmd",1337600384,null),new cljs.core.Symbol("replica.utils","create-command!","replica.utils/create-command!",-1137978773,null),new cljs.core.Symbol(null,"url","url",1916828573,null),new cljs.core.Symbol("replica.utils","url!","replica.utils/url!",-129249061,null),new cljs.core.Symbol(null,"full","full",2077332747,null),new cljs.core.Symbol("replica.utils","full-score!","replica.utils/full-score!",342237218,null)], null);

@@ -3,6 +3,8 @@ var head = document.getElementsByTagName('head')[0];
 var INS = document.getElementById('scene');
 var CM = document.getElementById('code'); //now just textarea, later the proper CodeMirror instance.
 var tempo = 0;
+var logINS = [];
+var cmDocs = [];
 
 $(window).keydown(function (event) {
   currKey = event.which;
@@ -22,11 +24,14 @@ loadScript = function (url) {
 };
 
 addInfo = function (text, color) {
-  var d = $('#right-info');
-  var p = $('<p></p>').css('color', color).text(text);
+  if (text.includes("/ITL")) {
+    logINS.push(text);
+  }
+  var d = $('#info');
+  var p = $('<p></p>').css('color', color).text('> ' + text);
   d.append(p);
   d.scrollTop(d.prop('scrollHeight'));
-}
+};
 
 displayDiv = function (id, show) {
   if (show) {
@@ -38,10 +43,25 @@ displayDiv = function (id, show) {
 
 dropTextTo = function (element, text) {
   addInfo(text, 'olive');
+  logINS = [];
   const dataTransfer = new DataTransfer;
   dataTransfer.setData('text', text);
   element.dispatchEvent(new DragEvent('drop', { dataTransfer: dataTransfer }));
+  return logINS;
 };
+
+loadInscore = function (script) {
+  logINS = [];
+  inscore.loadInscore(script);
+  return logINS;
+};
+
+loadInscore2 = function (script) {
+  logINS = [];
+  inscore.loadInscore2(script);
+  return logINS;
+};
+
 assignUrl = function (url) {
   location.assign(url);
 };
@@ -60,37 +80,77 @@ appendLinkTo = function (containerID, name, hrefString) {
 appendToCM = function (text) {
   CM.replaceRange(text, CodeMirror.Pos(CM.lastLine()));
 };
+updateDocs = function() {
+  $('.tabs').empty();
+  cmDocs.forEach(elm => $('.tabs').append($('<a>').attr('href','#').text(elm.name)));
+};
 fromUrlToCM = function (url, callback) {
-  $.get( url , function (data) {
-    CM.setValue(data);
+  $.get( url, function (data) {
+    var newDoc = CodeMirror.Doc(data, 'clojure');
+    cmDocs.push({name: url, doc: newDoc});
+    CM.swapDoc(newDoc);
+    updateDocs();
     if (typeof callback === 'function') {
       callback();
     }
   }, 'text');
 };
 
-var FS = false;
-goFullScore = function (full) {
-  if (FS && !full) {
-    let style = document.createElement('style');
-    style.innerHTML =
-      '.grid-container { grid-template-columns: 1fr 1fr;' +
-      'grid-template-rows: 51px 1fr 30px 1fr 80px; }' +
-      '#app { display: flex; }';
-    document.head.appendChild(style);
-    FS = false;
-  } else {
-    let style = document.createElement('style');
-    style.innerHTML =
-      '.grid-container { grid-template-columns: 0fr 1fr;' +
-      'grid-template-rows: 51px 1fr 30px 0fr 80px; }' +
-      '#app { display: none; }';
-    document.head.appendChild(style);
-    FS = true;
-  }
+updateResize = function() {
   window.dispatchEvent(new Event('resize'));
   window.setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 500);
 };
+
+var FS = false;
+goFullScore = function (full) {
+  if (FS && !full) {
+    $('.grid-container').css({
+      'grid-template-columns': '1fr 1fr',
+      'grid-template-rows': '51px 1fr 50px 1fr 80px'});
+    $('#app').css('display', 'flex');
+    $('.right-mid').css('display', 'grid');
+    $('#fs').text('fullscreen');
+    FS = false;
+  } else {
+    $('.grid-container').css({
+      'grid-template-columns': '0fr 1fr',
+      'grid-template-rows': '51px 1fr 0px 0fr 80px'});
+    $('#app').css('display', 'none');
+    $('.right-mid').css('display', 'none');
+    $('#fs').text('fullscreen_exit');
+    FS = true;
+  }
+  updateResize();
+};
+
+var uiState = 1;
+goLeft = function() {
+  if (uiState == 2) {goCenter()}
+  else {
+    $('.grid-container').css('grid-template-columns', '0fr 1fr');
+    $('#app').css('display', 'none');
+    $('#goL').css('visibility', 'hidden');
+    uiState = 0;
+  }
+  updateResize();
+}
+goRight = function() {
+  if (uiState == 0) {goCenter()}
+  else {
+    $('.grid-container').css('grid-template-columns', '1fr 0fr');
+    $('.right').css('visibility', 'hidden');
+    $('#goR').css('visibility', 'hidden');
+    uiState = 2;
+  }
+  updateResize();
+}
+goCenter = function() {
+  $('.grid-container').css('grid-template-columns', '1fr 1fr')
+  $('#app').css('display', 'flex');
+  $('.right').css('visibility', 'visible');
+  $('.go').css('visibility', 'visible');
+  uiState = 1;
+}
 
 // define a new console
 var console = (function(oldCons){

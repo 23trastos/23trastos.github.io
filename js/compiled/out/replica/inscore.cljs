@@ -10,7 +10,7 @@
   (let [code (apply str codes)]
     (if (re-find #"--keep" code)
       (. code replace (js/RegExp. #"--keep|;" 'g) "")
-      (js/dropTextTo js/INS code))))
+      (js->clj (js/dropTextTo js/INS code)))))
 
 (defn make-line
   [& codes]
@@ -48,17 +48,21 @@
 (defn setx!
   "Dispatches a 'set [obj-type] [args]' command to an object."
   [object obj-type & args]
-  (apply msg! object "set" obj-type args))
+  (apply msg! object "set" obj-type args)
+  (let [elm  (. js/INS -lastChild)]
+    (set! (. elm -id) (str object))
+    elm))
+
 
 (defn gmn!
   "Macro command for creating a new score from GMN code. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
-  [object gmn-string & opt]
-  (apply setx! object 'gmn (str "'" gmn-string "'") opt))
+  [object gmn-code & opt]
+  (apply setx! object 'gmn (str "'" gmn-code "'") opt))
 
-#_(defn gmn-expr! ; needs NESTED
-    "Macro command for creating a new score from GMN score expression. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
-  [object operation gmn1 gmn2 & opt]
-  (apply setx! object 'gmn (str "expr(" operation " '" gmn1 "' '" gmn2 "')") opt))
+(defn gmn-expr!
+  "Macro command for creating a new score from GMN score expression. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  [object expr & opt]
+  (apply setx! object 'gmn (str expr) opt))
 
 (defn txt!
   "Macro command for creating a new text entry. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
@@ -101,6 +105,16 @@
          (. (apply array body) join ", ")
          ")"))
 
+(defn get!
+  "Query element contents or specific property. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
+  [object & queries]
+  (if (= (str (last queries)) "--keep")
+    (apply msg! object 'get queries)
+    (map #(conj (vec (butlast (rest %)))
+                (. (last (rest %)) replace ";" ""))
+         (js->clj (map #(. % split " ")
+                       (apply msg! object 'get queries))))))
+
 (defn als!
   "Macro command for creating an alias for the desired object"
   [object your-alias & opt]
@@ -115,12 +129,13 @@
              'msg 'msg!
              'setx 'setx!
              'gmn 'gmn!
-             ;'gmn-expr 'gmn-expr!
+             'gmn-expr 'gmn-expr!
              'txt 'txt!
              'html 'html!
              'btn 'btn!
              'sld 'sld!
              'watch 'watch!
+             'get 'get!
              'als 'als!})
 
 (defn i

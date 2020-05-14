@@ -11,7 +11,7 @@
  {:type :markdown :value
   "Or go into some more action with:"}
  {:type :input :silent? true :value
-  "'es \":BACH\\n[b& a c2 h1]\\n:BACH\""}
+  "'es \":BACH\\n[\\\\slur(b&ac2h1)]\\n:BACH\""}
  {:type :input :sample? true :value
   "['iclear]['igmn 'bach1 (r 'erl :BACH)]['igmn 'bach2 (r 'erl :BACH)]['imsg 'bach2 ['angle 180]['x 0.22]['y -0.04]]['isetx 'time 'rect 0 0]"}
  {:type :stop}

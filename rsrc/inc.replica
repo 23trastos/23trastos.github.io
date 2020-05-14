@@ -74,7 +74,7 @@ SETUP
 (def progress (atom 0))
 (when (= tempo "") (def tempo 100))
 (def query-transp (js/prompt "Set the desired transposition note (Bb Eb F...) default: C / Introduce la transposición deseada (Eb Bb F...) por defecto: C" "C"))
-(def query-octave (js/parseInt (js/prompt "Set an optional 8ve shift (1 -2...) default: 0 / Introduce el desplazamiento de 8va opcional (1 -2...) por defecto: 0" "0")))
+(def query-octave (- (js/parseInt (js/prompt "Set an optional 8ve shift (1 -2...) default: 0 / Introduce el desplazamiento de 8va opcional (1 -2...) por defecto: 0" "0"))))
 'display 'modalLoading true
 (def transp (str (case query-transp "Bb" "b&" "Eb" "e&" "F" "f" "c") (+ query-octave (if (= query-transp "Bb") 0 1))))
 'tst tempo
@@ -88,7 +88,7 @@ SETUP
 (def start 0.6)
 (def positions (range start (+ length start) step))
 'isetx 'inc 'layer
-(map #(r 'isetx (str 'inc/pat %1) 'gmn "expr(seq '[\\repeatBegin]' (seq (tail (transpose (seq '[c]' '[" (r 'er %2) "]') '[" transp "]') '[" transp "]')" "'[\\repeatEnd]'))") pats lines)
+(map #(r 'isetx (str 'inc/pat %1) 'gmn "expr(seq '[\\repeatBegin]' (seq (tail (transpose (seq '[" transp "]' '[" (r 'er %2) "]') '[c]') '[c]')" "'[\\repeatEnd]'))") pats lines)
 'itxt 'inc/title1 (str "TERRY RILEY IN C ( in " query-transp " )")
 'imsg 'inc/title1 ['scale 2] ['y -0.5]
 (map #(r 'isetx (str 'inc/lab %1) 'txt (str %1)) pats)

@@ -32,14 +32,14 @@
     </div>
     <div id="container" class="grid-container">
       <div id="menu" class="header">
-        <a class="active" href="/">REPL!CA</a>
+        <a class="active" href="#/">REPL!CA</a>
         <a href="#/new")>New</a>
-        <a href="#/save" onclick=assignUrl("#/save")>Save</a>
-        <a href="#/load" onclick="document.getElementById('file-input').click();">Load</a>
+        <a href="#/save">Save</a>
+        <a href="#" onclick="document.getElementById('file-input').click();">Load</a>
         <a href="#/initRec">Record Video</a>
         <a href="#/initRec?onlyAudio=true">Record Audio</a>
-        <a class="right fs" href="#/full-inscore" onclick="goFullScore()">
-          <i class="material-icons">fullscreen</i>
+        <a class="floatr fs" href="#" onclick="goFullScore()">
+          <i id="fs" class="material-icons">fullscreen</i>
         </a>
         <!--a href="#/filter">Filter</a>
 <a href="#/cmd?c=%22(r%20'ep)%22">(r 'ep)</a>
@@ -47,11 +47,21 @@
         <input id="file-input" type="file" name="name" style="display: none;" />
       </div>
       <div id="app" class="history notebook">( Loading REPLiCA . . . )</div>
-      <div id="scene" class="inscore scene">
+      <div id="scene" class="right inscore scene">
       </div>
-      <div id="right-info" class="info">
+      <div class="right-mid">
+        <div class="controls">
+          <a id="goL" class="go" href="#" onclick="goLeft()"><i class="material-icons">chevron_left</i></a>
+          <a id="goR" class="go" href="#" onclick="goRight()"><i class="material-icons">chevron_right</i></a>
+        </div>
+        <div class="right info-tabs">
+          <div id="info" class="info-msgs">
+          </div>
+          <div class="tabs">
+          </div>
+        </div>
       </div>
-      <div id="editor" class="code">
+      <div id="editor" class="right code">
         <textarea id="code"></textarea>
       </div>
       <div id="repl-input" class="footer">

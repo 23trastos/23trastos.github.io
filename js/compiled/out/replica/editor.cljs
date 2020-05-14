@@ -9,20 +9,18 @@
                                    proc!
                                    add-routes!
                                    doc-commands
-                                   set-info!
+                                   add-info!
                                    command!]]))
 
-(defonce cm (. js/CodeMirror fromTextArea
-               (. js/document getElementById "code")
+(defonce cm (js/CodeMirror.fromTextArea
+               (js/document.getElementById "code")
                (clj->js {:lineNumbers true
                          :mode "clojure"
                          :matchBrackets true})))
 
 (set! js/CM cm)
 
-;(js/loadScript "lib/searchcursor.js")
-
-(set-info! "CodeMirror loaded")
+(add-info! "CodeMirror loaded")
 
 (defonce search (atom {:query nil :cursor nil}))
 

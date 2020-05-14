@@ -50,7 +50,7 @@
 ;; Route definitions
 
 ; home
-(defroute "/" []
+(defroute #"/" []
   (navigate! "/replica/index"))
 
 (defroute "/new" []
@@ -91,7 +91,10 @@
                            (js/prompt "Name:" "my-replication")))]
     (when-not (= file-name "")
       (file/download-object!
-        (str @state/history)
+        (str (hash-map
+               :history @state/history
+               :code (mapv #(hash-map :name (. % -name) :value (.getValue (.-doc %))) js/cmDocs)
+               :scene (.join (js/dropTextTo js/INS "/ITL/scene get;/ITL/scene/* get x y xorigin yorigin rotatex rotatey rotatez shear scale color penWidth penColor penStyle brushStyle fontSize fontFamily fontStyle fontWeight effect;") "")))
         (str file-name ".edn")))))
 
 (defroute "/hist2CM" [query-params]

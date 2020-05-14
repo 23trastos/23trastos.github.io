@@ -4,7 +4,7 @@
 (def global (this-as this this))
 (defonce resp (atom nil))
 (defonce routes (atom nil))
-(defonce info (. js/document getElementById "right-info"))
+(defonce info (js/document.getElementById "right-info"))
 
 (defn get-value []
   (let [value (:value @resp)]
@@ -18,9 +18,11 @@
     (js/Error.
       (apply str "@replica." origin ": " msgs))))
 
-(defn set-info!
-  [string]
-  (set! (. info -innerHTML) string))
+(defn add-info!
+  ([string]
+   (add-info! string "black"))
+  ([string color]
+   (js/addInfo string color)))
 
 (defn display-div!
   [id display?]
@@ -51,20 +53,36 @@
    (reset! resp nil)
    (js/toRepl c hist? resp?)))
 
+(defn js-query
+  ([query] (js-query query js/document))
+  ([query parent]
+   (. parent querySelector (str query))))
+
+(defn- from-id-or-obj
+  [obj]
+  (if (or
+        (= (type obj) (type 'a))
+        (= (type obj) (type "")))
+    (js-query (str "#" obj))
+    obj))
+
 (defn get-js-value
-  [obj & path-to-key]
-  (apply g/getValueByKeys obj path-to-key))
+  [obj-or-id & path-to-key]
+  (let [obj (from-id-or-obj obj-or-id)]
+    (apply g/getValueByKeys obj path-to-key)))
 
 (defn set-js-prop!
-  [obj & path-to-prop-value]
-  (let [target (butlast path-to-prop-value)]
-    (g/set (apply get-js-value obj (butlast target))
-           (last target)
-           (last path-to-prop-value))))
+  [obj-or-id & path-to-prop-value]
+  (let [obj (from-id-or-obj obj-or-id)]
+    (let [target (butlast path-to-prop-value)]
+      (g/set (apply get-js-value obj (butlast target))
+             (last target)
+             (last path-to-prop-value)))))
 
 (defn get-js-paths
-  [obj & pre-paths]
-  (g/getKeys (apply g/getValueByKeys obj pre-paths)))
+  [obj-or-id & pre-paths]
+  (let [obj (from-id-or-obj obj-or-id)]
+    (g/getKeys (apply g/getValueByKeys obj pre-paths))))
 
 (defn proc!
   [route & args]

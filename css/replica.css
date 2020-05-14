@@ -73,7 +73,7 @@ html, body {
   color: black;
 }
 
-.header a.right {
+.header a.floatr {
   float: right;
 }
 
@@ -105,11 +105,25 @@ html, body {
   width: 100%;
 }
 
-.info {
-  grid-area: info;
+.info-tabs {
+  display: grid;
+  grid-template-rows: 25px 1fr;
+}
+
+.info-msgs {
   overflow: scroll;
+  border-bottom: dotted 1px gray;
+}
+
+.tabs {
+  text-align: right;
+}
+
+.right-mid {
+  grid-area: info;
+  display: grid;
+  grid-template-columns: 30px 1fr;
   background-color: #f9f9f9;
-  padding: 5px;
   font-family: Inconsolata, monospace;
   font-size: 12px;
 }
@@ -126,7 +140,7 @@ html, body {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 51px 1fr 30px 1fr 80px;
+  grid-template-rows: 51px 1fr 50px 1fr 80px;
   grid-template-areas:
     'header header'
     'notebook scene'
