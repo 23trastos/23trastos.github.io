@@ -5,7 +5,8 @@
             [cljs-browser-repl.ui.cljs-browser-repl :refer [cljs-browser-repl]]
             [cljs-browser-repl.ui.repl-input :refer [repl-input]]
             [cljs-browser-repl.router :as router]
-            [replica.core]))
+            ;[replica.core]
+            ))
 
 (enable-console-print!)
 

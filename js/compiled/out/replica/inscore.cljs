@@ -48,31 +48,32 @@
 (defn setx!
   "Dispatches a 'set [obj-type] [args]' command to an object."
   [object obj-type & args]
-  (apply msg! object "set" obj-type args)
-  (let [elm  (. js/INS -lastChild)]
-    (set! (. elm -id) (str object))
-    elm))
+  (let [arguments (map #(if (= (type %) (type "")) (str "\"" % "\"") %) args)]
+    (or (apply msg! object "set" obj-type arguments)
+        (let [elm  (. js/INS -lastChild)]
+          (set! (. elm -id) (str object))
+          elm))))
 
 
 (defn gmn!
   "Macro command for creating a new score from GMN code. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object gmn-code & opt]
-  (apply setx! object 'gmn (str "'" gmn-code "'") opt))
+  (apply setx! object 'gmn (str gmn-code) opt))
 
 (defn gmn-expr!
   "Macro command for creating a new score from GMN score expression. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
-  [object expr & opt]
-  (apply setx! object 'gmn (str expr) opt))
+  [object expr-string & opt]
+  (apply setx! object (str "gmn expr(" expr-string ")") opt))
 
 (defn txt!
   "Macro command for creating a new text entry. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object txt-string & opt]
-  (apply setx! object 'txt (str "'" txt-string "'") opt))
+  (apply setx! object 'txt (str txt-string) opt))
 
 (defn html!
   "Macro command for creating a new html entry. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
   [object html-string & opt]
-  (apply setx! object 'html (str "'" html-string "'") opt))
+  (apply setx! object 'html (str html-string) opt))
 
 (defn btn!
   "Macro command for creating a new html <button> entry and the repl entry to be sent onclick. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
@@ -81,7 +82,7 @@
   ([object label to-repl-code & opt]
    (let [code (. to-repl-code replace (js/RegExp. #"'" 'g) "\\\\'")]
      (apply html! object
-            (str "<button onclick=\"toRepl(\\'" code "\\')\">"
+            (str "<button onclick=\\\"toRepl(\\'" code "\\')\\\">"
                  (or label object)
                  "</button>") opt))))
 
@@ -92,11 +93,11 @@
   ([object-id label minv maxv step initv on-change & opt]
    (let [function (. on-change replace (js/RegExp. #"'" 'g) "\\\\'")]
      (apply html! object-id
-            (str "<p>" label ":</p><input type=\"range\"
-                 min=\"" minv "\" max=\"" maxv "\" step=\"" step
-                 "\" value=\"" initv "\" id=\"" object-id
-                 "\" oninput=\"toRepl(\\'("
-                 function " \\' + this.value + \\')\\', false, false)\">") opt))))
+            (str "<p>" label ":</p><input type=\\\"range\\\"
+                 min=\\\"" minv "\\\" max=\\\"" maxv "\\\" step=\\\"" step
+                 "\\\" value=\\\"" initv "\\\" id=\\\"" object-id
+                 "\\\" oninput=\\\"toRepl(\\'("
+                 function " \\' + this.value + \\')\\', false, false)\\\">") opt))))
 
 (defn watch!
   "Macro command for creating a watch to an element. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."

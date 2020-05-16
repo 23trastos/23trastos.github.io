@@ -35,10 +35,9 @@
         <a class="active" href="#/">REPL!CA</a>
         <a href="#/new")>New</a>
         <a href="#/save">Save</a>
-        <a href="#" onclick="document.getElementById('file-input').click();">Load</a>
-        <a href="#/initRec">Record Video</a>
-        <a href="#/initRec?onlyAudio=true">Record Audio</a>
-        <a class="floatr fs" href="#" onclick="goFullScore()">
+        <a href="#load" onclick="document.getElementById('file-input').click();">Load</a>
+        <a id="record" href="#initRec" onclick="initMediaRecorder()" style="visibility:hidden;">Record</a>
+        <a class="floatr fs" href="#fs" onclick="goFullScore()">
           <i id="fs" class="material-icons">fullscreen</i>
         </a>
         <!--a href="#/filter">Filter</a>
@@ -51,8 +50,8 @@
       </div>
       <div class="right-mid">
         <div class="controls">
-          <a id="goL" class="go" href="#" onclick="goLeft()"><i class="material-icons">chevron_left</i></a>
-          <a id="goR" class="go" href="#" onclick="goRight()"><i class="material-icons">chevron_right</i></a>
+          <a id="goR" class="go" href="#right" onclick="goRight()"><i class="material-icons">chevron_right</i></a>
+          <a id="goL" class="go" href="#left" onclick="goLeft()"><i class="material-icons">chevron_left</i></a>
         </div>
         <div class="right info-tabs">
           <div id="info" class="info-msgs">

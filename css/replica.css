@@ -107,16 +107,46 @@ html, body {
 
 .info-tabs {
   display: grid;
-  grid-template-rows: 25px 1fr;
+  grid-template-rows: 32px auto;
+}
+
+.controls {
+  background-color: #eee;
+  font-size: 20px;
+  text-align: center;
 }
 
 .info-msgs {
   overflow: scroll;
-  border-bottom: dotted 1px gray;
+  border-bottom: solid 1px #eee;
+  border-top: solid 5px #eee;
 }
 
 .tabs {
-  text-align: right;
+  border-bottom: solid 3px #eee;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}
+
+.tabs div {
+  font-size: 13px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin: 5px;
+}
+
+.tabs div:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.tabs a {
+  text-decoration: none;
+}
+
+.tabs i {
+  font-size: 15px;
 }
 
 .right-mid {
@@ -137,10 +167,10 @@ html, body {
 }
 
 .grid-container {
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 51px 1fr 50px 1fr 80px;
+  grid-template-rows: 51px 1fr 55px 1fr 80px;
   grid-template-areas:
     'header header'
     'notebook scene'

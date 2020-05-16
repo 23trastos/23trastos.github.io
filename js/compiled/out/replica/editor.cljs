@@ -1,7 +1,6 @@
 (ns replica.editor
   (:require [cljsjs.codemirror]
             [cljsjs.codemirror.addon.search.searchcursor]
-            [cljsjs.codemirror.addon.dialog.dialog]
             [cljsjs.codemirror.mode.clojure]
             [cljsjs.codemirror.addon.edit.matchbrackets]
             [cljsjs.codemirror.addon.edit.closebrackets]
@@ -140,10 +139,22 @@
   (command! (str "(do " (rd) ")")))
 
 (defn lf!
+  "Loads document from file."
   ([url] (lf! url nil))
   ([url callback]
-   "Loads code from file."
    (js/fromUrlToCM url callback)))
+
+(defn nd!
+  "Creates a new document."
+  ([title content] (nd! title content nil))
+  ([title content callback]
+  (js/fromStringToCM title content callback)))
+
+(defn clear!
+  "Cleans the CM editor closing all documents."
+  []
+  (set! js/cmDocs (clj->js []))
+  (js/updateDocs))
 
 (def routes {'rd 'rd
              's 's!
@@ -158,7 +169,9 @@
              'bl 'bl
              'pl 'pl!
              'rl 'rl
-             'lf 'lf!})
+             'lf 'lf!
+             'nd 'nd!
+             'clear 'clear!})
 
 (defn e
   "'e' is a route to the code editor built-in functions inside replica."

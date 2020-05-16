@@ -84,11 +84,11 @@ SETUP
 (def lines (range (first bounds) (inc (last bounds))))
 (def length 20)
 (def step (/ length 53))
-(def delta (/ tempo 100000))
-(def start 0.6)
+(def delta (/ tempo 24500))
+(def start 0.55)
 (def positions (range start (+ length start) step))
 'isetx 'inc 'layer
-(map #(r 'isetx (str 'inc/pat %1) 'gmn "expr(seq '[\\repeatBegin]' (seq (tail (transpose (seq '[" transp "]' '[" (r 'er %2) "]') '[c]') '[c]')" "'[\\repeatEnd]'))") pats lines)
+(map #(r 'igmn-expr (str 'inc/pat %1) (str "expr(seq '[\\repeatBegin]' (seq (tail (transpose (seq '[" transp "]' '[" (r 'er %2) "]') '[c]') '[c]')" "'[\\repeatEnd]'))")) pats lines)
 'itxt 'inc/title1 (str "TERRY RILEY IN C ( in " query-transp " )")
 'imsg 'inc/title1 ['scale 2] ['y -0.5]
 (map #(r 'isetx (str 'inc/lab %1) 'txt (str %1)) pats)
@@ -101,27 +101,27 @@ SETUP
 'imsg 'inc/time 'show 0
 'iwatch 'inc/time 'SMALL (r 'imsg 'inc 'dy (- delta) '--keep)
 'iwatch 'inc/time 'STEP (r 'imsg 'inc 'dy (- step) '--keep)
-'tconv 'conv "rsrc/x00y00.wav"
-'tsp 'conv 'wet 'value 0.2
-'tsynth 'b1 :-- 'conv
-'tsynth 'b2 :-- 'conv
-'tsp 'conv 'output 'gain 'value 0.3
-'tlp 'metr (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand))))) "8n" 0.1 1200
-'tlp 'info (fn[t] (r 'imsg 'inc/time 'event 'SMALL) (swap! progress inc) (r 'log (str "pos: " @progress " secs: " (r 'tsecs)))) "64n" 0.1 1200
+;'tconv 'conv "rsrc/x00y00.wav"
+;'tsp 'conv 'wet 'value 0.2
+;'tsynth 'b1 :-- 'conv
+;'tsynth 'b2 :-- 'conv
+;'tsp 'conv 'output 'gain 'value 0.3
+;'tlp 'metr (fn[t] (r 'tp 'b1 "C5" "32n" t (+ 0.1 (* 0.4 (rand)))) (r 'tp 'b2 "C6" "32n" t (+ 0.1 (* 0.4 (rand))))) "8n" 0.1 1200
+'tlp 'scroll (fn[t] (r 'imsg 'inc/time 'event 'SMALL)) "16n" 0.8 1200
 'isetx 'control 'layer
 'isetx 'control/bgn 'rect 4 0.18
 'imsg 'control/bgn 'color 255 255 255 100
 'ibtn 'control/start 'START "(r 'epl 'START)"
 'ibtn 'control/stop 'STOP "(r 'epl 'STOP)"
-'isld 'control/volmetr "Metr.Vol" 0 0.4 0.01 0.3 "#(r 'tsp 'conv 'output 'gain 'value %)"
+;'isld 'control/volmetr "Metr.Vol" 0 0.4 0.01 0.3 "#(r 'tsp 'conv 'output 'gain 'value %)"
 'isld 'control/volback "Loading.Acmp..." 0 0 0 0 "#(str 'not-yet-loaded)"
-'imsg 'control/start 'x -1.5
-'imsg 'control/stop 'x -1.3
-'imsg 'control/volmetr 'x 1
-'imsg 'control/volback 'x 1.5
-'imsg 'control/vol* 'scale 0.8
+'imsg 'control/start 'x -1.3
+'imsg 'control/stop 'x -1.1
+;'imsg 'control/volmetr 'x 1
+'imsg 'control/volback 'x 1.1
+'imsg 'control/volback 'scale 0.8
 'imsg 'control ['y -0.9] ['z 1]
-'tgrn 'back "rsrc/inC_backing.mp3" :onload (fn[] (r 'isld 'control/volback "Acmp.Vol" -40 10 0.2 0 "#(r 'tsp 'back 'volume 'value %)") (r 'display 'modalLoading false))
+'tgrn 'back "rsrc/inC_backing.ogg" :onload (fn[] (r 'isld 'control/volback "Acmp.Vol" -40 10 0.2 0 "#(r 'tsp 'back 'volume 'value %)") (r 'display 'modalLoading false))
 'tsp 'back 'playbackRate (/ tempo 100)
 (. (.sync (r 'tg 'back)) start (/ 67.5 tempo))
 SETUP

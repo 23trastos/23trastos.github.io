@@ -29,7 +29,7 @@
            (map getrsrc elms))))
 
 (defn chain
-  "chains from source through elements by ID."
+  "connects in chain from source through elements by ID."
   [source-id & elms]
   (let [src (getrsrc source-id)]
     (apply (. (. src -chain) bind src)
