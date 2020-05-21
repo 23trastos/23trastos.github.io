@@ -1,7 +1,7 @@
 [{:type :input :silent? true :deaf? true :value
   "(js/displayDiv \"modalLoading\" true)"}
- {:type :input :silent? true :value
+ {:type :input :silent? true :deaf? true :value
   "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
  {:type :stop :resp-enables true :auto-continue true}
  {:type :input :silent? true :deaf? true :value
-  "['full true]['iclear]['display 'modalLoading false]['elf \"rsrc/inc.replica\"]['isetx 'title 'txt \"TERRY RILEY -- IN C\"]['imsg 'title ['y -0.5]['scale 2]]['ibtn 'SETUP \"(r 'epl 'SETUP)\"]"}]
+  "['full true]['clear]['display 'modalLoading false]['elf \"rsrc/inc.replica\"]['isetx 'title 'txt \"TERRY RILEY -- IN C\"]['imsg 'title ['y -0.5]['scale 2]]['ibtn 'SETUP \"'epl 'SETUP\"]"}]

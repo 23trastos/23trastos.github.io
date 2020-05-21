@@ -1,6 +1,4 @@
-[{:type :markdown :value
-  "Waiting for Replica dependencies..."}
- {:type :input :value
+[{:type :input :silent? true :deaf? true :value
   "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
  {:type :stop :resp-enables true :auto-continue true}
  {:type :markdown :value
@@ -10,10 +8,10 @@
  {:type :stop}
  {:type :markdown :value
   "Or go into some more action with:"}
- {:type :input :silent? true :value
-  "'es \":BACH\\n[\\\\slur(b&ac2h1)]\\n:BACH\""}
+ {:type :input :silent? true :deaf? true :value
+  "['clear]['end 'tour.replica \":BACH\\n[\\\\slur(b&ac2h1)]\\n:BACH\"]"}
  {:type :input :sample? true :value
-  "['iclear]['igmn 'bach1 (r 'erl :BACH)]['igmn 'bach2 (r 'erl :BACH)]['imsg 'bach2 ['angle 180]['x 0.22]['y -0.04]]['isetx 'time 'rect 0 0]"}
+  "['igmn 'bach1 (r 'erl :BACH)]['igmn 'bach2 (r 'erl :BACH)]['imsg 'bach2 ['angle 180]['x 0.22]['y -0.04]]['isetx 'time 'rect 0 0]"}
  {:type :stop}
  {:type :markdown :value
   "And then:"}

@@ -37,8 +37,9 @@
          (reset! state/current-ns (current-ns))
          ; Add result to history
          (reset! utils/resp ret)
-         (swap! state/history state/add-entry
-                (if error
-                  (state/to-repl-error (error->str error))
-                  ;(when-not (some? (re-find #"nil" value))
-                  (when resp? (state/to-repl-result value)))))))))
+         (when resp?
+           (swap! state/history state/add-entry
+                  (if error
+                    (state/to-repl-error (error->str error))
+                    ;(when-not (some? (re-find #"nil" value))
+                    (state/to-repl-result value)))))))))

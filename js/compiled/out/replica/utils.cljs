@@ -20,9 +20,9 @@
 
 (defn add-info!
   ([string]
-   (add-info! string "black"))
+   (add-info! (str string) "black"))
   ([string color]
-   (js/addInfo string color)))
+   (js/addInfo (str string) (str color))))
 
 (defn display-div!
   [id display?]

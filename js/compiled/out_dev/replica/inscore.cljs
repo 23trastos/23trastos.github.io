@@ -80,9 +80,9 @@
   ([object to-repl-code]
    (btn! object object to-repl-code))
   ([object label to-repl-code & opt]
-   (let [code (. to-repl-code replace (js/RegExp. #"'" 'g) "\\\\'")]
+   (let [code (. (str to-repl-code) replace (js/RegExp. #"'" 'g) "\\\\'")]
      (apply html! object
-            (str "<button onclick=\\\"toRepl(\\'" code "\\')\\\">"
+            (str "<button onclick=\\\"toRepl('" code "')\\\">"
                  (or label object)
                  "</button>") opt))))
 

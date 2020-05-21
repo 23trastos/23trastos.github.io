@@ -29,8 +29,7 @@
   ([code history? resp?]
    (when-not (blank? code)
      ; Add just typed command to history
-     (when history?
-       (swap! state/history state/add-entry (state/to-repl-input code)))
+     (swap! state/history state/add-entry (state/to-repl-input (if history? code nil)))
      (cljs-read-eval-print!
        (real-code code)
        (fn [{:keys [value error] :as ret}]
@@ -40,5 +39,4 @@
          (swap! state/history state/add-entry
                 (if error
                   (state/to-repl-error (error->str error))
-                  ;(when-not (some? (re-find #"nil" value))
-                  (when resp? (state/to-repl-result value)))))))))
+                  (state/to-repl-result (if resp? value nil)))))))))

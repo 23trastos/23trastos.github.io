@@ -30,9 +30,10 @@
      [:button (or label "Next")]]))
 
 (defn history-input [{:keys [emit]} {:keys [value] :as entry}]
-  [:div.history-input
-   {:on-click #(emit-input! emit entry)}
-   value])
+  (when value
+    [:div.history-input
+     {:on-click #(emit-input! emit entry)}
+     value]))
 
 (defn history-response [{:keys [emit]} {:keys [value] :as entry}]
   (let [sub-type (:type (meta value))]
@@ -41,7 +42,7 @@
       :on-click #(emit-input! emit entry)}
      (if sub-type
        [history-entry nil (response-with-meta->entry entry)]
-       (println-str value))]))
+       (when value (println-str value)))]))
 
 (defn history-response-error [{:keys [emit]} {:keys [value]}]
   [:div.history-response-error value])

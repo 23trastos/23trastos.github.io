@@ -9,7 +9,7 @@
                                    set-js-prop!
                                    get-js-value]]))
 
-(defonce rsrcs (atom {:run false :master js/Tone.Master :ins {} :fx {}}))
+(defonce rsrcs (atom {:run false :master js/Tone.Master}))
 
 (defn getrsrc
   ([id]
@@ -17,7 +17,7 @@
      (apply getrsrc id)
      (if (= (str id) "master")
        (:master @rsrcs)
-       (or (getrsrc :ins id) (getrsrc :fx id)))))
+       (or (getrsrc :ins id) (getrsrc :fx id) (getrsrc :tasks id)))))
   ([k id]
    (get-in @rsrcs [k id])))
 
@@ -58,12 +58,25 @@
       (apply get-js-value obj pre-path)
       (apply get-js-paths obj pre-path))))
 
-(defn do!
+(defn call!
   [id path-to-fn & args]
   (apply js-invoke
          (apply get-js-value (getrsrc id) (butlast path-to-fn))
          (str (last path-to-fn))
          args))
+
+(defn tone-set!
+  "Set the property value through the set method of any Tonejs object"
+  [id param value ramp-time]
+    (.set (getrsrc :ins id) (str param) value ramp-time))
+
+(defn tone-get
+  "Gets the property value through the get method of any Tonejs object"
+  [id param value ramp-time]
+    (.get (getrsrc :ins id) (str param) value ramp-time))
+
+;*********************;
+;-------SYNTHS:-------;
 
 (defn synth
   "Creates a new Tone.Synth"
@@ -109,36 +122,6 @@
                        :harmonicity harm :modulationIndex modidx
                        :resonance res :octaves 1.5})) :-- -- :-< -<))
 
-(defn p!
-  "Plays a Synth"
-  [id freq dur t vel]
-  (let [s (getrsrc :ins id)]
-    (case (str s)
-      ("Synth" "MonoSynth") (. s triggerAttackRelease freq dur t vel)
-      "MetalSynth" (do
-                     (when freq
-                       (set! (.. s -frequency -value) freq))
-                     (. s triggerAttackRelease dur t vel))
-      (str s " can't be played so!"))))
-
-(defn on!
-  "Triggers attack on a Synth"
-  [id freq t vel]
-  (let [s (getrsrc :ins id)]
-    (case (str s)
-      ("Synth" "MonoSynth") (. s triggerAttack freq t vel)
-      "PluckSynth" (. s triggerAttack freq t)
-      "MetalSynth" (do
-                     (when freq
-                       (set! (.. s -frequency -value) freq))
-                     (. s triggerAttack t vel))
-      (str s " can't be triggered so!"))))
-
-(defn off!
-  "Releases a Synth"
-  [id t]
-  (. (getrsrc :ins id) triggerRelease t))
-
 (defn buf
   "creates a Tonejs Buffer from url"
   [id url & {:keys [onload onerror]}]
@@ -164,13 +147,53 @@
 (defn grnstart
   [id t offset dur]
   "starts a GrainPlayer."
-  (. (getrsrc id) start t offset dur))
+  (. (getrsrc :ins id) start t offset dur))
 
 (defn grnstop
   [id t]
   "stops a GrainPlayer."
-  (. (getrsrc id) stop t))
+  (. (getrsrc :ins id) stop t))
 
+(defn p!
+  "Plays a Synth"
+  [id freq dur t vel]
+  (let [s (getrsrc :ins id)]
+    (case (str s)
+      "GrainPlayer" (do
+                      (when freq (tone-set! s 'playbackRate freq nil))
+                      (when vel (tone-set! s 'volume vel nil))
+                      (grnstart id t nil dur))
+      "PluckSynth" (. s triggerAttack freq t)
+      "MetalSynth" (do
+                     (when freq (tone-set! s 'frequency freq nil))
+                     (. s triggerAttackRelease dur t vel))
+      (. s triggerAttackRelease freq dur t vel))))
+
+(defn on!
+  "Triggers attack on a Synth"
+  [id freq t vel]
+  (let [s (getrsrc :ins id)]
+    (case (str s)
+      "GrainPlayer" (do
+                      (when freq (tone-set! s 'playbackRate freq nil))
+                      (when vel (tone-set! s 'volume vel nil))
+                      (grnstart id t nil nil))
+      "PluckSynth" (. s triggerAttack freq t)
+      "MetalSynth" (do
+                     (when freq (tone-set! s 'frequency freq nil))
+                     (. s triggerAttack t vel))
+      (. s triggerAttack freq t vel))))
+
+(defn off!
+  "Releases a Synth"
+  [id t]
+   (let [s (getrsrc :ins id)]
+    (case (str s)
+      "GrainPlayer" (grnstop id t)
+      (. (getrsrc :ins id) triggerRelease t))))
+
+;**********************;
+;-------EFFECTS:-------;
 
 (defn conv
   "creates a Tonejs Convolver from the speficied IR source buffer or url"
@@ -181,16 +204,73 @@
                                          (connect [:fx id] -- -<)
                                          (onload id)))))
 
+(defn pan
+  "creates a new Tonejs Panner"
+  [id init-pan & {:keys [onload -- -<]
+             :or {-- 'master}}]
+  (setrsrc :fx id (js/Tone.Panner. (or init-pan 0))
+           :-- -- :-< -<))
+
+(defn pan3
+  "creates a new Tonejs Panner3d"
+  [id x y z & {:keys [onload -- -<]
+             :or {-- 'master}}]
+  (setrsrc :fx id (js/Tone.Panner3D. (or x 0) (or y 0) (or z 0))
+           :-- -- :-< -<))
+
 (defn discn
   "disconnects source from element(s) by Object or index."
   [src & disconnect-from]
   (let [elm (getrsrc src)]
     (map #(. elm disconnect %) disconnect-from)))
 
-(defn schr!
+;********************;
+;-------TASKS:-------;
+
+(defn cancel!
+  ([]
+   (js/Tone.Transport.cancel)
+   (swap! rsrcs assoc :tasks {})
+   "All schedules cancelled.")
+  ([id]
+   (let [task (getrsrc :tasks id)]
+   (if (number? task)
+     (js/Tone.Transport.clear task)
+     (. task dispose)))))
+
+(defn clear!
+  ([]
+   (cancel!)
+   (reset! rsrcs {:run false :master js/Tone.Master}))
+  ([id]
+   (map #(clear! % id) [:ins :fx :tasks]))
+  ([k id]
+   (when-let [obj (getrsrc k id)]
+     (if (number? obj)
+       (js/Tone.Transport.clear obj)
+       (. obj dispose))
+     (swap! rsrcs assoc-in [k id] nil))))
+
+(defn schr
   "Schedules an event repeated on a time interval."
-  [interval function]
-  (js/Tone.Transport.scheduleRepeat function interval))
+  [id function interval]
+  (clear! :tasks id)
+  (swap! rsrcs assoc-in [:tasks id]
+         (js/Tone.Transport.scheduleRepeat function interval)))
+
+(defn lp
+  "Creates a new loop with defined start and end."
+  [id function interval start-time end-time]
+  (clear! :tasks id)
+  (swap! rsrcs assoc-in [:tasks id]
+         (. (. (js/Tone.Loop. function interval)
+               start start-time) stop end-time)))
+
+(defn draw
+  "Creates a new loop for drawing visuals with the provided callback function in sync with Tonejs."
+  [id visual-fn interval start-time end-time]
+  (lp id (fn[t] (js.Tone.Draw.schedule visual-fn t))
+      interval start-time end-time))
 
 (defn start!
   []
@@ -220,27 +300,6 @@
 
 (defn run? [] (:run @rsrcs))
 
-(defn cancel!
-  ([]
-   (js/Tone.Transport.cancel)
-   (swap! rsrcs :loops {})
-   "All schedules cancelled.")
-  ([id]
-   (if (number? id)
-     (js/Tone.Transport.clear id)
-     (do
-       (. (getrsrc :loops id) dispose)
-       (swap! rsrcs assoc-in [:loops id] nil)))))
-
-(defn lp
-  "Creates a new loop with defined start and end."
-  [id function interval start-time end-time]
-  (when-let [lp (getrsrc :loops id)]
-    (. lp dispose))
-  (swap! rsrcs assoc-in [:loops id]
-         (. (. (js/Tone.Loop. function interval)
-               start start-time) stop end-time)))
-
 (defn st!
   "ramps to a new Tempo in bpm within the desired time."
   [target-bpm ramp-time]
@@ -249,7 +308,6 @@
                                 (if ((every-pred number? (partial < 0)) ramp-time)
                                   ramp-time 0.001)))
 
-
 (def routes {'synth 'synth
              'monos 'monos
              'metal 'metal
@@ -257,19 +315,25 @@
              'on 'on!
              'off 'off!
              'conv 'conv
+             'pan 'pan
+             'pan3 'pan3
              'grn 'grn
-             'gstart 'grnstart
-             'gstop 'grnstop
+             'grnstart 'grnstart
+             'grnstop 'grnstop
              'buf 'buf
              '-- 'chain
              '-< 'fan
-             'schr 'schr!
+             'schr 'schr
              'lp 'lp
+             'draw 'draw
+             'clear 'clear!
              'g 'getrsrc
              's 'setrsrc
              'sp 'setprops!
              'gp 'getprops
-             'do 'do!
+             'set 'tone-set!
+             'get 'tone-get
+             'call 'call!
              'start 'start!
              'stop 'stop!
              'go 'go!

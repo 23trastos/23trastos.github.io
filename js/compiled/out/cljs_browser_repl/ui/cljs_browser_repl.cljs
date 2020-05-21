@@ -18,7 +18,7 @@
                (case type
                  :input
                  (if (= js/currKey 91)
-                   (repl-entry! (:value payload))
+                   (repl-entry! (:value payload) false true)
                    (do
                      (new-input! (:value payload) (= js/currKey 18))
                      (focus-input!)))

@@ -6,7 +6,7 @@
   **C**omposition **A**ssistance,
   or The **R**EPL-based **E**nvironment for **P**lanning your
   **L**ive **I**nteractive **C**oding **A**dventures,
-  or... well, just replications of it.
+  or... well, anything you might get out of it!
 
   Special credits to:
   [INScore](https://inscore.grame.fr)
@@ -29,4 +29,4 @@
   "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
  {:type :stop :resp-enables true :auto-continue true}
  {:type :input :silent? true :deaf? true :value
-  "'elf \"rsrc/welcome.replica\" (fn[] (r 'del #(print-str (r 'ep)) 500))"}]
+  "['elf \"rsrc/welcome.replica\" (r 'sf \"'del (r 'sf \\\"'ep\\\") 500\")]"}]

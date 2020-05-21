@@ -123,15 +123,19 @@
     (list start end)))
 
 (defn rl
-  "Reads the lines IN BETWEEN two regexp matches. It will ignore any line containing a regexp definition in the form #\"..."
+  "Reads the lines IN BETWEEN two regexp matches. It will ignore any line referencing the regexp definition in the form #\"..."
   [regexp]
   (apply r (bl regexp)))
 
 (defn pl!
-  "Processes the lines IN BETWEEN two regexp matches. It will ignore any line containing a regexp definition in the form #\"..."
+  "Processes code line by line IN BETWEEN two regexp matches. It will ignore any line referencing the regexp definition in the form #\"..."
   [regexp]
   (apply p! (bl regexp)))
 
+(defn rnp!
+  "Reads (on the fly) and processes code IN BETWEEN two regexp matches. It will ignore any line referencing the regexp definition in the form #\"..."
+  [regexp]
+  (command! (rl regexp) false false))
 
 (defn l!
   "Loads the full content of the CodeMirror editor and processes it as an entire cljs code file."
@@ -169,6 +173,7 @@
              'bl 'bl
              'pl 'pl!
              'rl 'rl
+             'rnp 'rnp!
              'lf 'lf!
              'nd 'nd!
              'clear 'clear!})

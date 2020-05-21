@@ -14,7 +14,7 @@
       (if (= (:type last-entry) :stop)
         (if (and
               (:resp-enables last-entry)
-              (some (partial = (:type e)) [:response nil]))
+              (= (:type e) :response))
           (conj (pop h) e (assoc last-entry :resp-enables false))
           (conj (pop h) e last-entry))
         (let [new (if (and

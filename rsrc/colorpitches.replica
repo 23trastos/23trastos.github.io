@@ -1,16 +1,50 @@
->INIT<
-(def number (js/prompt "Set the game's maximum number of pitches:"))
-['iclear]['ibtn 'ACTION (r 'erl #">ACTION<")]['imsg 'ACTION ['x 0] ['y -0.9] ['z 1]]
->INIT<
-
->ACTION<
-(let [new (str 'a (rand-int number))]
+:ACTION
+(let [elm (rand-int number)
+      color [(inc (rand-int 255)) (inc (rand-int 255)) (inc (rand-int 255))]
+      pitchclass (rand-nth '(a b c d e f g))
+      accidental (rand-nth '(["" ""] ["&" "b"] ["#" "#"]))
+      octave (rand-int 4)
+      microt (- 0.5 (rand 1))
+      x (- 1 (rand 2)) y (- 0.5 (rand 1))]
 	(r
-	['igmn new (str [(symbol
-		(str (rand-nth '(a b c d e f g))
-        (- 2 (rand-int 4))))])]
-	['imsg new
-    	['x (- 1 (rand 2))]
-        ['y (- 0.5 (rand 1))]
-        ['color (rand-int 255) (rand-int 255) (rand-int 255)]]))
->ACTION<
+     ['igmn (str 'a elm) (str "[\\tempo<\\\"" microt "\\\">"  pitchclass (first accidental) (dec octave) "]")]
+     ['imsg (str 'a elm)
+      ['x x]
+      ['y y]
+      ['color (. (apply array color) join space)]]
+     ['toff (str 'a elm)]
+     ['tset (str 'a elm) 'oscillator.partials (apply array (map #(/ % 255) color))]
+     ['tset (str 'a elm) 'oscillator.modulationIndex (/ (apply + color) 76.5)]
+     ['tset (str 'a elm) 'oscillator.harmonicity (+ (/ (color 0) (color 1))
+                                                    (/ (color 1) (color 2))
+                                                    (/ (color 2) (color 0)))]
+     ['tsp (str 'p elm) 'pan 'value x]
+     ['ton (str 'a elm)
+      (* (js/Tone.intervalToFrequencyRatio microt)
+         (.toFrequency (js/Tone.Frequency (str pitchclass (second accidental) (+ octave 2)))))
+      "+0.25" (* 0.01 (- 1 (Math/abs y)))]))
+:ACTION
+
+:RESET
+(map #(r 'toff (str 'a %)) (range number))
+['imsg 'a* 'del]['tstop]['tcancel]
+:RESET
+
+:AUTO
+'tschr 'auto #(when (> 0.5 (rand)) (r 'ernp :ACTION)) "1n"
+'tstart
+:AUTO
+
+:INIT
+(def number (js/prompt "Set the game's maximum number of pitches:" 4))
+(def space " ")
+'iclear
+(map #(r 'tpan (str 'p %)) (range number))
+(map #(r 'tsynth (str 'a %) :osc {:type 'fmsine :modulationType 'sine} :a 1 :d 0.001 :s 1 :r 0.001 :-- (str 'p %)) (range number))
+'ibtn 'ACTION "'ernp :ACTION"
+'imsg 'ACTION ['x -0.3] ['y -0.9] ['z 1]
+'ibtn 'RESET "'epl :RESET"
+'imsg 'RESET ['x 0] ['y -0.9] ['z 1]
+'ibtn 'AUTO "'epl :AUTO"
+'imsg 'AUTO ['x 0.3] ['y -0.9] ['z 1]
+:INIT

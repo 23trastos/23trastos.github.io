@@ -8,8 +8,8 @@ goog.require('replumb.repl');
 goog.require('clojure.string');
 goog.require('replica.utils');
 cljs_browser_repl.actions.repl.new_input_BANG_ = (function cljs_browser_repl$actions$repl$new_input_BANG_(var_args){
-var G__20330 = arguments.length;
-switch (G__20330) {
+var G__11708 = arguments.length;
+switch (G__11708) {
 case 1:
 return cljs_browser_repl.actions.repl.new_input_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -39,8 +39,8 @@ return cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.input,s);
 cljs_browser_repl.actions.repl.new_input_BANG_.cljs$lang$maxFixedArity = 2;
 
 cljs_browser_repl.actions.repl.real_code = (function cljs_browser_repl$actions$repl$real_code(string){
-var G__20332 = cljs.core.subs.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(string)].join(''),(0),(1));
-switch (G__20332) {
+var G__11710 = cljs.core.subs.call(null,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(string)].join(''),(0),(1));
+switch (G__11710) {
 case "'":
 case "[":
 return ["(apply replica.core/r [",cljs.core.str.cljs$core$IFn$_invoke$arity$1(string),"])"].join('');
@@ -60,8 +60,8 @@ return string;
 }
 });
 cljs_browser_repl.actions.repl.repl_entry_BANG_ = (function cljs_browser_repl$actions$repl$repl_entry_BANG_(var_args){
-var G__20335 = arguments.length;
-switch (G__20335) {
+var G__11713 = arguments.length;
+switch (G__11713) {
 case 1:
 return cljs_browser_repl.actions.repl.repl_entry_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -92,22 +92,19 @@ cljs_browser_repl.actions.repl.repl_entry_BANG_.cljs$core$IFn$_invoke$arity$3 = 
 if(clojure.string.blank_QMARK_.call(null,code)){
 return null;
 } else {
-if(cljs.core.truth_(history_QMARK_)){
-cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl.state.add_entry,cljs_browser_repl.state.to_repl_input.call(null,code));
-} else {
-}
+cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl.state.add_entry,cljs_browser_repl.state.to_repl_input.call(null,(cljs.core.truth_(history_QMARK_)?code:null)));
 
-return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,cljs_browser_repl.actions.repl.real_code.call(null,code),(function (p__20336){
-var map__20337 = p__20336;
-var map__20337__$1 = ((((!((map__20337 == null)))?(((((map__20337.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__20337.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20337):map__20337);
-var ret = map__20337__$1;
-var value = cljs.core.get.call(null,map__20337__$1,new cljs.core.Keyword(null,"value","value",305978217));
-var error = cljs.core.get.call(null,map__20337__$1,new cljs.core.Keyword(null,"error","error",-978969032));
+return cljs_browser_repl.compiler.cljs_read_eval_print_BANG_.call(null,cljs_browser_repl.actions.repl.real_code.call(null,code),(function (p__11714){
+var map__11715 = p__11714;
+var map__11715__$1 = ((((!((map__11715 == null)))?(((((map__11715.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__11715.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__11715):map__11715);
+var ret = map__11715__$1;
+var value = cljs.core.get.call(null,map__11715__$1,new cljs.core.Keyword(null,"value","value",305978217));
+var error = cljs.core.get.call(null,map__11715__$1,new cljs.core.Keyword(null,"error","error",-978969032));
 cljs.core.reset_BANG_.call(null,cljs_browser_repl.state.current_ns,replumb.repl.current_ns.call(null));
 
 cljs.core.reset_BANG_.call(null,replica.utils.resp,ret);
 
-return cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl.state.add_entry,(cljs.core.truth_(error)?cljs_browser_repl.state.to_repl_error.call(null,replumb.core.error__GT_str.call(null,error)):(cljs.core.truth_(resp_QMARK_)?cljs_browser_repl.state.to_repl_result.call(null,value):null)));
+return cljs.core.swap_BANG_.call(null,cljs_browser_repl.state.history,cljs_browser_repl.state.add_entry,(cljs.core.truth_(error)?cljs_browser_repl.state.to_repl_error.call(null,replumb.core.error__GT_str.call(null,error)):cljs_browser_repl.state.to_repl_result.call(null,(cljs.core.truth_(resp_QMARK_)?value:null))));
 }));
 }
 });

@@ -33,12 +33,11 @@
             "fh2cm" (utils/url! "#/hist2CM?filter=true")
             "h2cm" (utils/url! "#/hist2CM")
             "del" (apply (partial js-invoke js/window "setTimeout") args)
-            "log" (apply utils/add-info! args)
-            "display" (apply utils/display-div! args)
-            "get" (apply utils/get-js-value args)
-            "set" (apply utils/set-js-prop! args)
-            "paths" (apply utils/get-js-paths args)
-            "query" (apply utils/js-query args)
+            "clear" (r ['iclear] ['tclear] ['eclear])
+            "load" (utils/url! (str "#/replica/" (apply str args)))
+            "goto" (utils/url! (str "#/goto/" (apply str args)))
+            "tstate" @replica.tone/rsrcs
+            "sf" (fn[] (r 'sr (apply str args) false false))
             (or (apply proc! route args)
                 (get-value))))))))
 
@@ -46,8 +45,16 @@
              'i 'replica.inscore/i
              'e 'replica.editor/e
              't 'replica.tone/t
+             'sr 'replica.utils/command!
              'cmd 'replica.utils/create-command!
              'url 'replica.utils/url!
-             'full 'replica.utils/full-score!})
+             'full 'replica.utils/full-score!
+             'log 'replica.utils/add-info!
+             'display 'replica.utils/display-div!
+             'get 'replica.utils/get-js-value
+             'set 'replica.utils/set-js-prop!
+             'paths 'replica.utils/get-js-paths
+             'query 'replica.utils/js-query
+             })
 
 (add-routes! nil nil routes)

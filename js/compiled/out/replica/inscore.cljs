@@ -36,7 +36,8 @@
 (defn clear!
   "sends a '* del' message to the desired object or scene (if no argument is provided then '/ITL/scene/' is assumed)."
   [& obj]
-  (apply dropl! (str (addr (str (first obj))) "* del") (rest obj)))
+  (apply dropl! (str (addr (str (first obj))) "* del") (rest obj))
+  (replica.utils/add-info! "scene cleared!"))
 
 (defn msg!
   "Address an object [or create it] and send to it a command. If no scene is prepended in the form '[scenex/objx]' then 'scene/[obj]' is assumed. For aliases prepend '#' -> '#/my/alias'."
@@ -80,7 +81,7 @@
   ([object to-repl-code]
    (btn! object object to-repl-code))
   ([object label to-repl-code & opt]
-   (let [code (. to-repl-code replace (js/RegExp. #"'" 'g) "\\\\'")]
+   (let [code (. (str to-repl-code) replace (js/RegExp. #"'" 'g) "\\\\'")]
      (apply html! object
             (str "<button onclick=\\\"toRepl('" code "')\\\">"
                  (or label object)

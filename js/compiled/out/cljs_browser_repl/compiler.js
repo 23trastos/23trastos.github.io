@@ -18,26 +18,26 @@ return src_cb.call(null,e.target.getResponseText());
 return src_cb.call(null,null);
 }
 }));
-}catch (e19529){var e = e19529;
+}catch (e9633){var e = e9633;
 return src_cb.call(null,null);
 }});
 cljs_browser_repl.compiler.repl_opts = cljs.core.merge.call(null,replumb.core.options.call(null,new cljs.core.Keyword(null,"browser","browser",828191719),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, ["/js/compiled/out"], null),cljs_browser_repl.compiler.fetch_file_BANG_),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"warning-as-error","warning-as-error",1347418166),true], null));
 cljs_browser_repl.compiler.cljs_read_eval_print_BANG_ = (function cljs_browser_repl$compiler$cljs_read_eval_print_BANG_(line,cb){
 try{return replumb.core.read_eval_call.call(null,cljs_browser_repl.compiler.repl_opts,cb,line);
-}catch (e19530){if((e19530 instanceof Error)){
-var err = e19530;
+}catch (e9634){if((e9634 instanceof Error)){
+var err = e9634;
 cljs.core.println.call(null,"Caught js/Error during read-eval-print: ",err);
 
 return cb.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"error","error",-978969032),err,new cljs.core.Keyword(null,"ns","ns",441598760),replumb.repl.current_ns.call(null)], null));
 } else {
-throw e19530;
+throw e9634;
 
 }
 }});
 cljs_browser_repl.compiler.is_readable_QMARK_ = (function cljs_browser_repl$compiler$is_readable_QMARK_(line){
 var mark = cljs.core.subs.call(null,line,(0),(1));
-var G__19531 = mark;
-switch (G__19531) {
+var G__9635 = mark;
+switch (G__9635) {
 case "'":
 case "{":
 return true;
@@ -55,7 +55,7 @@ default:
 try{cljs.tools.reader.read_string.call(null,line);
 
 return true;
-}catch (e19532){var _ = e19532;
+}catch (e9636){var _ = e9636;
 return false;
 }
 }

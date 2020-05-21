@@ -1,0 +1,8 @@
+:INIT
+'tdraw 'create (r 'sf "'igmn 'a (str [(rand-nth ['a 'b 'c 'd 'e 'f 'g])])") "4n" 0 999999
+'tdraw 'move (r 'sf "'imsg 'a ['dx (- 0.005 (rand 0.01))] ['dy (- 0.005 (rand 0.01))]") 0.02 0 999999
+'ibtn 'START "'tstart"
+'ibtn 'STOP "['tstop]['tgo 0]"
+'imsg 'START ['y -0.9] ['x -0.2]
+'imsg 'STOP ['y -0.9] ['x 0.2]
+:INIT

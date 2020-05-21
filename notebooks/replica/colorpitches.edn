@@ -1,4 +1,12 @@
-[{:type :stop :label
-  "CLICK HERE TO LOAD. CLICK AQUÍ PARA EMPEZAR!"}
+[{:type :input :silent? true :deaf? true :value
+  "(js/displayDiv \"modalLoading\" true)"}
+ {:type :input :silent? true :deaf? true :value
+  "(ns replica.user)\n(require '[replica.core :refer [r rr]])"}
+ {:type :stop :resp-enables true :auto-continue true}
+ {:type :input :silent? true :deaf? true :value
+  "['clear]['display 'modalLoading false]"}
  {:type :input :value
-  "'elf \"rsrc/colorpitches.replica\""}]
+  "'elf \"rsrc/colorpitches.replica\""}
+ {:type :stop :resp-enables true :auto-continue true}
+ {:type :input :value
+  "['full true]['ibtn 'INIT \"'epl :INIT\"]"}]
