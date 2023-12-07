@@ -6,11 +6,10 @@
 
 <body>
   <pre><code class="language-klipse">
-    (let [params (-> js/window.location.href js/URL. .-searchParams js/Object.fromEntries (js->clj :keywordize-keys true))]
-      (list 
-        (merge {:p (quote (proc (:pre pro) (when :prefer (-> pre :processing)))) :o (quote #{:over :on}) :u (into [:u] [:n :i :t :s])} params)
-        '-->
-        (when (:p params) (eval (map cljs.reader/read-string (list (:p params) (:o params) (:u params)))))))  
+    (def params (-> js/window.location.href js/URL. .-searchParams js/Object.fromEntries (js->clj :keywordize-keys true)))
+    (hash-map 
+      :params (merge {:p (quote (proc (:pre pro) (when :prefer (-> pre :processing)))) :o (quote #{:over :on}) :u (into [:u] [:n :i :t :s])} params)
+      :result (when (:p params) (eval (map cljs.reader/read-string (list (:p params) (:o params) (:u params))))))
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
