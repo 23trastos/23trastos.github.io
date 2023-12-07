@@ -5,7 +5,13 @@
 </head>
 
 <body>
-  <pre><code class="language-klipse">(apply str (list :P :O :U))
+  <pre><code class="language-klipse">
+    (let [params (-> js/window.location.href js/URL. .-searchParams js/Object.fromEntries (js->clj :keywordize-keys true))]
+      (when (some #{:p :o :u} (keys params))
+        (if-let [p (:p params)]
+          (apply p (:o params) (or (:u params) (dissoc params :p :o))
+          params))
+    {:p (quote (proc (:pre pro) (when :prefer (-> pre :processing)))) :o (quote #{:over :on}) :u (into [:u] [:n :i :t :s])}
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
