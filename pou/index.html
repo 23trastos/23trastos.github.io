@@ -6,11 +6,9 @@
 
 <body>
   <pre><code class="language-klipse">
-    (def pou (reduce-kv #(assoc %1 %2 (js/atob %3))
-                        {} 
-                        (-> js/window.location.href js/URL. .-searchParams js/Object.fromEntries (js->clj :keywordize-keys true))))
-    (def cm (.-CodeMirror (.querySelector js/document ".CodeMirror")))
-    (if-let [p (:p pou)] (.setValue cm p) pou)
+    (def pou (atom (reduce-kv #(assoc %1 %2 (js/atob %3)) {} (-> js/window.location.href js/URL. .-searchParams js/Object.fromEntries (js->clj :keywordize-keys true)))))
+    (swap! pou assoc :cm (.-CodeMirror (.querySelector js/document ".CodeMirror")))
+    (let [{:keys [p cm]} @pou] (if p (.setValue cm p) @pou))
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
