@@ -6,12 +6,12 @@
 
 <body>
   <pre><code class="language-klipse">
-    (let [ps (reduce-kv #(assoc %1 %2 (cljs.reader/read-string (js/atob %3)))
-                        {} 
-                        (-> js/window.location.href js/URL. .-searchParams js/Object.fromEntries (js->clj :keywordize-keys true)))]
-      (if-let [p (:p ps)]
-        ((eval p) (dissoc ps :p))
-        ps))
+    (let [pou (reduce-kv #(assoc %1 %2 (cljs.reader/read-string (js/atob %3)))
+                          {} 
+                          (-> js/window.location.href js/URL. .-searchParams js/Object.fromEntries (js->clj :keywordize-keys true)))]
+      (if-let [p (:p pou)]
+        ((eval p) (dissoc pou :p))
+        pou))
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
