@@ -6,11 +6,11 @@
 
 <body>
   <pre><code class="language-klipse">
-    (def pou (atom {:params (js/klipse.utils.url-parameters
+    (def pou (atom {:params (js/klipse.utils.url-parameters)
                     :editors {:main {:p (aget js/klipse-editors 0)
                                      :o (aget js/klipse-results 0)
-                                     :u js/klipse-container}})}))
-    (let [{:keys [params main]} @pou] (if (params :p) (.setValue (main :p) (js/atob p)) @pou))
+                                     :u js/klipse-container}}}))
+    (let [{:keys [params main]} @pou] (if-let [p (params :p)] (.setValue (main :p) (js/atob p)) @pou))
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
