@@ -6,14 +6,30 @@
 
 <body>
   <pre><code class="language-klipse">
-    (def trusted-url js/goog.html.legacyconversions.trustedResourceUrlFromString)
-    (def js-safe-load js/goog.net.jsloader.safeLoad)
-    (def j js/applied-science.js-interop)
-    (def pou (atom {:params (or (js/klipse.utils.url-parameters) {})
+    
+(def trusted-url js/goog.html.legacyconversions.trustedResourceUrlFromString)
+    
+(def js-safe-load js/goog.net.jsloader.safeLoad)
+    
+(def j js/applied-science.js-interop)
+    
+(def pou (atom {:params (or (js/klipse.utils.url-parameters) {})
                 :editors {:main {:type :cljs
                                  :cm (aget js/klipse-editors 0)
                                  :res (aget js/klipse-results 0)}}}))
-    (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :p) (js/atob p)) @pou))
+    
+(defn load-gist [id file callback]
+  (-> (str "https://api.github.com/gists/" id) js/fetch
+    (.then (fn [r]
+       (.then (.json r)
+              (fn [j]
+                (callback (-> (js->clj j :keywordize-keys true) :files ((keyword file)) :content))))))))
+    
+(defn eval-gist [id file & {:keys [editor] :or {editor :main}}]
+  (load-gist id file #(.setValue (-> @pou :editors :main :cm) %)))
+    
+(let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :cm) (js/atob p)) @pou))
+    
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
