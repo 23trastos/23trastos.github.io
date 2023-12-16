@@ -32,8 +32,8 @@
                                                 (when clear-code (str "\n(cm " editor " :setValue \"" clear-code "\")"))))))
 
 (defn eval-gist-loop [f & r] 
-  (eval-gist :id f) :file f :append-code (if (not (empty? (rest r))) `(apply eval-gist-loop ~r) 
-                                                                     `(eval-gist ~(first r)))))
+  (eval-gist :id (:id f) :file (:file f) :append-code (if (not (empty? (rest r))) `(apply eval-gist-loop ~r) 
+                                                                                  `(eval-gist ~(first r)))))
 
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (cm :main :setValue (js/atob p)) @pou))
     
