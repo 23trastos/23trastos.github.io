@@ -23,15 +23,13 @@
               (fn [j]
                 (callback (-> (js->clj j :keywordize-keys true) :files ((keyword file)) :content))))))))
     
-(defn eval-gist [id file & {:keys [editor append-code require] :or {editor :main append-code ""}}]
-  (load-gist id file #(.setValue (-> @pou :editors :main :cm) 
+(defn eval-gist [id file & {:keys [editor append-code require clear-code] :or {editor :main}}]
+  (load-gist id file #(.setValue (-> @pou :editors editor :cm) 
                                  (str % "(ns pou.user)\n" 
                                         (when require (str "(require " require ")"))
-                                        append-code))))
+                                        (when append-code (str "\n" append-code))
+                                        (when clear-code (str "\n(.setValue (-> @pou :editors " editor " :main :cm) " clear-code ")"))))))
 
-(defn require-gist [id file & {:keys [editor append-code :require] :or {editor :main append-code ""}}]
-  (eval-gist [id file :editor editor :append-code (str "(ns pou.user)(.setValue @pou :editors " editor " :cm)(
-    
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :cm) (js/atob p)) @pou))
     
   </code></pre>
