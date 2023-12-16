@@ -29,7 +29,7 @@
     
 (defn eval-gist [& {:keys [id file editor append-code clear-code] :or {editor :main append-code ""}}]
   (load-gist id file #(cm editor :setValue (str % "\n" append-code
-                                                (when clear-code (str "\n(cm " editor " :setValue \"" clear-code "\")"))))))
+                                                (when clear-code (str "\n(pou.user/cm " editor " :setValue \"" clear-code "\")"))))))
 
 (defn eval-gist-loop [f & r] 
   (eval-gist :id (:id f) :file (:file f) :append-code (if (not (empty? (rest r))) `(apply eval-gist-loop ~r) 
