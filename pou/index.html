@@ -27,7 +27,7 @@
 (defn eval-gist [id file & {:keys [editor append-code clear-code] :or {editor :main append-code ""}}]
   (load-gist id file #(.setValue (-> @pou :editors editor :cm) 
                                  (str % "\n" append-code
-                                        (when clear-code (str "\n(.setValue (-> @pou :editors " editor " :cm) \"" clear-code "\")"))))))
+                                        (when clear-code (str "\n(.setValue (-> @pou.user/pou :editors " editor " :cm) \"" clear-code "\")"))))))
 
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :cm) (js/atob p)) @pou))
     
