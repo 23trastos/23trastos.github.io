@@ -25,8 +25,8 @@
               (fn [j]
                 (callback (-> (js->clj j :keywordize-keys true) :files ((keyword file)) :content))))))))
     
-(defn eval-gist [id file & {:keys [editor] :or {editor :main}}]
-  (load-gist id file #(.setValue (-> @pou :editors :main :cm) %)))
+(defn eval-gist [id file & {:keys [editor append-code] :or {editor :main append-code ""}}]
+  (load-gist id file #(.setValue (-> @pou :editors :main :cm) (str % append-code))))
     
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :cm) (js/atob p)) @pou))
     
