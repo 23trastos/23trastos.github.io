@@ -6,11 +6,13 @@
 
 <body>
   <pre><code class="language-klipse">
+    (def trusted-url js/goog.html.legacyconversions.trustedResourceUrlFromString)
+    (def js-safe-load js/goog.net.jsloader.safeLoad)
+    (def j js/applied-science.js-interop)
     (def pou (atom {:params (or (js/klipse.utils.url-parameters) {})
                 :editors {:main {:type :cljs
-                                 :p (aget js/klipse-editors 0)
-                                 :o (aget js/klipse-results 0)
-                                 :u js/klipse-container}}}))
+                                 :cm (aget js/klipse-editors 0)
+                                 :res (aget js/klipse-results 0)}}}))
     (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :p) (js/atob p)) @pou))
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
