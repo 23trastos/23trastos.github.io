@@ -16,6 +16,9 @@
                 :editors {:main {:type :cljs
                                  :cm (aget js/klipse-editors 0)
                                  :res (aget js/klipse-results 0)}}}))
+
+(defn cm [k method & args]
+  (j.apply (-> @pou :editors k :cm) method (clj->js args)))
     
 (defn load-gist [id file callback]
   (-> (str "https://api.github.com/gists/" id) js/fetch
@@ -25,11 +28,10 @@
                 (callback (-> (js->clj j :keywordize-keys true) :files ((keyword file)) :content))))))))
     
 (defn eval-gist [id file & {:keys [editor append-code clear-code] :or {editor :main append-code ""}}]
-  (load-gist id file #(.setValue (-> @pou :editors editor :cm) 
-                                 (str % "\n" append-code
-                                        (when clear-code (str "\n(.setValue (-> @pou.user/pou :editors " editor " :cm) \"" clear-code "\")"))))))
+  (load-gist id file #(cm editor :setValue (str % "\n" append-code
+                                                (when clear-code (str "\n(.setValue (-> @pou.user/pou :editors " editor " :cm) \"" clear-code "\")"))))))
 
-(let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :cm) (js/atob p)) @pou))
+(let [{:keys [params editors]} @pou] (if-let [p (params :p)] (cm :main :setValue (js/atob p)) @pou))
     
   </code></pre>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
