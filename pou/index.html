@@ -27,9 +27,13 @@
               (fn [j]
                 (callback (-> (js->clj j :keywordize-keys true) :files ((keyword file)) :content))))))))
     
-(defn eval-gist [id file & {:keys [editor append-code clear-code] :or {editor :main append-code ""}}]
+(defn eval-gist [{:keys [id file editor append-code clear-code] :or {editor :main append-code ""}}]
   (load-gist id file #(cm editor :setValue (str % "\n" append-code
-                                                (when clear-code (str "\n(.setValue (-> @pou.user/pou :editors " editor " :cm) \"" clear-code "\")"))))))
+                                                (when clear-code (str "\n(cm " editor " :setValue \"" clear-code "\")"))))))
+
+(defn eval-gist-loop [f & r] 
+  (eval-gist (:id f) (:file f) :append-code (if (not (empty? (rest r))) `(apply eval-gist-loop ~r) 
+                                                                        `(eval-gist ~(first r)))))
 
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (cm :main :setValue (js/atob p)) @pou))
     
