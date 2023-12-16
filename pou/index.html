@@ -27,7 +27,7 @@
               (fn [j]
                 (callback (-> (js->clj j :keywordize-keys true) :files ((keyword file)) :content))))))))
     
-(defn eval-gist [{:keys [id file editor append-code clear-code] :or {editor :main append-code ""}}]
+(defn eval-gist [& {:keys [id file editor append-code clear-code] :or {editor :main append-code ""}}]
   (load-gist id file #(cm editor :setValue (str % "\n" append-code
                                                 (when clear-code (str "\n(cm " editor " :setValue \"" clear-code "\")"))))))
 
