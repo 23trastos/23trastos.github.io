@@ -6,13 +6,11 @@
 
 <body>
   <pre><code class="language-klipse">
+(ns pou.user)
     
 (def trusted-url js/goog.html.legacyconversions.trustedResourceUrlFromString)
-    
-(def js-safe-load js/goog.net.jsloader.safeLoad)
-    
-(def j js/applied-science.js-interop)
-    
+(def js-safe-load js/goog.net.jsloader.safeLoad)  
+(def j js/applied-science.js-interop)    
 (def pou (atom {:params (or (js/klipse.utils.url-parameters) {})
                 :editors {:main {:type :cljs
                                  :cm (aget js/klipse-editors 0)
@@ -25,8 +23,14 @@
               (fn [j]
                 (callback (-> (js->clj j :keywordize-keys true) :files ((keyword file)) :content))))))))
     
-(defn eval-gist [id file & {:keys [editor append-code] :or {editor :main append-code ""}}]
-  (load-gist id file #(.setValue (-> @pou :editors :main :cm) (str % append-code))))
+(defn eval-gist [id file & {:keys [editor append-code require] :or {editor :main append-code ""}}]
+  (load-gist id file #(.setValue (-> @pou :editors :main :cm) 
+                                 (str % "(ns pou.user)\n" 
+                                        (when require (str "(require " require ")"))
+                                        append-code))))
+
+(defn require-gist [id file & {:keys [editor append-code :require] :or {editor :main append-code ""}}]
+  (eval-gist [id file :editor editor :append-code (str "(ns pou.user)(.setValue @pou :editors " editor " :cm)(
     
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (.setValue (-> editors :main :cm) (js/atob p)) @pou))
     
