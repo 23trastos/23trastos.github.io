@@ -56,8 +56,8 @@
   (load-gist id file #(cm editor :setValue (str % "\n" append-code
                                                 (when clear-code (str "\n(pou.user/cm " editor " :setValue \"" clear-code "\")"))))))
 
-(defn eval-gist-loop [f & r] 
-  (eval-gist :id (:id f) :file (:file f) :append-code (if (not (empty? (rest r))) `(apply eval-gist-loop ~r) 
+(defn eval-gists [f & r] 
+  (eval-gist :id (:id f) :file (:file f) :append-code (if (not (empty? (rest r))) `(apply eval-gists ~r) 
                                                                                   `(apply eval-gist (mapcat seq ~(first r))))))
 
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (cm :main :setValue (js/atob p)) @pou))
