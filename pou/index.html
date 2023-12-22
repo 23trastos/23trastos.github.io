@@ -6,6 +6,13 @@
 
 <body>
   <div id="main" class="language-klipse">
+(ns klipse.utils)
+    
+(defn gist-path-raw [gist-id-file]
+  (if (coll? gist-id-file)
+    (str "https://gist.githubusercontent.com/" (first gist-id-file) "/raw/" (second gist-id-file))
+    (str "https://gist.githubusercontent.com/" gist-id-file "/raw" "?" (rand))))
+
 (ns pou.user
   (:require [goog.dom :as gdom]
             [klipse.plugin :as klp]))
@@ -13,17 +20,21 @@
 (def j js/applied-science.js-interop)
     
 (def pou (atom {:params (or (js/klipse.utils.url-parameters) {})
-                :editors {:main {:type :cljs
-                                 :cm (aget js/klipse-editors 0)
-                                 :res (aget js/klipse-results 0)}}}))
+                :editors {:main {:mode "eval-clojure"
+                                 :cm #(aget js/klipse-editors 0)
+                                 :res #(aget js/klipse-results 0)}}}))
 
-(defn pou-add [& {:keys [mode attrs snippet klipsettings]}]
+(defn append-editor [& {:keys [id mode attrs snippet klipsettings] :or {mode "eval-clojure"}}]
   (let [div (gdom/createDom "div" (clj->js attrs) (gdom/createTextNode (str snippet)))]
     (gdom/insertSiblingAfter div js/klipse-container)
-    (klp/klipsify div (merge {} klipsettings) mode)))
+    (klp/klipsify div (merge {} klipsettings) mode))
+  (let [c (count (@pou :editors))]
+    (swap! pou assoc-in [:editors (or id c)] {:mode mode
+                                              :cm #(aget js/klipse-editors c)
+                                              :res #(aget js/klipse-results c)})))
 
 (defn cm [k method & args]
-  (j.apply (-> @pou :editors k :cm) method (clj->js args)))
+  (j.apply ((-> @pou :editors (get k) :cm)) method (clj->js args)))
     
 (defn load-gist [id file callback]
   (-> (str "https://api.github.com/gists/" id) js/fetch
@@ -41,7 +52,6 @@
                                                                                   `(apply eval-gist (mapcat seq ~(first r))))))
 
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (cm :main :setValue (js/atob p)) @pou))
-    
   </div>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
