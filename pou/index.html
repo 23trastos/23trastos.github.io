@@ -4,8 +4,12 @@
 <head>
   <style>
     .loader {
-      heigth: 100vh;
+      height: 100vh;
       animation: blinker 1s linear infinite;
+      text-align: center;
+      margin-top: 38vh;
+      font-size: x-large;
+      font-family: monospace;
     }
     @keyframes blinker {
       50% {
@@ -65,7 +69,7 @@
 
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (cm :main :setValue (js/atob p)) @pou))
 (-> "loading" gdom/getElement .-hidden (set! true))
-(cm :main :setValue "")
+(cm :main :setValue "@pou")
   </div>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
