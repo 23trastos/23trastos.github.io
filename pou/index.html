@@ -22,13 +22,6 @@
 <body>
   <div id="loading" class="loader">LOADING...</div>
   <div id="main" class="language-klipse">
-(ns klipse.utils)
-    
-(defn gist-path-raw [gist-id-file]
-  (if (coll? gist-id-file)
-    (str "https://gist.githubusercontent.com/" (first gist-id-file) "/raw/" (second gist-id-file))
-    (str "https://gist.githubusercontent.com/" gist-id-file "/raw" "?" (rand))))
-
 (ns pou.user
   (:require [goog.dom :as gdom]
             [klipse.plugin :as klp]))
