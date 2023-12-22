@@ -2,9 +2,21 @@
 <html>
 
 <head>
+  <style>
+    .loader {
+      heigth: 100vh;
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="loading" class="loader">LOADING...</div>
   <div id="main" class="language-klipse">
 (ns klipse.utils)
     
@@ -52,6 +64,8 @@
                                                                                   `(apply eval-gist (mapcat seq ~(first r))))))
 
 (let [{:keys [params editors]} @pou] (if-let [p (params :p)] (cm :main :setValue (js/atob p)) @pou))
+(-> "loading" gdom/getElement .-hidden (set! true))
+(cm :main :setValue "")
   </div>
   <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
   <script>
